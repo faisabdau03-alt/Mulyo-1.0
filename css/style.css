@@ -1,0 +1,578 @@
+/* Mulyo Adventure - Modern Outdoor Gear Rental Theme */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Urbanist:wght@400;600;700;800&display=swap');
+
+:root {
+  --font-main: 'Plus Jakarta Sans', sans-serif;
+  --font-heading: 'Urbanist', 'Plus Jakarta Sans', sans-serif;
+  
+  --color-primary: #5edd5b;
+  --color-primary-dark: #22a51f;
+  --color-primary-deep: #15803d;
+  --color-primary-light: #dcfce7;
+  
+  --color-dark: #0e131f;
+  --color-dark-surface: #1a2234;
+  --color-body-bg: #f8fafc;
+  --color-card-bg: #ffffff;
+  
+  --color-text-dark: #0f172a;
+  --color-text-muted: #64748b;
+  --color-border: #e2e8f0;
+  
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  
+  --transition-normal: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--color-body-bg);
+  color: var(--color-text-dark);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Color Utilities */
+.text-brand-green { color: var(--color-primary-dark) !important; }
+.bg-brand-green { background-color: var(--color-primary) !important; color: #000 !important; }
+.bg-brand-dark { background-color: var(--color-dark) !important; }
+
+/* Top Announcement Bar */
+.top-bar-announcement {
+  background-color: #0b0f19;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.8125rem;
+}
+
+.top-bar-announcement a {
+  transition: var(--transition-normal);
+}
+
+.top-bar-announcement a:hover {
+  color: var(--color-primary) !important;
+}
+
+/* Navbar */
+.navbar-mulyo {
+  background-color: #0e131f;
+  transition: var(--transition-normal);
+  padding-top: 0.85rem;
+  padding-bottom: 0.85rem;
+}
+
+.navbar-mulyo.scrolled {
+  background-color: rgba(14, 19, 31, 0.95);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+}
+
+.navbar-brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.45rem;
+  color: #ffffff;
+  text-decoration: none;
+  letter-spacing: -0.5px;
+}
+
+.navbar-brand-logo span.accent {
+  color: var(--color-primary);
+}
+
+.navbar-nav .nav-link {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #cbd5e1;
+  padding: 0.5rem 1rem !important;
+  transition: var(--transition-normal);
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+  color: var(--color-primary) !important;
+}
+
+.nav-link.dropdown-toggle::after {
+  vertical-align: 0.15em;
+}
+
+/* Dropdown Menu */
+.dropdown-menu-dark-custom {
+  background-color: #1a2234;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: var(--shadow-xl);
+  border-radius: 12px;
+  padding: 0.6rem;
+}
+
+.dropdown-menu-dark-custom .dropdown-item {
+  color: #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.5rem 0.85rem;
+  transition: var(--transition-normal);
+}
+
+.dropdown-menu-dark-custom .dropdown-item:hover {
+  background-color: rgba(94, 221, 91, 0.15);
+  color: var(--color-primary);
+  transform: translateX(4px);
+}
+
+/* Badge Cart Count */
+.cart-count-badge {
+  position: absolute;
+  top: -5px;
+  right: -8px;
+  background-color: #ef4444;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #0e131f;
+}
+
+/* Hero Section */
+.hero-banner-section {
+  position: relative;
+  background-color: #0b0f19;
+  background-image: linear-gradient(180deg, rgba(11, 15, 25, 0.75) 0%, rgba(14, 19, 31, 0.95) 100%),
+    url('https://images.unsplash.com/photo-1510312305653-8ed496efae75?auto=format&fit=crop&w=1920&q=85');
+  background-size: cover;
+  background-position: center center;
+  padding-top: 130px;
+  padding-bottom: 90px;
+  color: #ffffff;
+}
+
+.hero-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: rgba(94, 221, 91, 0.15);
+  border: 1px solid rgba(94, 221, 91, 0.35);
+  color: var(--color-primary);
+  padding: 0.45rem 1.15rem;
+  border-radius: 50px;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.hero-title {
+  font-size: clamp(2.3rem, 5vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+}
+
+.hero-subtitle {
+  font-size: 1.15rem;
+  color: #94a3b8;
+  max-width: 650px;
+}
+
+.hero-ticks-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding-left: 0;
+  list-style: none;
+  margin-top: 1.5rem;
+}
+
+.hero-ticks-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #e2e8f0;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.hero-ticks-list li svg {
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+/* Floating Search Box */
+.booking-search-card {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  padding: 1.25rem;
+  margin-top: -45px;
+  position: relative;
+  z-index: 10;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.search-field-item {
+  border-right: 1px solid #e2e8f0;
+  padding-right: 1rem;
+}
+
+@media (max-width: 991.98px) {
+  .search-field-item {
+    border-right: none;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    padding-right: 0;
+  }
+}
+
+.search-field-item label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #64748b;
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
+.search-field-item input,
+.search-field-item select {
+  border: none;
+  font-family: var(--font-main);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #0f172a;
+  background: transparent;
+  padding-left: 0;
+  width: 100%;
+}
+
+.search-field-item input:focus,
+.search-field-item select:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Brand Partners Slider */
+.brand-ticker-section {
+  background-color: #f1f5f9;
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.brand-badge-item {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #334155;
+  transition: var(--transition-normal);
+  box-shadow: var(--shadow-sm);
+  min-width: 130px;
+}
+
+.brand-badge-item:hover {
+  border-color: var(--color-primary-dark);
+  color: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Category Filter Tabs */
+.category-tab-btn {
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 0.5rem 1.25rem;
+  transition: var(--transition-normal);
+}
+
+.category-tab-btn.active {
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+  color: #000000 !important;
+  font-weight: 700;
+}
+
+/* Product Card */
+.product-card {
+  transition: var(--transition-normal);
+  background-color: #ffffff;
+}
+
+.hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-xl) !important;
+}
+
+.product-img-wrapper {
+  position: relative;
+}
+
+.product-img {
+  transition: transform 0.4s ease;
+}
+
+.product-card:hover .product-img {
+  transform: scale(1.05);
+}
+
+.product-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.product-card:hover .product-overlay {
+  opacity: 1;
+}
+
+.text-truncate-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.hover-green:hover {
+  color: var(--color-primary-dark) !important;
+}
+
+/* Feature Benefits Cards */
+.feature-box {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 2rem;
+  transition: var(--transition-normal);
+  height: 100%;
+}
+
+.feature-box:hover {
+  border-color: var(--color-primary);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.feature-icon-wrapper {
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  background: rgba(94, 221, 91, 0.15);
+  color: var(--color-primary-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+/* Testimonial Cards */
+.testimonial-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 1.75rem;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-normal);
+}
+
+.testimonial-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: #cbd5e1;
+}
+
+.testimonial-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* How to Rent Steps */
+.step-number-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #000;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+/* Footer */
+.footer-mulyo {
+  background-color: #0b0f19;
+  color: #94a3b8;
+  padding-top: 4.5rem;
+  padding-bottom: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-heading {
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+}
+
+.footer-links {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.65rem;
+}
+
+.footer-links a {
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 0.9375rem;
+  transition: var(--transition-normal);
+}
+
+.footer-links a:hover {
+  color: var(--color-primary);
+  padding-left: 4px;
+}
+
+.footer-contact-item {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+  font-size: 0.9rem;
+  color: #94a3b8;
+}
+
+.footer-contact-item svg {
+  color: var(--color-primary);
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.footer-bottom-bar {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 1.75rem;
+  margin-top: 3rem;
+  font-size: 0.875rem;
+}
+
+/* Floating WhatsApp Button */
+.floating-whatsapp-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1040;
+  background-color: #25d366;
+  color: #ffffff;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
+  transition: var(--transition-normal);
+  text-decoration: none;
+}
+
+.floating-whatsapp-btn:hover {
+  transform: scale(1.08);
+  background-color: #20ba59;
+  color: #ffffff;
+  box-shadow: 0 12px 28px rgba(37, 211, 102, 0.5);
+}
+
+.floating-whatsapp-btn::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid #25d366;
+  animation: pulse-ring 1.8s infinite;
+  opacity: 0.7;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 0.3; }
+  100% { transform: scale(1.25); opacity: 0; }
+}
+
+/* Buttons */
+.btn-brand-primary {
+  background-color: var(--color-primary);
+  color: #000000;
+  font-weight: 700;
+  border-radius: 12px;
+  padding: 0.65rem 1.4rem;
+  border: none;
+  transition: var(--transition-normal);
+}
+
+.btn-brand-primary:hover {
+  background-color: #52c74f;
+  color: #000000;
+  box-shadow: 0 4px 12px rgba(94, 221, 91, 0.3);
+}
+
+/* Accordion FAQ */
+.accordion-mulyo .accordion-item {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px !important;
+  margin-bottom: 0.85rem;
+  overflow: hidden;
+}
+
+.accordion-mulyo .accordion-button {
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 1.15rem 1.25rem;
+  background-color: #ffffff;
+  color: #0f172a;
+}
+
+.accordion-mulyo .accordion-button:not(.collapsed) {
+  background-color: #f8fafc;
+  color: var(--color-primary-dark);
+  box-shadow: none;
+}
+
+/* Offcanvas Cart */
+.cart-offcanvas {
+  width: 440px !important;
+  max-width: 90vw !important;
+}

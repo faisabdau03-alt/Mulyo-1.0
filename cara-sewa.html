@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cara Sewa & Syarat Ketentuan | Mulyo Adventure</title>
+  <meta name="description" content="Pelajari panduan lengkap cara sewa perlengkapan outdoor, syarat jaminan identitas, dan aturan pengembalian di Mulyo Adventure." />
+
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-bar-announcement py-2 text-white">
+    <div class="container d-flex flex-wrap justify-content-between align-items-center gap-2">
+      <div class="d-flex align-items-center gap-3">
+        <a href="https://wa.me/6281234567890" target="_blank" class="text-white text-decoration-none d-flex align-items-center gap-1">
+          <i class="bi bi-telephone-fill text-brand-green"></i>
+          <span>0812-3456-7890</span>
+        </a>
+        <span class="text-secondary d-none d-sm-inline">|</span>
+        <a href="mailto:info@mulyoadventure.com" class="text-white text-decoration-none d-none d-sm-flex align-items-center gap-1">
+          <i class="bi bi-envelope-fill text-brand-green"></i>
+          <span>info@mulyoadventure.com</span>
+        </a>
+      </div>
+      <div class="d-flex align-items-center gap-2 ms-auto">
+        <span class="text-light small">Buka Setiap Hari: 08.00 - 21.00 WIB</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar Utama Sticky -->
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-mulyo sticky-top navbar-sticky">
+    <div class="container">
+      <a class="navbar-brand-logo" href="index.html">
+        <span class="p-2 rounded-3 bg-brand-green text-dark d-inline-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
+          <i class="bi bi-compass fs-5"></i>
+        </span>
+        <span>MULYO<span class="accent">.</span>ADVENTURE</span>
+      </a>
+
+      <div class="d-flex align-items-center gap-2 d-lg-none">
+        <button class="btn btn-outline-light rounded-pill position-relative px-3 py-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+          <i class="bi bi-cart3"></i>
+          <span class="cart-count-badge" style="display: none;">0</span>
+        </button>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mulyoNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+
+      <div class="collapse navbar-collapse" id="mulyoNavbar">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html">Beranda</a></li>
+          <li class="nav-item"><a class="nav-link" href="katalog.html">Katalog Gear</a></li>
+          <li class="nav-item"><a class="nav-link active" href="cara-sewa.html">Cara Sewa</a></li>
+          <li class="nav-item"><a class="nav-link" href="kontak.html">Kontak & Lokasi</a></li>
+        </ul>
+
+        <div class="d-none d-lg-flex align-items-center gap-3">
+          <button class="btn btn-outline-light rounded-pill position-relative px-3 py-2 d-flex align-items-center gap-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+            <i class="bi bi-cart3 fs-5"></i>
+            <span class="fw-semibold">Keranjang</span>
+            <span class="cart-count-badge" style="display: none;">0</span>
+          </button>
+          <a href="https://wa.me/6281234567890" target="_blank" class="btn btn-brand-primary d-flex align-items-center gap-2">
+            <i class="bi bi-whatsapp"></i> Hubungi Kami
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header Section -->
+  <section class="bg-brand-dark text-white py-4 border-bottom border-secondary border-opacity-25">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-2 small">
+          <li class="breadcrumb-item"><a href="index.html" class="text-brand-green text-decoration-none">Beranda</a></li>
+          <li class="breadcrumb-item active text-white opacity-75" aria-current="page">Cara Sewa</li>
+        </ol>
+      </nav>
+      <h2 class="fw-bold mb-1">Panduan & Syarat Ketentuan Sewa</h2>
+      <p class="text-muted small mb-0">Informasi lengkap alur pemesanan, dokumen jaminan, dan aturan pengembalian gear di Mulyo Adventure.</p>
+    </div>
+  </section>
+
+  <!-- Content Section -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row g-5">
+        
+        <div class="col-lg-8">
+          <!-- Step by Step -->
+          <div class="card border-0 shadow-sm rounded-4 p-4 mb-4">
+            <h4 class="fw-bold text-dark mb-4"><i class="bi bi-diagram-3-fill text-success me-2"></i> 4 Alur Mudah Peminjaman Alat</h4>
+            
+            <div class="d-flex gap-3 mb-4">
+              <div class="step-number-badge flex-shrink-0">1</div>
+              <div>
+                <h5 class="fw-bold mb-1">Pilih Alat & Tentukan Jadwal</h5>
+                <p class="text-muted small mb-0">
+                  Buka halaman <a href="katalog.html" class="text-success fw-semibold">Katalog Produk</a>, pilih peralatan yang Anda butuhkan (tenda, carrier, nesting, sleeping bag, dll). Masukkan tanggal ambil serta durasi sewa yang diinginkan.
+                </p>
+              </div>
+            </div>
+
+            <div class="d-flex gap-3 mb-4">
+              <div class="step-number-badge flex-shrink-0">2</div>
+              <div>
+                <h5 class="fw-bold mb-1">Konfirmasi Pesanan via WhatsApp</h5>
+                <p class="text-muted small mb-0">
+                  Setelah barang dimasukkan ke keranjang, klik tombol checkout. Sistem akan otomatis menyusun format pesan lengkap ke WhatsApp admin kami. Admin akan segera memeriksa ketersediaan stok fisik di gudang.
+                </p>
+              </div>
+            </div>
+
+            <div class="d-flex gap-3 mb-4">
+              <div class="step-number-badge flex-shrink-0">3</div>
+              <div>
+                <h5 class="fw-bold mb-1">Pengambilan Alat & Titip Dokumen Jaminan</h5>
+                <p class="text-muted small mb-0">
+                  Ambil peralatan di toko Mulyo Adventure pada hari H (atau H-1 sore). Lakukan pengecekan fisik bersama staf kami (kelengkapan frame, pasak, resleting) dan serahkan 1 identitas asli (KTP/KTM/SIM).
+                </p>
+              </div>
+            </div>
+
+            <div class="d-flex gap-3">
+              <div class="step-number-badge flex-shrink-0">4</div>
+              <div>
+                <h5 class="fw-bold mb-1">Pengembalian Alat & Pengambilan Jaminan</h5>
+                <p class="text-muted small mb-0">
+                  Kembalikan peralatan sesuai jadwal maksimal yang ditentukan. Tim kami akan mengecek kelengkapan kembali, lalu kartu identitas jaminan Anda akan diserahkan secara utuh.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Syarat Jaminan -->
+          <div class="card border-0 shadow-sm rounded-4 p-4 mb-4" id="syarat">
+            <h4 class="fw-bold text-dark mb-3"><i class="bi bi-card-checklist text-success me-2"></i> Dokumen Jaminan yang Diperlukan</h4>
+            <p class="text-muted small mb-3">Untuk menjamin keamanan perlengkapan kami, penyewa wajib menitipkan <b>1 identitas asli</b> yang masih berlaku:</p>
+            
+            <ul class="list-group list-group-flush small mb-3">
+              <li class="list-group-item px-0 py-2 d-flex align-items-center gap-2">
+                <i class="bi bi-check-circle-fill text-success"></i> <b>KTP Asli</b> (Kartu Tanda Penduduk Republik Indonesia)
+              </li>
+              <li class="list-group-item px-0 py-2 d-flex align-items-center gap-2">
+                <i class="bi bi-check-circle-fill text-success"></i> <b>KTM Asli</b> (Kartu Tanda Mahasiswa yang masih aktif semester ini)
+              </li>
+              <li class="list-group-item px-0 py-2 d-flex align-items-center gap-2">
+                <i class="bi bi-check-circle-fill text-success"></i> <b>SIM A / C Asli</b> (Surat Izin Mengemudi)
+              </li>
+              <li class="list-group-item px-0 py-2 d-flex align-items-center gap-2">
+                <i class="bi bi-check-circle-fill text-success"></i> <b>Paspor Asli</b> (Untuk turis atau WNA)
+              </li>
+            </ul>
+
+            <div class="alert alert-warning py-2 small mb-0">
+              <i class="bi bi-exclamation-triangle-fill me-1"></i> Identitas yang dititipkan harus asli (bukan fotokopi atau softcopy foto HP) dan milik orang yang mengambil barang secara langsung.
+            </div>
+          </div>
+
+          <!-- Ketentuan Denda -->
+          <div class="card border-0 shadow-sm rounded-4 p-4" id="denda">
+            <h4 class="fw-bold text-dark mb-3"><i class="bi bi-shield-exclamation text-success me-2"></i> Ketentuan Kerusakan & Denda Keterlambatan</h4>
+            
+            <div class="table-responsive">
+              <table class="table table-bordered table-sm small align-middle">
+                <thead class="table-light">
+                  <tr>
+                    <th>Kasus / Kejadian</th>
+                    <th>Ketentuan & Biaya Denda</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="fw-semibold">Terlambat s/d Pukul 12.00 WIB</td>
+                    <td class="text-success fw-bold">Gratis (Toleransi waktu pengembalian)</td>
+                  </tr>
+                  <tr>
+                    <td class="fw-semibold">Terlambat lebih dari Pukul 12.00 WIB</td>
+                    <td>Dikenakan biaya sewa 1 hari normal tambahan per unit</td>
+                  </tr>
+                  <tr>
+                    <td class="fw-semibold">Pasak Tenda Hilang</td>
+                    <td>Rp 5.000 / pcs pasak</td>
+                  </tr>
+                  <tr>
+                    <td class="fw-semibold">Frame Tenda Patah / Rusak Parah</td>
+                    <td>Rp 15.000 / ruas sambungan frame</td>
+                  </tr>
+                  <tr>
+                    <td class="fw-semibold">Kain Tenda / SB Robek Kena Rokok / Api</td>
+                    <td>Dikenakan biaya perbaikan/service jahitan (Rp 25.000 - Rp 50.000)</td>
+                  </tr>
+                  <tr>
+                    <td class="fw-semibold">Barang Hilang Total</td>
+                    <td>Mengganti dengan barang yang setipe atau mengganti senilai harga pasar barang bekas layak pakai</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar Info -->
+        <div class="col-lg-4">
+          <div class="card border-0 shadow-sm rounded-4 p-4 mb-4 bg-white sticky-top" style="top: 90px;">
+            <h5 class="fw-bold mb-3">Butuh Bantuan Cepat?</h5>
+            <p class="text-muted small mb-4">
+              Punya pertanyaan khusus seputar sewa rombongan atau ketersediaan gear darurat untuk malam ini?
+            </p>
+            <div class="d-grid gap-2">
+              <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Mulyo%20Adventure,%20saya%20ingin%20tanya%20syarat%20sewa" target="_blank" class="btn btn-brand-primary py-2 d-flex align-items-center justify-content-center gap-2">
+                <i class="bi bi-whatsapp"></i> Chat CS WhatsApp
+              </a>
+              <a href="katalog.html" class="btn btn-outline-dark py-2">
+                Lihat Katalog Alat
+              </a>
+            </div>
+
+            <hr class="my-4" />
+
+            <h6 class="fw-bold mb-2">Jam Buka Toko:</h6>
+            <p class="text-muted small mb-3">
+              Senin - Minggu: 08.00 - 21.00 WIB<br />
+              (Tetap buka di tanggal merah & hari libur nasional)
+            </p>
+
+            <h6 class="fw-bold mb-2">Lokasi Toko:</h6>
+            <p class="text-muted small mb-0">
+              Jl. Kaliurang KM 5, Gang Mulyo No. 12, Yogyakarta (Dekat Kampus).
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Mulyo Adventure -->
+  <footer class="footer-mulyo">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="navbar-brand-logo mb-3">
+            <span class="p-2 rounded-3 bg-brand-green text-dark d-inline-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+              <i class="bi bi-compass fs-5"></i>
+            </span>
+            <span>MULYO<span class="accent">.</span>ADVENTURE</span>
+          </div>
+          <p class="text-muted small mb-3">
+            Pusat persewaan perlengkapan outdoor, camping, dan mendaki gunung terpercaya. Melayani sewa tenda, carrier, sleeping bag, dan peralatan pendakian lengkap dengan kondisi prima dan bersih.
+          </p>
+          <div class="footer-contact-item">
+            <i class="bi bi-geo-alt-fill text-brand-green"></i>
+            <span>Jl. Kaliurang KM 5, Gang Mulyo No. 12, Yogyakarta (Dekat Kampus)</span>
+          </div>
+          <div class="footer-contact-item">
+            <i class="bi bi-whatsapp text-brand-green"></i>
+            <span>WhatsApp: 0812-3456-7890</span>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-6 col-6">
+          <h5 class="footer-heading">Kategori Alat</h5>
+          <ul class="footer-links">
+            <li><a href="katalog.html?cat=tenda">Tenda Camping</a></li>
+            <li><a href="katalog.html?cat=carrier">Carrier & Daypack</a></li>
+            <li><a href="katalog.html?cat=tidur">Sleeping Bag</a></li>
+            <li><a href="katalog.html?cat=masak">Alat Masak Camping</a></li>
+            <li><a href="katalog.html?cat=penerangan">Headlamp & Lampu</a></li>
+            <li><a href="katalog.html?cat=gear">Trekking Pole</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-6">
+          <h5 class="footer-heading">Bantuan & Panduan</h5>
+          <ul class="footer-links">
+            <li><a href="cara-sewa.html">Panduan Cara Sewa</a></li>
+            <li><a href="cara-sewa.html#syarat">Syarat Dokumen Jaminan</a></li>
+            <li><a href="cara-sewa.html#denda">Ketentuan Denda & Kerusakan</a></li>
+            <li><a href="kontak.html">Lokasi & Jam Buka</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <h5 class="footer-heading">Konsultasi Gear</h5>
+          <p class="text-muted small mb-3">Bingung mau bawa alat apa untuk gunung tujuanmu? Konsultasikan gratis ke tim kami:</p>
+          <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Mulyo%20Adventure,%20saya%20mau%20konsultasi%20sewa%20alat" target="_blank" class="btn btn-brand-primary w-100 d-flex align-items-center justify-content-center gap-2 mb-3">
+            <i class="bi bi-whatsapp"></i> Chat Admin Sekarang
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar d-flex flex-wrap justify-content-between align-items-center gap-2">
+        <p class="mb-0 text-muted">© 2026 Mulyo Adventure. All rights reserved.</p>
+        <p class="mb-0 text-muted small">Dibuat untuk Tugas Perkuliahan Sem 5 - Bu Fersel</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Action Button -->
+  <a href="https://wa.me/6281234567890" target="_blank" class="floating-whatsapp-btn" title="Chat WhatsApp Mulyo Adventure">
+    <i class="bi bi-whatsapp fs-3"></i>
+  </a>
+
+  <!-- Offcanvas Shopping Cart (Drawer) -->
+  <div class="offcanvas offcanvas-end cart-offcanvas" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
+    <div class="offcanvas-header border-bottom">
+      <div class="d-flex align-items-center gap-2">
+        <i class="bi bi-bag-check-fill text-success fs-4"></i>
+        <h5 class="offcanvas-title fw-bold" id="cartOffcanvasLabel">Keranjang Sewa</h5>
+        <span class="badge bg-secondary-subtle text-dark ms-1" id="cartDrawerCount">0 Item</span>
+      </div>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+
+    <div class="offcanvas-body p-3">
+      <div id="cartEmptyNotice" class="text-center py-5" style="display: none;">
+        <i class="bi bi-cart-x text-muted" style="font-size: 3.5rem;"></i>
+        <h6 class="mt-3 fw-bold text-dark">Keranjang Sewa Masih Kosong</h6>
+        <p class="text-muted small">Pilih tenda, carrier, atau perlengkapan camping lainnya dari katalog kami.</p>
+      </div>
+      <div id="cartDrawerItems"></div>
+    </div>
+
+    <div class="offcanvas-footer border-top p-3 bg-light" id="cartDrawerFooter">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <span class="text-muted">Total Estimasi Sewa:</span>
+        <h5 class="fw-bold text-success mb-0" id="cartDrawerTotal">Rp 0</h5>
+      </div>
+      <div class="d-grid gap-2">
+        <button class="btn btn-brand-primary py-2 d-flex align-items-center justify-content-center gap-2" data-bs-toggle="modal" data-bs-target="#checkoutModal" data-bs-dismiss="offcanvas">
+          <i class="bi bi-whatsapp"></i> Lanjut Booking via WhatsApp
+        </button>
+        <button class="btn btn-outline-danger btn-sm py-1" onclick="cartService.clearCart()">
+          <i class="bi bi-trash"></i> Kosongkan Keranjang
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Form Checkout WhatsApp -->
+  <div class="modal fade" id="checkoutModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg rounded-4">
+        <div class="modal-header border-bottom">
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-whatsapp text-success fs-4"></i>
+            <h5 class="modal-title fw-bold">Form Konfirmasi Booking</h5>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="whatsappCheckoutForm">
+          <div class="modal-body p-4">
+            <p class="text-muted small mb-3">
+              Isi data diri Anda di bawah ini. Format pesan reservasi otomatis dibuat untuk dikirim ke WhatsApp Admin Mulyo Adventure.
+            </p>
+
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Nama Lengkap Penyewa *</label>
+              <input type="text" id="coName" class="form-control" placeholder="Contoh: Budi Santoso" required />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Nomor WhatsApp Aktif *</label>
+              <input type="tel" id="coPhone" class="form-control" placeholder="Contoh: 081234567890" required />
+            </div>
+
+            <div class="row g-2 mb-3">
+              <div class="col-6">
+                <label class="form-label small fw-bold">Tanggal Ambil *</label>
+                <input type="date" id="coStartDate" class="form-control" required />
+              </div>
+              <div class="col-6">
+                <label class="form-label small fw-bold">Tanggal Pengembalian *</label>
+                <input type="date" id="coEndDate" class="form-control" required />
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Catatan / Kebutuhan Tambahan (Opsional)</label>
+              <textarea id="coNotes" class="form-control" rows="2" placeholder="Catatan tambahan"></textarea>
+            </div>
+          </div>
+          <div class="modal-footer border-top">
+            <button type="button" class="btn btn-secondary rounded-pill px-3" data-bs-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-brand-primary rounded-pill px-4 fw-bold">
+              Kirim ke WhatsApp <i class="bi bi-arrow-right ms-1"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/products-data.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>

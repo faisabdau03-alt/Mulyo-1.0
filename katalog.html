@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Katalog Sewa Gear Outdoor | Mulyo Adventure</title>
+  <meta name="description" content="Katalog lengkap sewa tenda, carrier, sleeping bag, kompor camping, dan perlengkapan hiking di Mulyo Adventure." />
+
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- 1. Top Announcement Bar -->
+  <div class="top-bar-announcement py-2 text-white">
+    <div class="container d-flex flex-wrap justify-content-between align-items-center gap-2">
+      <div class="d-flex align-items-center gap-3">
+        <a href="https://wa.me/6281234567890" target="_blank" class="text-white text-decoration-none d-flex align-items-center gap-1">
+          <i class="bi bi-telephone-fill text-brand-green"></i>
+          <span>0812-3456-7890</span>
+        </a>
+        <span class="text-secondary d-none d-sm-inline">|</span>
+        <a href="mailto:info@mulyoadventure.com" class="text-white text-decoration-none d-none d-sm-flex align-items-center gap-1">
+          <i class="bi bi-envelope-fill text-brand-green"></i>
+          <span>info@mulyoadventure.com</span>
+        </a>
+      </div>
+      <div class="d-flex align-items-center gap-2 ms-auto">
+        <span class="text-light small">Buka Setiap Hari: 08.00 - 21.00 WIB</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Navbar Utama Sticky -->
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-mulyo sticky-top navbar-sticky">
+    <div class="container">
+      <a class="navbar-brand-logo" href="index.html">
+        <span class="p-2 rounded-3 bg-brand-green text-dark d-inline-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
+          <i class="bi bi-compass fs-5"></i>
+        </span>
+        <span>MULYO<span class="accent">.</span>ADVENTURE</span>
+      </a>
+
+      <!-- Mobile Action Buttons -->
+      <div class="d-flex align-items-center gap-2 d-lg-none">
+        <button class="btn btn-outline-light rounded-pill position-relative px-3 py-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+          <i class="bi bi-cart3"></i>
+          <span class="cart-count-badge" style="display: none;">0</span>
+        </button>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mulyoNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+
+      <!-- Menu Items -->
+      <div class="collapse navbar-collapse" id="mulyoNavbar">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Beranda</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="katalog.html">Katalog Gear</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="cara-sewa.html">Cara Sewa</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="kontak.html">Kontak & Lokasi</a>
+          </li>
+        </ul>
+
+        <div class="d-none d-lg-flex align-items-center gap-3">
+          <button class="btn btn-outline-light rounded-pill position-relative px-3 py-2 d-flex align-items-center gap-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+            <i class="bi bi-cart3 fs-5"></i>
+            <span class="fw-semibold">Keranjang</span>
+            <span class="cart-count-badge" style="display: none;">0</span>
+          </button>
+          <a href="https://wa.me/6281234567890" target="_blank" class="btn btn-brand-primary d-flex align-items-center gap-2">
+            <i class="bi bi-whatsapp"></i> Hubungi Kami
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 3. Header Katalog Section -->
+  <section class="bg-brand-dark text-white py-4 border-bottom border-secondary border-opacity-25">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-2 small">
+          <li class="breadcrumb-item"><a href="index.html" class="text-brand-green text-decoration-none">Beranda</a></li>
+          <li class="breadcrumb-item active text-white opacity-75" aria-current="page">Katalog Produk</li>
+        </ol>
+      </nav>
+      <h2 class="fw-bold mb-1">Katalog Perlengkapan Outdoor</h2>
+      <p class="text-muted small mb-0">Temukan tenda, carrier, matras, dan peralatan gunung berkualitas tinggi siap disewa.</p>
+    </div>
+  </section>
+
+  <!-- 4. Main Catalog Content Grid -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row g-4">
+        
+        <!-- Sidebar Filter (Desktop) -->
+        <div class="col-lg-3">
+          <div class="card border-0 shadow-sm rounded-4 p-4 sticky-top" style="top: 90px;">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h5 class="fw-bold mb-0 fs-6"><i class="bi bi-funnel me-1"></i> Filter Produk</h5>
+              <button class="btn btn-link text-decoration-none text-muted small p-0" id="katalogResetFilterBtn">Reset</button>
+            </div>
+
+            <!-- Search Input -->
+            <div class="mb-4">
+              <label class="form-label small fw-bold text-muted text-uppercase">Cari Produk</label>
+              <div class="input-group input-group-sm">
+                <input type="text" id="katalogSearchInput" class="form-control" placeholder="Nama atau kata kunci..." />
+                <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
+              </div>
+            </div>
+
+            <!-- Kategori Checkbox -->
+            <div class="mb-4">
+              <label class="form-label small fw-bold text-muted text-uppercase">Kategori Alat</label>
+              <div class="d-flex flex-column gap-2 small">
+                <div class="form-check">
+                  <input class="form-check-input category-checkbox" type="checkbox" value="tenda" id="catTenda" />
+                  <label class="form-check-label" for="catTenda">Tenda Camping (2-6P)</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input category-checkbox" type="checkbox" value="carrier" id="catCarrier" />
+                  <label class="form-check-label" for="catCarrier">Carrier & Ransel</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input category-checkbox" type="checkbox" value="tidur" id="catTidur" />
+                  <label class="form-check-label" for="catTidur">Sleeping Bag & Matras</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input category-checkbox" type="checkbox" value="masak" id="catMasak" />
+                  <label class="form-check-label" for="catMasak">Peralatan Masak Camping</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input category-checkbox" type="checkbox" value="penerangan" id="catLampu" />
+                  <label class="form-check-label" for="catLampu">Headlamp & Senter</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input category-checkbox" type="checkbox" value="pakaian" id="catPakaian" />
+                  <label class="form-check-label" for="catPakaian">Jaket & Sepatu Gunung</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input category-checkbox" type="checkbox" value="gear" id="catGear" />
+                  <label class="form-check-label" for="catGear">Trekking Pole, Meja & Kursi</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Brand Checkbox -->
+            <div class="mb-4">
+              <label class="form-label small fw-bold text-muted text-uppercase">Merek / Brand</label>
+              <div class="d-flex flex-column gap-2 small">
+                <div class="form-check">
+                  <input class="form-check-input brand-checkbox" type="checkbox" value="eiger" id="brandEiger" />
+                  <label class="form-check-label" for="brandEiger">Eiger</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input brand-checkbox" type="checkbox" value="deuter" id="brandDeuter" />
+                  <label class="form-check-label" for="brandDeuter">Deuter</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input brand-checkbox" type="checkbox" value="osprey" id="brandOsprey" />
+                  <label class="form-check-label" for="brandOsprey">Osprey</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input brand-checkbox" type="checkbox" value="tendaki" id="brandTendaki" />
+                  <label class="form-check-label" for="brandTendaki">Tendaki</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input brand-checkbox" type="checkbox" value="naturehike" id="brandNaturehike" />
+                  <label class="form-check-label" for="brandNaturehike">Naturehike</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input brand-checkbox" type="checkbox" value="quechua" id="brandQuechua" />
+                  <label class="form-check-label" for="brandQuechua">Quechua</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input brand-checkbox" type="checkbox" value="arei" id="brandArei" />
+                  <label class="form-check-label" for="brandArei">Arei Outdoor</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Rentang Harga -->
+            <div class="mb-2">
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <label class="form-label small fw-bold text-muted text-uppercase mb-0">Harga Maks / Hari</label>
+                <span class="small fw-bold text-success" id="katalogMaxPriceLabel">Rp 250.000</span>
+              </div>
+              <input type="range" class="form-range" id="katalogMaxPrice" min="10000" max="250000" step="5000" value="250000" />
+              <div class="d-flex justify-content-between text-muted small" style="font-size: 0.75rem;">
+                <span>Rp 10.000</span>
+                <span>Rp 250.000</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Catalog Product Grid Area -->
+        <div class="col-lg-9">
+          <!-- Top Bar Sorting & Results Info -->
+          <div class="card border-0 shadow-sm rounded-4 p-3 mb-4">
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
+              <div class="text-muted small" id="katalogResultsCount">
+                Memuat katalog produk...
+              </div>
+              <div class="d-flex align-items-center gap-2">
+                <span class="small text-muted text-nowrap">Urutkan:</span>
+                <select id="katalogSortSelect" class="form-select form-select-sm py-1" style="width: auto;">
+                  <option value="rating">Rating Tertinggi ★</option>
+                  <option value="price-asc">Harga: Termurah ke Termahal</option>
+                  <option value="price-desc">Harga: Termahal ke Termurah</option>
+                  <option value="name-asc">Nama Produk: A ke Z</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product Grid -->
+          <div class="row" id="katalogProductsGrid">
+            <!-- Rendered by katalog.js -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Footer Mulyo Adventure -->
+  <footer class="footer-mulyo">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="navbar-brand-logo mb-3">
+            <span class="p-2 rounded-3 bg-brand-green text-dark d-inline-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+              <i class="bi bi-compass fs-5"></i>
+            </span>
+            <span>MULYO<span class="accent">.</span>ADVENTURE</span>
+          </div>
+          <p class="text-muted small mb-3">
+            Pusat persewaan perlengkapan outdoor, camping, dan mendaki gunung terpercaya. Melayani sewa tenda, carrier, sleeping bag, dan peralatan pendakian lengkap dengan kondisi prima dan bersih.
+          </p>
+          <div class="footer-contact-item">
+            <i class="bi bi-geo-alt-fill text-brand-green"></i>
+            <span>Jl. Kaliurang KM 5, Gang Mulyo No. 12, Yogyakarta (Dekat Kampus)</span>
+          </div>
+          <div class="footer-contact-item">
+            <i class="bi bi-whatsapp text-brand-green"></i>
+            <span>WhatsApp: 0812-3456-7890</span>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-6 col-6">
+          <h5 class="footer-heading">Kategori Alat</h5>
+          <ul class="footer-links">
+            <li><a href="katalog.html?cat=tenda">Tenda Camping</a></li>
+            <li><a href="katalog.html?cat=carrier">Carrier & Daypack</a></li>
+            <li><a href="katalog.html?cat=tidur">Sleeping Bag</a></li>
+            <li><a href="katalog.html?cat=masak">Alat Masak Camping</a></li>
+            <li><a href="katalog.html?cat=penerangan">Headlamp & Lampu</a></li>
+            <li><a href="katalog.html?cat=gear">Trekking Pole</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-6">
+          <h5 class="footer-heading">Bantuan & Panduan</h5>
+          <ul class="footer-links">
+            <li><a href="cara-sewa.html">Panduan Cara Sewa</a></li>
+            <li><a href="cara-sewa.html#syarat">Syarat Dokumen Jaminan</a></li>
+            <li><a href="cara-sewa.html#denda">Ketentuan Denda & Kerusakan</a></li>
+            <li><a href="kontak.html">Lokasi & Jam Buka</a></li>
+            <li><a href="kontak.html">Hubungi Customer Support</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <h5 class="footer-heading">Konsultasi Gear</h5>
+          <p class="text-muted small mb-3">Bingung mau bawa alat apa untuk gunung tujuanmu? Konsultasikan gratis ke tim kami:</p>
+          <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Mulyo%20Adventure,%20saya%20mau%20konsultasi%20sewa%20alat" target="_blank" class="btn btn-brand-primary w-100 d-flex align-items-center justify-content-center gap-2 mb-3">
+            <i class="bi bi-whatsapp"></i> Chat Admin Sekarang
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar d-flex flex-wrap justify-content-between align-items-center gap-2">
+        <p class="mb-0 text-muted">© 2026 Mulyo Adventure. All rights reserved.</p>
+        <p class="mb-0 text-muted small">Dibuat untuk Tugas Perkuliahan Sem 5 - Bu Fersel</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Action Button -->
+  <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Mulyo%20Adventure,%20saya%20tertarik%20sewa%20alat%20outdoor" target="_blank" class="floating-whatsapp-btn" title="Chat WhatsApp Mulyo Adventure">
+    <i class="bi bi-whatsapp fs-3"></i>
+  </a>
+
+  <!-- Offcanvas Shopping Cart (Drawer) -->
+  <div class="offcanvas offcanvas-end cart-offcanvas" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
+    <div class="offcanvas-header border-bottom">
+      <div class="d-flex align-items-center gap-2">
+        <i class="bi bi-bag-check-fill text-success fs-4"></i>
+        <h5 class="offcanvas-title fw-bold" id="cartOffcanvasLabel">Keranjang Sewa</h5>
+        <span class="badge bg-secondary-subtle text-dark ms-1" id="cartDrawerCount">0 Item</span>
+      </div>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+
+    <div class="offcanvas-body p-3">
+      <div id="cartEmptyNotice" class="text-center py-5" style="display: none;">
+        <i class="bi bi-cart-x text-muted" style="font-size: 3.5rem;"></i>
+        <h6 class="mt-3 fw-bold text-dark">Keranjang Sewa Masih Kosong</h6>
+        <p class="text-muted small">Pilih tenda, carrier, atau perlengkapan camping lainnya dari katalog kami.</p>
+      </div>
+      <div id="cartDrawerItems"></div>
+    </div>
+
+    <div class="offcanvas-footer border-top p-3 bg-light" id="cartDrawerFooter">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <span class="text-muted">Total Estimasi Sewa:</span>
+        <h5 class="fw-bold text-success mb-0" id="cartDrawerTotal">Rp 0</h5>
+      </div>
+      <div class="d-grid gap-2">
+        <button class="btn btn-brand-primary py-2 d-flex align-items-center justify-content-center gap-2" data-bs-toggle="modal" data-bs-target="#checkoutModal" data-bs-dismiss="offcanvas">
+          <i class="bi bi-whatsapp"></i> Lanjut Booking via WhatsApp
+        </button>
+        <button class="btn btn-outline-danger btn-sm py-1" onclick="cartService.clearCart()">
+          <i class="bi bi-trash"></i> Kosongkan Keranjang
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Detail Produk -->
+  <div class="modal fade" id="productDetailModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+        <div class="modal-header border-0 pb-0">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4 pt-1">
+          <div class="row g-4">
+            <div class="col-md-5">
+              <div class="rounded-4 overflow-hidden bg-light" style="height: 280px;">
+                <img id="modalProductImg" src="" alt="Produk" class="w-100 h-100 object-fit-cover" />
+              </div>
+              <div class="d-flex justify-content-between align-items-center mt-3 text-muted small">
+                <span id="modalProductRating" class="text-warning"></span>
+                <span id="modalProductStock" class="fw-semibold text-success"></span>
+              </div>
+            </div>
+
+            <div class="col-md-7">
+              <span id="modalProductCategory" class="badge bg-success-subtle text-success mb-2"></span>
+              <h4 id="modalProductTitle" class="fw-bold mb-2"></h4>
+              <div class="d-flex align-items-baseline gap-2 mb-3">
+                <h3 id="modalProductPrice" class="fw-bold text-success mb-0"></h3>
+                <span class="text-muted">/ hari</span>
+              </div>
+              <p id="modalProductDesc" class="text-muted small mb-3"></p>
+
+              <div class="mb-3">
+                <h6 class="fw-bold small text-dark mb-1">Spesifikasi Teknis:</h6>
+                <div class="table-responsive">
+                  <table class="table table-sm table-borderless mb-0">
+                    <tbody id="modalProductSpecs"></tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="bg-light p-3 rounded-3 mb-3 border">
+                <div class="row g-2 align-items-center">
+                  <div class="col-6">
+                    <label class="small text-muted fw-bold d-block mb-1">Jumlah (Qty)</label>
+                    <input type="number" id="modalQtyInput" class="form-control form-control-sm text-center fw-bold" value="1" min="1" max="10" />
+                  </div>
+                  <div class="col-6">
+                    <label class="small text-muted fw-bold d-block mb-1">Durasi Sewa</label>
+                    <select id="modalDurationSelect" class="form-select form-select-sm">
+                      <option value="1">1 Hari</option>
+                      <option value="2">2 Hari</option>
+                      <option value="3">3 Hari</option>
+                      <option value="4">4 Hari</option>
+                      <option value="5">5 Hari</option>
+                      <option value="7">7 Hari</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-2 pt-2 border-top">
+                  <span class="small text-muted">Subtotal:</span>
+                  <span class="fw-bold text-dark fs-6" id="modalCalculatedSubtotal">Rp 0</span>
+                </div>
+              </div>
+
+              <div class="d-flex gap-2">
+                <button type="button" id="modalAddToCartBtn" class="btn btn-outline-success flex-grow-1 py-2 rounded-pill fw-semibold">
+                  <i class="bi bi-cart-plus me-1"></i> + Keranjang
+                </button>
+                <button type="button" id="modalRentNowWaBtn" class="btn btn-brand-primary flex-grow-1 py-2 rounded-pill fw-bold">
+                  <i class="bi bi-whatsapp me-1"></i> Sewa Langsung
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Form Checkout WhatsApp -->
+  <div class="modal fade" id="checkoutModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg rounded-4">
+        <div class="modal-header border-bottom">
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-whatsapp text-success fs-4"></i>
+            <h5 class="modal-title fw-bold">Form Konfirmasi Booking</h5>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="whatsappCheckoutForm">
+          <div class="modal-body p-4">
+            <p class="text-muted small mb-3">
+              Isi data diri Anda di bawah ini. Format pesan reservasi otomatis dibuat untuk dikirim ke WhatsApp Admin Mulyo Adventure.
+            </p>
+
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Nama Lengkap Penyewa *</label>
+              <input type="text" id="coName" class="form-control" placeholder="Contoh: Budi Santoso" required />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Nomor WhatsApp Aktif *</label>
+              <input type="tel" id="coPhone" class="form-control" placeholder="Contoh: 081234567890" required />
+            </div>
+
+            <div class="row g-2 mb-3">
+              <div class="col-6">
+                <label class="form-label small fw-bold">Tanggal Ambil *</label>
+                <input type="date" id="coStartDate" class="form-control" required />
+              </div>
+              <div class="col-6">
+                <label class="form-label small fw-bold">Tanggal Pengembalian *</label>
+                <input type="date" id="coEndDate" class="form-control" required />
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Catatan / Kebutuhan Tambahan (Opsional)</label>
+              <textarea id="coNotes" class="form-control" rows="2" placeholder="Catatan tambahan"></textarea>
+            </div>
+          </div>
+          <div class="modal-footer border-top">
+            <button type="button" class="btn btn-secondary rounded-pill px-3" data-bs-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-brand-primary rounded-pill px-4 fw-bold">
+              Kirim ke WhatsApp <i class="bi bi-arrow-right ms-1"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/products-data.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/katalog.js"></script>
+
+</body>
+</html>

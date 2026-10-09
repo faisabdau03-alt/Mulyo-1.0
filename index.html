@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mulyo Adventure | Sewa Tenda, Carrier & Perlengkapan Outdoor Berkualitas</title>
+  <meta name="description" content="Sewa perlengkapan mendaki gunung dan camping berkualitas dengan harga terjangkau di Mulyo Adventure. Tenda, carrier, sleeping bag, kompor portable & alat outdoor lengkap!" />
+  <meta name="keywords" content="sewa tenda, rental outdoor, mulyo adventure, sewa carrier, rental camping, alat mendaki" />
+  <meta name="author" content="Mulyo Adventure" />
+
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- 1. Top Announcement Bar -->
+  <div class="top-bar-announcement py-2 text-white">
+    <div class="container d-flex flex-wrap justify-content-between align-items-center gap-2">
+      <div class="d-flex align-items-center gap-3">
+        <a href="https://wa.me/6281234567890" target="_blank" class="text-white text-decoration-none d-flex align-items-center gap-1">
+          <i class="bi bi-telephone-fill text-brand-green"></i>
+          <span>0812-3456-7890</span>
+        </a>
+        <span class="text-secondary d-none d-sm-inline">|</span>
+        <a href="mailto:info@mulyoadventure.com" class="text-white text-decoration-none d-none d-sm-flex align-items-center gap-1">
+          <i class="bi bi-envelope-fill text-brand-green"></i>
+          <span>info@mulyoadventure.com</span>
+        </a>
+      </div>
+      <div class="d-flex align-items-center gap-2 ms-auto">
+        <span class="d-none d-md-inline text-light">Lebih dari <b class="text-brand-green">1.000+</b> perlengkapan camping siap sewa</span>
+        <a href="katalog.html" class="btn btn-sm bg-brand-green text-dark fw-bold rounded-pill px-3 py-1" style="font-size: 0.75rem;">
+          Lihat Katalog <i class="bi bi-arrow-right ms-1"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Navbar Utama Sticky -->
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-mulyo sticky-top navbar-sticky">
+    <div class="container">
+      <!-- Logo Mulyo Adventure -->
+      <a class="navbar-brand-logo" href="index.html">
+        <span class="p-2 rounded-3 bg-brand-green text-dark d-inline-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
+          <i class="bi bi-compass fs-5"></i>
+        </span>
+        <span>MULYO<span class="accent">.</span>ADVENTURE</span>
+      </a>
+
+      <!-- Tombol Aksi Mobile (Cart + Hamburger) -->
+      <div class="d-flex align-items-center gap-2 d-lg-none">
+        <button class="btn btn-outline-light rounded-pill position-relative px-3 py-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+          <i class="bi bi-cart3"></i>
+          <span class="cart-count-badge" style="display: none;">0</span>
+        </button>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mulyoNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+
+      <!-- Menu Navigasi -->
+      <div class="collapse navbar-collapse" id="mulyoNavbar">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" href="index.html">Beranda</a>
+          </li>
+          <!-- Dropdown Kategori -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+              Kategori
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark-custom">
+              <li><a class="dropdown-item" href="katalog.html?cat=tenda"><i class="bi bi-triangle-fill text-brand-green me-2"></i>Tenda Camping (2-6 Orang)</a></li>
+              <li><a class="dropdown-item" href="katalog.html?cat=carrier"><i class="bi bi-backpack-fill text-brand-green me-2"></i>Carrier & Semi Carrier (35L - 75L)</a></li>
+              <li><a class="dropdown-item" href="katalog.html?cat=tidur"><i class="bi bi-moon-stars-fill text-brand-green me-2"></i>Sleeping Bag & Matras</a></li>
+              <li><a class="dropdown-item" href="katalog.html?cat=masak"><i class="bi bi-fire text-brand-green me-2"></i>Kompor & Perlengkapan Masak</a></li>
+              <li><a class="dropdown-item" href="katalog.html?cat=penerangan"><i class="bi bi-lightbulb-fill text-brand-green me-2"></i>Lampu Tenda & Headlamp</a></li>
+              <li><a class="dropdown-item" href="katalog.html?cat=pakaian"><i class="bi bi-person-standing text-brand-green me-2"></i>Jaket & Sepatu Gunung</a></li>
+              <li><a class="dropdown-item" href="katalog.html?cat=gear"><i class="bi bi-tools text-brand-green me-2"></i>Trekking Pole, Meja & Kursi</a></li>
+              <li><hr class="dropdown-divider border-secondary" /></li>
+              <li><a class="dropdown-item text-brand-green fw-bold" href="katalog.html">Semua Kategori Produk →</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="katalog.html">Katalog Gear</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="cara-sewa.html">Cara Sewa</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="kontak.html">Kontak & Lokasi</a>
+          </li>
+        </ul>
+
+        <!-- Action Buttons Desktop -->
+        <div class="d-none d-lg-flex align-items-center gap-3">
+          <!-- Cart Button -->
+          <button class="btn btn-outline-light rounded-pill position-relative px-3 py-2 d-flex align-items-center gap-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+            <i class="bi bi-cart3 fs-5"></i>
+            <span class="fw-semibold">Keranjang</span>
+            <span class="cart-count-badge" style="display: none;">0</span>
+          </button>
+
+          <!-- WhatsApp Direct -->
+          <a href="https://wa.me/6281234567890" target="_blank" class="btn btn-brand-primary d-flex align-items-center gap-2">
+            <i class="bi bi-whatsapp"></i> Hubungi Kami
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 3. Hero Banner Section -->
+  <header class="hero-banner-section position-relative">
+    <div class="container position-relative z-2">
+      <div class="row align-items-center min-vh-50 py-4">
+        <div class="col-lg-8 col-xl-7">
+          <div class="hero-pill-badge mb-3">
+            <i class="bi bi-trees-fill"></i> Siap Menjelajah, Tanpa Ribet
+          </div>
+          <h1 class="hero-title mb-3">
+            Sewa Gear Outdoor <br />
+            <span class="text-brand-green">Kini Lebih Mudah!</span>
+          </h1>
+          <p class="hero-subtitle mb-4">
+            Nikmati kebebasan berpetualang ke puncak gunung dan pantai impian tanpa harus beli perlengkapan mahal. Mulyo Adventure menyediakan gear sewa bersih, terawat, dan berstandar keamanan tinggi.
+          </p>
+
+          <ul class="hero-ticks-list">
+            <li>
+              <svg width="20" height="20" fill="currentColor" class="bi bi-check-circle-fill text-brand-green" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+              </svg>
+              <span>Stok Real-Time & Lengkap</span>
+            </li>
+            <li>
+              <svg width="20" height="20" fill="currentColor" class="bi bi-check-circle-fill text-brand-green" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+              </svg>
+              <span>Peralatan Dicuci Bersih & Steril</span>
+            </li>
+            <li>
+              <svg width="20" height="20" fill="currentColor" class="bi bi-check-circle-fill text-brand-green" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+              </svg>
+              <span>Bonus 1 Hari Toleransi Pengembalian</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 4. Interactive Booking Date & Duration Bar (Floating Card) -->
+  <section class="container position-relative">
+    <div class="booking-search-card">
+      <div class="row g-3 align-items-center">
+        <!-- Tgl Ambil -->
+        <div class="col-lg-3 col-md-6 search-field-item">
+          <label><i class="bi bi-calendar-event me-1"></i> Tgl Ambil Sewa</label>
+          <input type="date" id="bookingStartDate" class="form-control" />
+        </div>
+
+        <!-- Durasi Sewa -->
+        <div class="col-lg-3 col-md-6 search-field-item">
+          <label><i class="bi bi-clock-history me-1"></i> Durasi Sewa</label>
+          <select id="bookingDuration" class="form-select">
+            <option value="1">1 Hari (24 Jam)</option>
+            <option value="2">2 Hari (1 Malam)</option>
+            <option value="3" selected>3 Hari (2 Malam - Populer)</option>
+            <option value="4">4 Hari (3 Malam)</option>
+            <option value="5">5 Hari</option>
+            <option value="6">6 Hari</option>
+            <option value="7">7 Hari (1 Minggu)</option>
+            <option value="10">10 Hari</option>
+            <option value="14">14 Hari</option>
+          </select>
+        </div>
+
+        <!-- Maks Pengembalian -->
+        <div class="col-lg-3 col-md-6 search-field-item">
+          <label><i class="bi bi-arrow-return-left me-1"></i> Maks. Pengembalian</label>
+          <input type="text" id="bookingEndDate" class="form-control" readonly placeholder="Terhitung otomatis" />
+        </div>
+
+        <!-- Pencarian & Tombol Cari -->
+        <div class="col-lg-3 col-md-6 d-flex align-items-end">
+          <div class="search-box-wrapper w-100">
+            <div class="input-group">
+              <input type="text" class="form-control hero-search-input bg-light border-0 py-2" placeholder="Cari tenda, carrier..." />
+              <button class="btn btn-brand-primary hero-search-btn px-3" type="button">
+                <i class="bi bi-search"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Brand Showcase (Pilihan Brand) -->
+  <section class="brand-ticker-section mt-5">
+    <div class="container">
+      <div class="text-center mb-3">
+        <h4 class="fw-bold mb-1">Pilihan Brand Outdoor Ternama</h4>
+        <p class="text-muted small">Dipilih dari merek terpercaya demi kenyamanan & keselamatan petualangan Anda.</p>
+      </div>
+      <div class="d-flex flex-wrap justify-content-center gap-3 py-2">
+        <div class="brand-badge-item">EIGER</div>
+        <div class="brand-badge-item">CONSINA</div>
+        <div class="brand-badge-item">AREI OUTDOOR</div>
+        <div class="brand-badge-item">DEUTER</div>
+        <div class="brand-badge-item">OSPREY</div>
+        <div class="brand-badge-item">NATUREHIKE</div>
+        <div class="brand-badge-item">TENDAKI</div>
+        <div class="brand-badge-item">QUECHUA</div>
+        <div class="brand-badge-item">MERAPI MOUNTAIN</div>
+        <div class="brand-badge-item">GREAT OUTDOOR</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Featured Products Section -->
+  <section class="py-5">
+    <div class="container">
+      <!-- Header Section -->
+      <div class="row align-items-end mb-4">
+        <div class="col-md-8">
+          <span class="badge bg-success-subtle text-success fw-bold px-3 py-2 rounded-pill mb-2">Paling Dicari</span>
+          <h2 class="fw-bold fs-2 mb-1">Pilihan Terbaik Minggu Ini!</h2>
+          <p class="text-muted mb-0">Gear pilihan pendaki favorit, siap temani petualanganmu akhir pekan ini.</p>
+        </div>
+        <div class="col-md-4 text-md-end mt-3 mt-md-0">
+          <a href="katalog.html" class="btn btn-outline-dark rounded-pill px-4 fw-semibold">
+            Lihat Semua Produk <i class="bi bi-arrow-right ms-1"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <div class="d-flex flex-wrap gap-2 mb-4 pb-2 overflow-x-auto">
+        <button class="btn category-tab-btn active" data-category="all">Semua Perlengkapan</button>
+        <button class="btn category-tab-btn btn-outline-secondary" data-category="tenda">🏕️ Tenda Camping</button>
+        <button class="btn category-tab-btn btn-outline-secondary" data-category="carrier">🎒 Carrier & Tas</button>
+        <button class="btn category-tab-btn btn-outline-secondary" data-category="tidur">🛌 Sleeping Bag & Matras</button>
+        <button class="btn category-tab-btn btn-outline-secondary" data-category="masak">🍳 Alat Masak</button>
+        <button class="btn category-tab-btn btn-outline-secondary" data-category="penerangan">💡 Senter & Lentera</button>
+        <button class="btn category-tab-btn btn-outline-secondary" data-category="gear">⛰️ Trekking Pole & Kursi</button>
+      </div>
+
+      <!-- Product Cards Grid -->
+      <div class="row" id="featuredProductsGrid">
+        <!-- Rendered dynamically by main.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Mengapa Memilih Mulyo Adventure (Keunggulan) -->
+  <section class="py-5 bg-white border-top border-bottom">
+    <div class="container">
+      <div class="text-center max-w-700 mx-auto mb-5">
+        <span class="badge bg-success-subtle text-success fw-bold px-3 py-2 rounded-pill mb-2">Kualitas Terjamin</span>
+        <h2 class="fw-bold">Kenapa Sewa di Mulyo Adventure?</h2>
+        <p class="text-muted">Kami memahami kenyamanan mendaki dimulai dari peralatan yang bersih, aman, dan mudah disewa.</p>
+      </div>
+
+      <div class="row g-4">
+        <!-- Card 1 -->
+        <div class="col-lg-3 col-md-6">
+          <div class="feature-box">
+            <div class="feature-icon-wrapper">
+              <i class="bi bi-shield-check"></i>
+            </div>
+            <h5 class="fw-bold mb-2">Steril & Dicuci Bersih</h5>
+            <p class="text-muted small mb-0">Setiap tenda, carrier, dan sleeping bag selalu dicuci bersih dan dikeringkan steril setelah dipakai.</p>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="col-lg-3 col-md-6">
+          <div class="feature-box">
+            <div class="feature-icon-wrapper">
+              <i class="bi bi-patch-check"></i>
+            </div>
+            <h5 class="fw-bold mb-2">100% Brand Original</h5>
+            <p class="text-muted small mb-0">Semua perlengkapan adalah brand original (Eiger, Deuter, Osprey, Consina) yang teruji di medan ekstrem.</p>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="col-lg-3 col-md-6">
+          <div class="feature-box">
+            <div class="feature-icon-wrapper">
+              <i class="bi bi-wallet2"></i>
+            </div>
+            <h5 class="fw-bold mb-2">Harga Ramah Kantong</h5>
+            <p class="text-muted small mb-0">Tarif sewa transparan tanpa biaya tersembunyi. Sangat cocok untuk mahasiswa dan pendaki pemula.</p>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="col-lg-3 col-md-6">
+          <div class="feature-box">
+            <div class="feature-icon-wrapper">
+              <i class="bi bi-gift"></i>
+            </div>
+            <h5 class="fw-bold mb-2">Toleransi Pengembalian</h5>
+            <p class="text-muted small mb-0">Kami memberikan kelonggaran waktu pengembalian agar Anda tidak terburu-buru sehabis turun gunung.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Langkah Cara Sewa (How it Works) -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="text-center mb-5">
+        <span class="badge bg-success-subtle text-success fw-bold px-3 py-2 rounded-pill mb-2">Alur Simpel</span>
+        <h2 class="fw-bold">4 Langkah Mudah Sewa Alat</h2>
+        <p class="text-muted">Proses cepat tanpa birokrasi rumit, cukup dari HP Anda.</p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-lg-3 col-md-6 text-center">
+          <div class="step-number-badge mx-auto">1</div>
+          <h5 class="fw-bold mb-2">Pilih Alat & Jadwal</h5>
+          <p class="text-muted small">Cari peralatan yang dibutuhkan dan tentukan tanggal ambil serta durasi petualangan Anda.</p>
+        </div>
+
+        <div class="col-lg-3 col-md-6 text-center">
+          <div class="step-number-badge mx-auto">2</div>
+          <h5 class="fw-bold mb-2">Booking & Checkout</h5>
+          <p class="text-muted small">Masukkan barang ke keranjang dan kirim format booking langsung ke WhatsApp admin Mulyo.</p>
+        </div>
+
+        <div class="col-lg-3 col-md-6 text-center">
+          <div class="step-number-badge mx-auto">3</div>
+          <h5 class="fw-bold mb-2">Ambil & Titip Jaminan</h5>
+          <p class="text-muted small">Ambil gear di toko kami (atau via ojek online) dengan menitipkan kartu identitas asli (KTP/KTM/SIM).</p>
+        </div>
+
+        <div class="col-lg-3 col-md-6 text-center">
+          <div class="step-number-badge mx-auto">4</div>
+          <h5 class="fw-bold mb-2">Jelajah & Kembalikan</h5>
+          <p class="text-muted small">Nikmati keindahan alam nusantara dan kembalikan gear tepat waktu. Jaminan identitas akan dikembalikan utuh.</p>
+        </div>
+      </div>
+
+      <div class="text-center mt-5">
+        <a href="cara-sewa.html" class="btn btn-brand-primary px-4 py-2">
+          Baca Syarat & Ketentuan Lengkap <i class="bi bi-arrow-right ms-1"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Testimoni Pendaki -->
+  <section class="py-5 bg-white">
+    <div class="container">
+      <div class="text-center mb-5">
+        <span class="badge bg-success-subtle text-success fw-bold px-3 py-2 rounded-pill mb-2">Ulasan Nyata</span>
+        <h2 class="fw-bold">Apa Kata Sahabat Mulyo?</h2>
+        <p class="text-muted">Cerita nyata dari ratusan pendaki yang telah menjelajah bersama kami.</p>
+      </div>
+
+      <div class="row g-4">
+        <!-- Testi 1 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="testimonial-card h-100 d-flex flex-column">
+            <div class="text-warning mb-2 fs-5">★★★★★</div>
+            <p class="text-dark fw-semibold mb-1">"Kondisi tenda super wangi & bersih!"</p>
+            <p class="text-muted small mb-4 flex-grow-1">
+              "Sewa tenda Borneo 4 Pro buat nanjak ke Prau. Pas dibuka tendanya beneran wangi dan nggak ada bocor sama sekali pas kena hujan malam. Adminnya juga ramah banget ngasih tips packing."
+            </p>
+            <div class="d-flex align-items-center gap-3 pt-3 border-top">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Rizky" class="testimonial-avatar" />
+              <div>
+                <h6 class="mb-0 fw-bold">Rizky Maulana</h6>
+                <small class="text-muted">Pendaki Gunung Prau</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testi 2 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="testimonial-card h-100 d-flex flex-column">
+            <div class="text-warning mb-2 fs-5">★★★★★</div>
+            <p class="text-dark fw-semibold mb-1">"Carrier Deuter nyaman banget"</p>
+            <p class="text-muted small mb-4 flex-grow-1">
+              "Baru pertama kali nanjak Merbabu bawa carrier 50L. Backsystem Deuternya empuk beneran anti pegel pinggang. Harga sewanya juga sangat ramah kantong mahasiswa. Pasti langganan di Mulyo!"
+            </p>
+            <div class="d-flex align-items-center gap-3 pt-3 border-top">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Bagas" class="testimonial-avatar" />
+              <div>
+                <h6 class="mb-0 fw-bold">Bagas Pratama</h6>
+                <small class="text-muted">Mahasiswa & Backpacker</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testi 3 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="testimonial-card h-100 d-flex flex-column">
+            <div class="text-warning mb-2 fs-5">★★★★★</div>
+            <p class="text-dark fw-semibold mb-1">"Proses checkout cepat via WhatsApp"</p>
+            <p class="text-muted small mb-4 flex-grow-1">
+              "Fitur pilih tanggal di webnya mantap, langsung kehitung otomatis tanggal kembalinya. Tinggal kirim ke WA langsung dikonfirmasi dalam 5 menit. Sukses terus Mulyo Adventure!"
+            </p>
+            <div class="d-flex align-items-center gap-3 pt-3 border-top">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" alt="Nadia" class="testimonial-avatar" />
+              <div>
+                <h6 class="mb-0 fw-bold">Nadia Safitri</h6>
+                <small class="text-muted">Camper Pemula</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. FAQ Section -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="text-center max-w-700 mx-auto mb-4">
+        <h3 class="fw-bold">Pertanyaan yang Sering Diajukan (FAQ)</h3>
+        <p class="text-muted">Informasi ringkas seputar penyewaan alat di Mulyo Adventure.</p>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="accordion accordion-mulyo" id="faqAccordion">
+            <!-- FAQ 1 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                  Apa saja syarat dokumen jaminan untuk menyewa?
+                </button>
+              </h2>
+              <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-muted small">
+                  Penyewa wajib menitipkan 1 kartu identitas asli yang masih berlaku (KTP, SIM, Paspor, atau Kartu Tanda Mahasiswa/KTM) atas nama peminjam. Identitas akan disimpan aman di brankas toko dan dikembalikan saat alat dikembalikan.
+                </div>
+              </div>
+            </div>
+
+            <!-- FAQ 2 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                  Apakah alat harus dicuci sebelum dikembalikan?
+                </button>
+              </h2>
+              <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-muted small">
+                  Tidak perlu! Anda cukup mengibaskan tanah atau dedaunan kering. Seluruh tenda, sleeping bag, dan peralatan masak akan kami cuci dan sterilisasi sendiri dengan detergen khusus outdoor agar bahan waterproof tetap awet.
+                </div>
+              </div>
+            </div>
+
+            <!-- FAQ 3 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                  Bagaimana jika terlambat mengembalikan alat?
+                </button>
+              </h2>
+              <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-muted small">
+                  Kami memberikan toleransi hingga pukul 12.00 WIB pada hari pengembalian. Keterlambatan lebih dari itu tanpa konfirmasi terlebih dahulu akan dikenakan biaya sewa harian normal untuk hari berikutnya.
+                </div>
+              </div>
+            </div>
+
+            <!-- FAQ 4 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                  Apakah bisa booking untuk rombongan / open trip besar?
+                </button>
+              </h2>
+              <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-muted small">
+                  Bisa sekali! Kami melayani penyewaan skala besar hingga puluhan tenda dan carrier untuk kegiatan kampus, ospek, open trip, maupun gathering kantor dengan diskon spesial rombongan. Hubungi WhatsApp admin kami untuk penawaran khusus.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. Footer Mulyo Adventure -->
+  <footer class="footer-mulyo">
+    <div class="container">
+      <div class="row g-4">
+        <!-- Kolom Info Toko -->
+        <div class="col-lg-4 col-md-6">
+          <div class="navbar-brand-logo mb-3">
+            <span class="p-2 rounded-3 bg-brand-green text-dark d-inline-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+              <i class="bi bi-compass fs-5"></i>
+            </span>
+            <span>MULYO<span class="accent">.</span>ADVENTURE</span>
+          </div>
+          <p class="text-muted small mb-3">
+            Pusat persewaan perlengkapan outdoor, camping, dan mendaki gunung terpercaya. Melayani sewa tenda, carrier, sleeping bag, dan peralatan pendakian lengkap dengan kondisi prima dan bersih.
+          </p>
+          <div class="footer-contact-item">
+            <i class="bi bi-geo-alt-fill text-brand-green"></i>
+            <span>Jl. Kaliurang KM 5, Gang Mulyo No. 12, Yogyakarta (Dekat Kampus)</span>
+          </div>
+          <div class="footer-contact-item">
+            <i class="bi bi-clock-fill text-brand-green"></i>
+            <span>Buka Setiap Hari: 08.00 - 21.00 WIB</span>
+          </div>
+          <div class="footer-contact-item">
+            <i class="bi bi-whatsapp text-brand-green"></i>
+            <span>WhatsApp: 0812-3456-7890</span>
+          </div>
+        </div>
+
+        <!-- Kolom Navigasi Kategori -->
+        <div class="col-lg-2 col-md-6 col-6">
+          <h5 class="footer-heading">Kategori Alat</h5>
+          <ul class="footer-links">
+            <li><a href="katalog.html?cat=tenda">Tenda Camping</a></li>
+            <li><a href="katalog.html?cat=carrier">Carrier & Daypack</a></li>
+            <li><a href="katalog.html?cat=tidur">Sleeping Bag</a></li>
+            <li><a href="katalog.html?cat=masak">Alat Masak Camping</a></li>
+            <li><a href="katalog.html?cat=penerangan">Headlamp & Lampu</a></li>
+            <li><a href="katalog.html?cat=gear">Trekking Pole</a></li>
+          </ul>
+        </div>
+
+        <!-- Kolom Bantuan & Panduan -->
+        <div class="col-lg-3 col-md-6 col-6">
+          <h5 class="footer-heading">Bantuan & Panduan</h5>
+          <ul class="footer-links">
+            <li><a href="cara-sewa.html">Panduan Cara Sewa</a></li>
+            <li><a href="cara-sewa.html#syarat">Syarat Dokumen Jaminan</a></li>
+            <li><a href="cara-sewa.html#denda">Ketentuan Denda & Kerusakan</a></li>
+            <li><a href="kontak.html">Lokasi & Jam Buka</a></li>
+            <li><a href="kontak.html">Hubungi Customer Support</a></li>
+          </ul>
+        </div>
+
+        <!-- Kolom Kontak Cepat WhatsApp -->
+        <div class="col-lg-3 col-md-6">
+          <h5 class="footer-heading">Konsultasi Gear</h5>
+          <p class="text-muted small mb-3">Bingung mau bawa alat apa untuk gunung tujuanmu? Konsultasikan gratis ke tim kami:</p>
+          <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Mulyo%20Adventure,%20saya%20mau%20konsultasi%20sewa%20alat" target="_blank" class="btn btn-brand-primary w-100 d-flex align-items-center justify-content-center gap-2 mb-3">
+            <i class="bi bi-whatsapp"></i> Chat Admin Sekarang
+          </a>
+          <div class="d-flex align-items-center gap-2">
+            <span class="text-muted small">Ikuti Kami:</span>
+            <a href="https://instagram.com" target="_blank" class="text-white fs-5 hover-green"><i class="bi bi-instagram"></i></a>
+            <a href="https://tiktok.com" target="_blank" class="text-white fs-5 hover-green"><i class="bi bi-tiktok"></i></a>
+            <a href="https://facebook.com" target="_blank" class="text-white fs-5 hover-green"><i class="bi bi-facebook"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Copyright Bar -->
+      <div class="footer-bottom-bar d-flex flex-wrap justify-content-between align-items-center gap-2">
+        <p class="mb-0 text-muted">© 2026 Mulyo Adventure. All rights reserved.</p>
+        <p class="mb-0 text-muted small">Dibuat untuk Tugas Perkuliahan Sem 5 - Bu Fersel</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 12. Floating WhatsApp Action Button -->
+  <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Mulyo%20Adventure,%20saya%20tertarik%20sewa%20alat%20outdoor" target="_blank" class="floating-whatsapp-btn" title="Chat WhatsApp Mulyo Adventure">
+    <i class="bi bi-whatsapp fs-3"></i>
+  </a>
+
+  <!-- 13. Offcanvas Shopping Cart (Drawer) -->
+  <div class="offcanvas offcanvas-end cart-offcanvas" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
+    <div class="offcanvas-header border-bottom">
+      <div class="d-flex align-items-center gap-2">
+        <i class="bi bi-bag-check-fill text-success fs-4"></i>
+        <h5 class="offcanvas-title fw-bold" id="cartOffcanvasLabel">Keranjang Sewa</h5>
+        <span class="badge bg-secondary-subtle text-dark ms-1" id="cartDrawerCount">0 Item</span>
+      </div>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+
+    <div class="offcanvas-body p-3">
+      <!-- Empty State -->
+      <div id="cartEmptyNotice" class="text-center py-5" style="display: none;">
+        <i class="bi bi-cart-x text-muted" style="font-size: 3.5rem;"></i>
+        <h6 class="mt-3 fw-bold text-dark">Keranjang Sewa Masih Kosong</h6>
+        <p class="text-muted small">Pilih tenda, carrier, atau perlengkapan camping lainnya dari katalog kami.</p>
+        <a href="katalog.html" class="btn btn-brand-primary btn-sm rounded-pill px-4 mt-2" data-bs-dismiss="offcanvas">
+          Mulai Pilih Alat
+        </a>
+      </div>
+
+      <!-- Cart Items List Container -->
+      <div id="cartDrawerItems">
+        <!-- Rendered by cart.js -->
+      </div>
+    </div>
+
+    <!-- Cart Footer with Checkout -->
+    <div class="offcanvas-footer border-top p-3 bg-light" id="cartDrawerFooter">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <span class="text-muted">Total Estimasi Sewa:</span>
+        <h5 class="fw-bold text-success mb-0" id="cartDrawerTotal">Rp 0</h5>
+      </div>
+      <div class="d-grid gap-2">
+        <button class="btn btn-brand-primary py-2 d-flex align-items-center justify-content-center gap-2" data-bs-toggle="modal" data-bs-target="#checkoutModal" data-bs-dismiss="offcanvas">
+          <i class="bi bi-whatsapp"></i> Lanjut Booking via WhatsApp
+        </button>
+        <button class="btn btn-outline-danger btn-sm py-1" onclick="cartService.clearCart()">
+          <i class="bi bi-trash"></i> Kosongkan Keranjang
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 14. Modal Detail Produk -->
+  <div class="modal fade" id="productDetailModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+        <div class="modal-header border-0 pb-0">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4 pt-1">
+          <div class="row g-4">
+            <!-- Gambar -->
+            <div class="col-md-5">
+              <div class="rounded-4 overflow-hidden bg-light" style="height: 280px;">
+                <img id="modalProductImg" src="" alt="Produk" class="w-100 h-100 object-fit-cover" />
+              </div>
+              <div class="d-flex justify-content-between align-items-center mt-3 text-muted small">
+                <span id="modalProductRating" class="text-warning"></span>
+                <span id="modalProductStock" class="fw-semibold text-success"></span>
+              </div>
+            </div>
+
+            <!-- Detail Info -->
+            <div class="col-md-7">
+              <span id="modalProductCategory" class="badge bg-success-subtle text-success mb-2"></span>
+              <h4 id="modalProductTitle" class="fw-bold mb-2"></h4>
+              <div class="d-flex align-items-baseline gap-2 mb-3">
+                <h3 id="modalProductPrice" class="fw-bold text-success mb-0"></h3>
+                <span class="text-muted">/ hari</span>
+              </div>
+              <p id="modalProductDesc" class="text-muted small mb-3"></p>
+
+              <!-- Tabel Spesifikasi -->
+              <div class="mb-3">
+                <h6 class="fw-bold small text-dark mb-1">Spesifikasi Teknis:</h6>
+                <div class="table-responsive">
+                  <table class="table table-sm table-borderless mb-0">
+                    <tbody id="modalProductSpecs">
+                      <!-- Rendered by JS -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- Kalkulator Durasi Modal -->
+              <div class="bg-light p-3 rounded-3 mb-3 border">
+                <div class="row g-2 align-items-center">
+                  <div class="col-6">
+                    <label class="small text-muted fw-bold d-block mb-1">Jumlah (Qty)</label>
+                    <input type="number" id="modalQtyInput" class="form-control form-control-sm text-center fw-bold" value="1" min="1" max="10" />
+                  </div>
+                  <div class="col-6">
+                    <label class="small text-muted fw-bold d-block mb-1">Durasi Sewa</label>
+                    <select id="modalDurationSelect" class="form-select form-select-sm">
+                      <option value="1">1 Hari</option>
+                      <option value="2">2 Hari</option>
+                      <option value="3">3 Hari</option>
+                      <option value="4">4 Hari</option>
+                      <option value="5">5 Hari</option>
+                      <option value="7">7 Hari</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-2 pt-2 border-top">
+                  <span class="small text-muted">Subtotal:</span>
+                  <span class="fw-bold text-dark fs-6" id="modalCalculatedSubtotal">Rp 0</span>
+                </div>
+              </div>
+
+              <!-- Tombol Aksi -->
+              <div class="d-flex gap-2">
+                <button type="button" id="modalAddToCartBtn" class="btn btn-outline-success flex-grow-1 py-2 rounded-pill fw-semibold">
+                  <i class="bi bi-cart-plus me-1"></i> + Keranjang
+                </button>
+                <button type="button" id="modalRentNowWaBtn" class="btn btn-brand-primary flex-grow-1 py-2 rounded-pill fw-bold">
+                  <i class="bi bi-whatsapp me-1"></i> Sewa Langsung
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 15. Modal Form Checkout WhatsApp -->
+  <div class="modal fade" id="checkoutModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg rounded-4">
+        <div class="modal-header border-bottom">
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-whatsapp text-success fs-4"></i>
+            <h5 class="modal-title fw-bold">Form Konfirmasi Booking</h5>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="whatsappCheckoutForm">
+          <div class="modal-body p-4">
+            <p class="text-muted small mb-3">
+              Isi data diri Anda di bawah ini. Sistem kami akan otomatis membuat pesan reservasi rapi yang siap dikirim langsung ke WhatsApp Admin Mulyo Adventure.
+            </p>
+
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Nama Lengkap Penyewa *</label>
+              <input type="text" id="coName" class="form-control" placeholder="Contoh: Budi Santoso" required />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Nomor WhatsApp Aktif *</label>
+              <input type="tel" id="coPhone" class="form-control" placeholder="Contoh: 081234567890" required />
+            </div>
+
+            <div class="row g-2 mb-3">
+              <div class="col-6">
+                <label class="form-label small fw-bold">Tanggal Ambil *</label>
+                <input type="date" id="coStartDate" class="form-control" required />
+              </div>
+              <div class="col-6">
+                <label class="form-label small fw-bold">Tanggal Pengembalian *</label>
+                <input type="date" id="coEndDate" class="form-control" required />
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Catatan / Kebutuhan Tambahan (Opsional)</label>
+              <textarea id="coNotes" class="form-control" rows="2" placeholder="Contoh: Ambil tenda warna hijau, butuh gas kaleng tambahan"></textarea>
+            </div>
+
+            <div class="alert alert-info py-2 small mb-0 d-flex gap-2 align-items-center">
+              <i class="bi bi-info-circle-fill fs-5"></i>
+              <span>Setelah klik tombol di bawah, Anda akan diarahkan ke WhatsApp untuk verifikasi stok dan jaminan.</span>
+            </div>
+          </div>
+          <div class="modal-footer border-top">
+            <button type="button" class="btn btn-secondary rounded-pill px-3" data-bs-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-brand-primary rounded-pill px-4 fw-bold">
+              Kirim ke WhatsApp <i class="bi bi-arrow-right ms-1"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap 5.3 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Data & Application Logic -->
+  <script src="js/products-data.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>

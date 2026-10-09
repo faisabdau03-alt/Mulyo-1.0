@@ -1,0 +1,20 @@
+{
+  "name": "mulyo-adventure",
+  "version": "1.0.0",
+  "description": "Website Persewaan Tenda, Carrier & Gear Outdoor - Mulyo Adventure",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve -l 3000 .",
+    "dev": "npx serve -l 3000 ."
+  },
+  "keywords": [
+    "sewa-outdoor",
+    "rental-tenda",
+    "mulyo-adventure",
+    "camping",
+    "hiking",
+    "gear-rental"
+  ],
+  "author": "Mulyo Adventure Team",
+  "license": "MIT"
+}
