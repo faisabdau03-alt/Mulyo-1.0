@@ -1,4 +1,4 @@
-/* Mulyo Adventure - Modern Outdoor Gear Rental Theme */
+/* Foresta Adventure - Modern Outdoor Gear Rental Theme */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Urbanist:wght@400;600;700;800&display=swap');
 
 :root {
@@ -62,14 +62,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Navbar */
-.navbar-mulyo {
+.navbar-foresta {
   background-color: #0e131f;
   transition: var(--transition-normal);
   padding-top: 0.85rem;
   padding-bottom: 0.85rem;
 }
 
-.navbar-mulyo.scrolled {
+.navbar-foresta.scrolled {
   background-color: rgba(14, 19, 31, 0.95);
   backdrop-filter: blur(12px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
@@ -432,7 +432,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Footer */
-.footer-mulyo {
+.footer-foresta {
   background-color: #0b0f19;
   color: #94a3b8;
   padding-top: 4.5rem;
@@ -550,14 +550,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Accordion FAQ */
-.accordion-mulyo .accordion-item {
+.accordion-foresta .accordion-item {
   border: 1px solid #e2e8f0;
   border-radius: 12px !important;
   margin-bottom: 0.85rem;
   overflow: hidden;
 }
 
-.accordion-mulyo .accordion-button {
+.accordion-foresta .accordion-button {
   font-weight: 700;
   font-size: 1rem;
   padding: 1.15rem 1.25rem;
@@ -565,7 +565,7 @@ h1, h2, h3, h4, h5, h6 {
   color: #0f172a;
 }
 
-.accordion-mulyo .accordion-button:not(.collapsed) {
+.accordion-foresta .accordion-button:not(.collapsed) {
   background-color: #f8fafc;
   color: var(--color-primary-dark);
   box-shadow: none;

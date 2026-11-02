@@ -1,7 +1,7 @@
 {
-  "name": "mulyo-adventure",
+  "name": "foresta-adventure",
   "version": "1.0.0",
-  "description": "Website Persewaan Tenda, Carrier & Gear Outdoor - Mulyo Adventure",
+  "description": "Website Persewaan Tenda, Carrier & Gear Outdoor - Foresta Adventure",
   "main": "index.html",
   "scripts": {
     "start": "npx serve -l 3000 .",
@@ -10,11 +10,11 @@
   "keywords": [
     "sewa-outdoor",
     "rental-tenda",
-    "mulyo-adventure",
+    "foresta-adventure",
     "camping",
     "hiking",
     "gear-rental"
   ],
-  "author": "Mulyo Adventure Team",
+  "author": "Foresta Adventure Team",
   "license": "MIT"
 }

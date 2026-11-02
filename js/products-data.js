@@ -1,4 +1,4 @@
-// Database Produk Mulyo Adventure
+// Database Produk Foresta Adventure
 const PRODUCTS_DATA = [
   {
     id: "tenda-01",
@@ -402,7 +402,7 @@ const PRODUCTS_DATA = [
     name: "Flysheet Waterproof 3x4 Meter + Tali Prusik",
     category: "gear",
     categoryName: "Flysheet & Jas Hujan & Tiang",
-    brand: "Mulyo Gear",
+    brand: "Foresta Gear",
     basePrice: 15000,
     rating: 4.8,
     reviewsCount: 89,

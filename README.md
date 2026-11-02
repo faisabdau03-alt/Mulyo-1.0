@@ -1,6 +1,6 @@
-# Mulyo Adventure 🏕️ - Persewaan Tenda, Carrier & Gear Outdoor
+# Foresta Adventure 🏕️ - Persewaan Tenda, Carrier & Gear Outdoor
 
-Website platform persewaan perlengkapan camping, mendaki gunung, dan outdoor adventure modern yang dirancang mengadaptasi konsep dan tata letak **Foresta Adventure**, dengan penyesuaian brand menjadi **Mulyo Adventure**.
+Website platform persewaan perlengkapan camping, mendaki gunung, dan outdoor adventure modern - **Foresta Adventure**.
 
 Proyek ini dibangun untuk kebutuhan tugas perkuliahan Semester 5 (Bu Fersel).
 
@@ -10,7 +10,7 @@ Proyek ini dibangun untuk kebutuhan tugas perkuliahan Semester 5 (Bu Fersel).
 
 1. **Header & Sticky Navigation Bar**:
    - Top announcement bar dengan info kontak telepon, email, dan jam buka.
-   - Logo kustom "Mulyo Adventure".
+   - Logo kustom "Foresta Adventure".
    - Menu navigasi: Beranda, Dropdown Kategori Lengkap, Katalog Gear, Cara Sewa, Kontak & Lokasi.
    - Tombol Keranjang Belanja interaktif dengan indikator jumlah item real-time.
 

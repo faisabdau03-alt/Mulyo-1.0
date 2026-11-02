@@ -1,4 +1,4 @@
-// Katalog Page Logic for Mulyo Adventure
+// Katalog Page Logic for Foresta Adventure
 
 document.addEventListener("DOMContentLoaded", () => {
   initKatalogPage();

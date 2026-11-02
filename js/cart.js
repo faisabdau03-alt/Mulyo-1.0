@@ -1,6 +1,6 @@
-// Cart System for Mulyo Adventure
-const CART_STORAGE_KEY = "mulyo_adventure_cart";
-const DEFAULT_PHONE_WA = "6281234567890"; // Nomor WhatsApp Admin Mulyo Adventure
+// Cart System for Foresta Adventure
+const CART_STORAGE_KEY = "foresta_adventure_cart";
+const DEFAULT_PHONE_WA = "6281234567890"; // Nomor WhatsApp Admin Foresta Adventure
 
 class CartService {
   constructor() {
@@ -29,7 +29,7 @@ class CartService {
 
   loadBookingState() {
     try {
-      const state = localStorage.getItem("mulyo_booking_dates");
+      const state = localStorage.getItem("foresta_booking_dates");
       if (state) return JSON.parse(state);
     } catch (e) {}
 
@@ -49,7 +49,7 @@ class CartService {
 
   saveBookingState(state) {
     this.bookingState = state;
-    localStorage.setItem("mulyo_booking_dates", JSON.stringify(state));
+    localStorage.setItem("foresta_booking_dates", JSON.stringify(state));
     this.updateUI();
   }
 
@@ -221,10 +221,10 @@ class CartService {
   }
 
   showToast(message, type = "success") {
-    let toastContainer = document.getElementById("mulyoToastContainer");
+    let toastContainer = document.getElementById("forestaToastContainer");
     if (!toastContainer) {
       toastContainer = document.createElement("div");
-      toastContainer.id = "mulyoToastContainer";
+      toastContainer.id = "forestaToastContainer";
       toastContainer.className = "toast-container position-fixed bottom-0 end-0 p-3";
       toastContainer.style.zIndex = "99999";
       document.body.appendChild(toastContainer);
@@ -262,7 +262,7 @@ class CartService {
       return;
     }
 
-    const nama = customer.name || "Pelanggan Mulyo Adventure";
+    const nama = customer.name || "Pelanggan Foresta Adventure";
     const wa = customer.phone || "-";
     const tglAmbil = customer.startDate || this.bookingState.startDate || "Menyesuaikan";
     const tglKembali = customer.endDate || this.bookingState.endDate || "Menyesuaikan";
@@ -279,7 +279,7 @@ class CartService {
       itemLines += `${index + 1}. *${item.name}*\n   • Jumlah: ${item.qty} pcs\n   • Durasi: ${dur} hari (@ ${formatRupiah(item.price)}/hari)\n   • Subtotal: ${formatRupiah(subtotal)}\n\n`;
     });
 
-    const message = `Halo Admin *Mulyo Adventure*! 👋
+    const message = `Halo Admin *Foresta Adventure*! 👋
 Saya ingin melakukan booking sewa perlengkapan outdoor melalui website:
 
 🏕️ *DATA PENYEWA*:

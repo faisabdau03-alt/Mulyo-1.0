@@ -1,4 +1,4 @@
-// Main App Logic for Mulyo Adventure
+// Main App Logic for Foresta Adventure
 
 document.addEventListener("DOMContentLoaded", () => {
   initDateAndDurationPicker();
@@ -245,7 +245,7 @@ function openProductModal(productId) {
       const dur = parseInt(durSelect.value) || 2;
       const total = product.basePrice * qty * dur;
 
-      const message = `Halo Admin *Mulyo Adventure*! 👋
+      const message = `Halo Admin *Foresta Adventure*! 👋
 Saya ingin menyewa produk ini langsung:
 
 📦 *Item*: ${product.name}
