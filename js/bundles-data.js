@@ -236,3 +236,4 @@ class BundlesService {
 
 // Global instance
 const bundlesService = new BundlesService();
+

@@ -12,6 +12,15 @@ let currentEditingBundleId = null;
 let currentFormItems = []; // Array of { productId, qty }
 
 function initAdminBundles() {
+  if (typeof adminAuth !== "undefined") {
+    if (!adminAuth.requireAuth()) return;
+    const session = adminAuth.getSession();
+    const label = document.getElementById("adminSessionLabel");
+    if (label && session) {
+      label.textContent = `${session.name} (${session.badge || session.role})`;
+    }
+  }
+
   renderAdminBundlesTable();
   updateAdminMetrics();
   setupAdminListeners();
@@ -529,3 +538,4 @@ function showAdminToast(message) {
 function formatRupiah(num) {
   return "Rp " + (Number(num) || 0).toLocaleString("id-ID");
 }
+

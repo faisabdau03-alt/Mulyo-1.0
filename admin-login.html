@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login Administrator - Foresta Adventure</title>
+  <meta name="description" content="Halaman login khusus pengelola dan administrator Foresta Adventure untuk mengelola paket bundling dan sistem rental." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    body {
+      background: radial-gradient(circle at 50% 10%, #161f33 0%, #0b0f19 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .admin-login-card {
+      background: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+    }
+    .admin-brand-glow {
+      box-shadow: 0 0 25px rgba(94, 221, 91, 0.25);
+    }
+    .demo-box {
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+    }
+  </style>
+</head>
+<body class="py-4">
+
+  <div class="container" style="max-width: 480px;">
+    <!-- Brand Logo Header -->
+    <div class="text-center mb-4">
+      <a class="navbar-brand-logo d-inline-flex justify-content-center mb-3" href="index.html">
+        <span class="p-2 rounded-3 bg-brand-green text-dark d-inline-flex align-items-center justify-content-center admin-brand-glow" style="width: 44px; height: 44px;">
+          <i class="bi bi-shield-lock fs-4"></i>
+        </span>
+        <span class="text-white fs-4 ms-2">FORESTA<span class="accent">.</span>ADMIN</span>
+      </a>
+      <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-dark bg-opacity-75 border border-success border-opacity-25 text-brand-green small">
+        <i class="bi bi-lock-fill"></i>
+        <span>Portal Khusus Pengelola &amp; Basecamp Manager</span>
+      </div>
+    </div>
+
+    <!-- Login Card -->
+    <div class="card admin-login-card rounded-4 p-4 p-sm-5 mb-4">
+      <div class="text-center mb-4">
+        <h4 class="fw-bold text-dark mb-1">Masuk Dashboard Admin</h4>
+        <p class="text-muted small mb-0">
+          Autentikasi keamanan untuk mengelola paket bundling, ketersediaan alat, dan data sewa.
+        </p>
+      </div>
+
+      <!-- Alert Error -->
+      <div id="adminLoginAlert" class="alert alert-danger small d-none align-items-center gap-2 py-2 mb-3" role="alert">
+        <i class="bi bi-exclamation-triangle-fill fs-5 flex-shrink-0"></i>
+        <div id="adminLoginAlertMsg">Username atau kata sandi admin tidak sesuai.</div>
+      </div>
+
+      <!-- Form Login Admin -->
+      <form id="adminLoginForm">
+        <div class="mb-3">
+          <label class="form-label small fw-bold text-dark">Username atau Email Admin *</label>
+          <div class="input-group">
+            <span class="input-group-text bg-light text-muted border-end-0"><i class="bi bi-person-badge"></i></span>
+            <input type="text" id="adminIdentifier" class="form-control border-start-0 ps-0" placeholder="admin atau admin@forestaadventure.com" required autocomplete="username" />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <div class="d-flex justify-content-between align-items-center">
+            <label class="form-label small fw-bold text-dark mb-0">Kata Sandi Admin *</label>
+            <span class="text-muted small" style="font-size: 0.72rem;">Sensitif huruf besar/kecil</span>
+          </div>
+          <div class="input-group mt-1">
+            <span class="input-group-text bg-light text-muted border-end-0"><i class="bi bi-key"></i></span>
+            <input type="password" id="adminPassword" class="form-control border-start-0 border-end-0 ps-0" placeholder="Masukkan kata sandi..." required autocomplete="current-password" />
+            <button class="btn btn-outline-secondary border-start-0" type="button" id="toggleAdminPassBtn" title="Lihat kata sandi">
+              <i class="bi bi-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="form-check mb-4">
+          <input class="form-check-input" type="checkbox" id="adminRememberMe" checked />
+          <label class="form-check-label small text-muted" for="adminRememberMe">
+            Ingat sesi login saya di perangkat ini
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-brand-primary w-100 py-2.5 rounded-pill fw-bold shadow-sm d-flex align-items-center justify-content-center gap-2" id="adminSubmitBtn">
+          <i class="bi bi-shield-check"></i>
+          <span>Masuk sebagai Admin</span>
+        </button>
+      </form>
+
+      <!-- Quick Demo Access Box (Untuk Evaluasi Dosen / Penguji) -->
+      <div class="demo-box rounded-3 p-3 mt-4">
+        <div class="d-flex align-items-center justify-content-between mb-2">
+          <span class="small fw-bold text-dark"><i class="bi bi-info-circle text-success me-1"></i> Akun Pengujian Admin:</span>
+          <span class="badge bg-success-subtle text-success small">Demo Ready</span>
+        </div>
+        <div class="small text-muted mb-2" style="font-size: 0.78rem;">
+          <div>• <strong>Username:</strong> <code>admin</code> atau <code>admin@forestaadventure.com</code></div>
+          <div>• <strong>Kata Sandi:</strong> <code>admin123</code></div>
+        </div>
+        <button type="button" class="btn btn-outline-secondary btn-sm w-100 rounded-pill py-1 fw-semibold" style="font-size: 0.78rem;" id="quickFillDemoBtn">
+          <i class="bi bi-magic me-1 text-success"></i> 1-Klik Isi Akun Demo Admin
+        </button>
+      </div>
+    </div>
+
+    <!-- Back to visitor website -->
+    <div class="text-center">
+      <a href="index.html" class="text-white text-opacity-75 text-decoration-none small">
+        <i class="bi bi-arrow-left me-1"></i> Kembali ke Website Pengunjung
+      </a>
+      <span class="text-secondary mx-2">·</span>
+      <a href="paket-bundling.html" class="text-white text-opacity-75 text-decoration-none small">
+        Lihat Paket Bundling
+      </a>
+    </div>
+
+    <div class="text-center text-muted small mt-4" style="font-size: 0.75rem;">
+      &copy; 2026 Mulyo Adventure / Foresta Adventure. Hak Akses Dibatasi.
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/admin-auth.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Jika sudah login sebagai admin, langsung redirect ke dashboard
+      if (adminAuth.isLoggedIn()) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const redirect = urlParams.get("redirect") || "admin.html";
+        window.location.replace(redirect);
+        return;
+      }
+
+      // Password toggle
+      const passInput = document.getElementById("adminPassword");
+      const toggleBtn = document.getElementById("toggleAdminPassBtn");
+      if (toggleBtn && passInput) {
+        toggleBtn.addEventListener("click", () => {
+          const isPass = passInput.type === "password";
+          passInput.type = isPass ? "text" : "password";
+          toggleBtn.innerHTML = isPass ? '<i class="bi bi-eye-slash"></i>' : '<i class="bi bi-eye"></i>';
+        });
+      }
+
+      // 1-Click Quick Demo Fill
+      const quickFillBtn = document.getElementById("quickFillDemoBtn");
+      if (quickFillBtn) {
+        quickFillBtn.addEventListener("click", () => {
+          document.getElementById("adminIdentifier").value = "admin";
+          document.getElementById("adminPassword").value = "admin123";
+        });
+      }
+
+      // Handle Submit Form
+      const form = document.getElementById("adminLoginForm");
+      const alertBox = document.getElementById("adminLoginAlert");
+      const alertMsg = document.getElementById("adminLoginAlertMsg");
+      const submitBtn = document.getElementById("adminSubmitBtn");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        alertBox.classList.add("d-none");
+
+        const id = document.getElementById("adminIdentifier").value;
+        const pass = document.getElementById("adminPassword").value;
+        const remember = document.getElementById("adminRememberMe").checked;
+
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Memverifikasi...`;
+
+        setTimeout(() => {
+          const result = adminAuth.login(id, pass, remember);
+
+          if (result.success) {
+            submitBtn.innerHTML = `<i class="bi bi-check-circle me-1"></i> Berhasil Masuk! Mengalihkan...`;
+            submitBtn.className = "btn btn-success w-100 py-2.5 rounded-pill fw-bold shadow-sm";
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const redirect = urlParams.get("redirect") || "admin.html";
+            setTimeout(() => {
+              window.location.replace(redirect);
+            }, 600);
+          } else {
+            alertMsg.textContent = result.message || "Akses ditolak!";
+            alertBox.classList.remove("d-none");
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = `<i class="bi bi-shield-check"></i><span>Masuk sebagai Admin</span>`;
+          }
+        }, 400);
+      });
+    });
+  </script>
+</body>
+</html>
