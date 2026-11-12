@@ -121,3 +121,4 @@ function getForestaAdminSession() {
 function logoutForestaAdmin() {
   adminAuth.logout();
 }
+

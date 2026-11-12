@@ -138,7 +138,9 @@
       <div class="row align-items-center">
         <div class="col-lg-8">
           <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill hero-bundle-badge mb-3">
-            <i class="bi bi-stars"></i>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-green">
+              <path d="m8 3 4 8 5-5 5 15H2L8 3z"></path>
+            </svg>
             <span>Pilihan Favorit Petualang · Lebih Hemat &amp; Bebas Ribet</span>
           </div>
           <h1 class="display-5 fw-extrabold text-white mb-3">
@@ -198,20 +200,45 @@
 
         <!-- Category Filter Buttons -->
         <div class="col-lg-8 col-md-7 d-flex flex-wrap align-items-center justify-content-md-end gap-2">
-          <button type="button" class="btn btn-sm bundle-filter-btn active btn-success text-white rounded-pill px-3" data-filter="all">
-            Semua Paket
+          <button type="button" class="btn btn-sm bundle-filter-btn active btn-success text-white rounded-pill px-3 d-inline-flex align-items-center gap-1" data-filter="all">
+            <svg class="cat-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" fill="currentColor" fill-opacity="0.25"></polygon>
+            </svg>
+            <span>Semua Paket</span>
           </button>
-          <button type="button" class="btn btn-sm bundle-filter-btn btn-outline-secondary rounded-pill px-3" data-filter="camping">
-            ⛺ Camping Basic
+          <button type="button" class="btn btn-sm bundle-filter-btn btn-outline-secondary rounded-pill px-3 d-inline-flex align-items-center gap-1" data-filter="camping">
+            <svg class="cat-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 20L12 4L5 20h14z"></path>
+              <path d="M12 4v16"></path>
+              <path d="M12 14l4.5 6"></path>
+              <path d="M12 14l-4.5 6"></path>
+            </svg>
+            <span>Camping Basic</span>
           </button>
-          <button type="button" class="btn btn-sm bundle-filter-btn btn-outline-secondary rounded-pill px-3" data-filter="hiking">
-            🎒 Hiking / Muncak
+          <button type="button" class="btn btn-sm bundle-filter-btn btn-outline-secondary rounded-pill px-3 d-inline-flex align-items-center gap-1" data-filter="hiking">
+            <svg class="cat-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m8 3 4 8 5-5 5 15H2L8 3z"></path>
+              <path d="M4.14 15.08 9 11l4 4"></path>
+            </svg>
+            <span>Hiking / Muncak</span>
           </button>
-          <button type="button" class="btn btn-sm bundle-filter-btn btn-outline-secondary rounded-pill px-3" data-filter="rombongan">
-            👥 Rombongan
+          <button type="button" class="btn btn-sm bundle-filter-btn btn-outline-secondary rounded-pill px-3 d-inline-flex align-items-center gap-1" data-filter="rombongan">
+            <svg class="cat-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+            <span>Rombongan</span>
           </button>
-          <a href="admin.html" class="btn btn-sm btn-outline-dark rounded-pill px-3 ms-lg-2" title="Login &amp; Kelola Paket di Dashboard Admin">
-            <i class="bi bi-shield-lock-fill me-1 text-warning"></i> Kelola Admin
+          <a href="admin.html" class="btn btn-sm btn-outline-dark rounded-pill px-3 ms-lg-2 d-inline-flex align-items-center gap-1" title="Login &amp; Kelola Paket di Dashboard Admin">
+            <svg class="cat-icon text-warning" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              <circle cx="12" cy="11" r="2"></circle>
+              <line x1="12" y1="13" x2="12" y2="16"></line>
+            </svg>
+            <span>Kelola Admin</span>
           </a>
         </div>
       </div>

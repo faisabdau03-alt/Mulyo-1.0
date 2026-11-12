@@ -84,21 +84,29 @@ function renderBundlesList() {
       const badgeColor = bundle.badgeColor || (m.savingsPercent >= 20 ? "warning" : "success");
       const isAvailable = m.isAvailable;
 
-      // Buat ringkasan item chips
+      // Buat ringkasan item chips dengan icon realistis seputar dunia pendakian
       const itemsChips = m.itemsDetail
         .map((item) => {
-          let icon = "bi-box";
+          let svgIcon = "";
           const cat = (item.categoryName || "").toLowerCase();
-          if (cat.includes("tenda")) icon = "bi-house-heart";
-          else if (cat.includes("carrier") || cat.includes("tas")) icon = "bi-backpack2";
-          else if (cat.includes("tidur") || cat.includes("sleeping") || cat.includes("matras")) icon = "bi-moon-stars";
-          else if (cat.includes("masak") || cat.includes("kompor")) icon = "bi-fire";
-          else if (cat.includes("penerangan") || cat.includes("headlamp") || cat.includes("lentera")) icon = "bi-lightbulb";
-          else if (cat.includes("gear") || cat.includes("pole")) icon = "bi-compass";
+
+          if (cat.includes("tenda")) {
+            svgIcon = `<svg class="me-1 text-success flex-shrink-0" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 20L12 4L5 20h14z"></path><path d="M12 4v16"></path></svg>`;
+          } else if (cat.includes("carrier") || cat.includes("tas")) {
+            svgIcon = `<svg class="me-1 text-primary flex-shrink-0" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 6V4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2"></path><rect x="5" y="6" width="14" height="15" rx="3"></rect><path d="M9 10h6"></path></svg>`;
+          } else if (cat.includes("tidur") || cat.includes("sleeping") || cat.includes("matras")) {
+            svgIcon = `<svg class="me-1 text-info flex-shrink-0" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="3"></rect><circle cx="8" cy="12" r="2.5"></circle></svg>`;
+          } else if (cat.includes("masak") || cat.includes("kompor")) {
+            svgIcon = `<svg class="me-1 text-warning flex-shrink-0" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2c1.5 2 3.5 3.5 3.5 6a3.5 3.5 0 0 1-7 0c0-2.5 2-4 3.5-6z"></path><path d="M4 14h16"></path></svg>`;
+          } else if (cat.includes("penerangan") || cat.includes("headlamp") || cat.includes("lentera")) {
+            svgIcon = `<svg class="me-1 text-warning flex-shrink-0" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line></svg>`;
+          } else {
+            svgIcon = `<svg class="me-1 text-success flex-shrink-0" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="21" x2="19" y2="3"></line><line x1="19" y1="21" x2="5" y2="3"></line></svg>`;
+          }
 
           return `
-            <span class="badge bg-light text-dark border me-1 mb-1 fw-normal" style="font-size: 0.75rem;">
-              <i class="bi ${icon} text-success me-1"></i>${item.qty}x ${item.name}
+            <span class="badge bg-light text-dark border me-1 mb-1 fw-normal d-inline-flex align-items-center" style="font-size: 0.75rem;">
+              ${svgIcon}<span>${item.qty}x ${item.name}</span>
             </span>
           `;
         })
@@ -114,7 +122,7 @@ function renderBundlesList() {
                 
                 <!-- Badge Atas Foto -->
                 <div class="position-absolute top-0 start-0 p-3 d-flex flex-column gap-1">
-                  ${bundle.badge ? `<span class="badge bg-${badgeColor} text-dark fw-bold px-3 py-2 shadow-sm rounded-pill" style="font-size: 0.75rem;"><i class="bi bi-stars me-1"></i>${bundle.badge}</span>` : ""}
+                  ${bundle.badge ? `<span class="badge bg-${badgeColor} text-dark fw-bold px-3 py-2 shadow-sm rounded-pill d-inline-flex align-items-center gap-1" style="font-size: 0.75rem;"><i class="bi bi-compass"></i><span>${bundle.badge}</span></span>` : ""}
                   ${m.savingsPercent > 0 ? `<span class="badge bg-danger text-white fw-bold px-2 py-1 shadow-sm rounded-pill" style="font-size: 0.72rem;">Hemat ${m.savingsPercent}%</span>` : ""}
                 </div>
 
