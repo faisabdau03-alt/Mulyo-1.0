@@ -70,6 +70,7 @@ h1, h2, h3, h4, h5, h6 {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  z-index: 1050 !important;
 }
 
 .navbar-foresta .container,
@@ -1292,4 +1293,36 @@ h1, h2, h3, h4, h5, h6 {
 
 .product-fade-in {
   animation: productFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Catalog Sidebar Filter Sticky (Desktop) */
+@media (min-width: 992px) {
+  .catalog-sidebar-sticky {
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    top: 90px !important;
+    z-index: 1000 !important;
+  }
+}
+
+.catalog-sidebar-card {
+  max-height: calc(100vh - 115px);
+  overflow-y: auto;
+}
+
+.catalog-sidebar-card::-webkit-scrollbar {
+  width: 5px;
+}
+
+.catalog-sidebar-card::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.catalog-sidebar-card::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 9999px;
+}
+
+.catalog-sidebar-card::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-dark);
 }
