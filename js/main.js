@@ -87,9 +87,9 @@ function initFeaturedProducts(categoryFilter = "all") {
 }
 
 // 3. Template HTML Kartu Produk
-function createProductCardHtml(product) {
+function createProductCardHtml(product, colClass = "col-xl-3 col-lg-4 col-md-6 mb-4") {
   return `
-    <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+    <div class="${colClass}">
       <div class="card h-100 product-card shadow-sm border-0 rounded-4 overflow-hidden position-relative hover-lift">
         <!-- Badge -->
         ${
@@ -122,7 +122,7 @@ function createProductCardHtml(product) {
           <div class="d-flex align-items-center justify-content-between text-muted small mb-1">
             <span class="text-uppercase fw-semibold" style="font-size: 0.75rem; letter-spacing: 0.5px;">${product.brand}</span>
             <span class="d-flex align-items-center text-warning small">
-              ★ <span class="text-dark ms-1 fw-bold">${product.rating}</span>
+              <i class="bi bi-star-fill text-warning me-1"></i><span class="text-dark fw-bold">${product.rating}</span>
               <span class="text-muted ms-1">(${product.reviewsCount})</span>
             </span>
           </div>

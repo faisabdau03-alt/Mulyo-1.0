@@ -32,7 +32,7 @@
         </a>
       </div>
       <div class="d-flex align-items-center gap-2 ms-auto">
-        <span class="d-none d-md-inline text-light" id="topBarMemberSlot">🌟 Wajib Daftar Member Sebelum Menyewa · <b class="text-brand-green">Diskon 10% Otomatis</b></span>
+        <span class="d-none d-md-inline text-light" id="topBarMemberSlot"><i class="bi bi-shield-check text-brand-green me-1"></i> Wajib Daftar Member Sebelum Menyewa · <b class="text-brand-green">Diskon 10% Otomatis</b></span>
         <a href="register.html" class="btn btn-sm btn-outline-light rounded-pill px-2 py-1 text-decoration-none d-none d-sm-inline-flex align-items-center gap-1" style="font-size: 0.75rem;">
           <i class="bi bi-person-plus text-brand-green"></i> Daftar Member
         </a>
@@ -74,34 +74,17 @@
           <li class="nav-item">
             <a class="nav-link active" href="index.html">Beranda</a>
           </li>
-          <!-- Dropdown Kategori -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-              Kategori
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark-custom">
-              <li><a class="dropdown-item" href="katalog.html?cat=tenda"><i class="bi bi-triangle-fill text-brand-green me-2"></i>Tenda Camping (2-6 Orang)</a></li>
-              <li><a class="dropdown-item" href="katalog.html?cat=carrier"><i class="bi bi-backpack-fill text-brand-green me-2"></i>Carrier & Semi Carrier (35L - 75L)</a></li>
-              <li><a class="dropdown-item" href="katalog.html?cat=tidur"><i class="bi bi-moon-stars-fill text-brand-green me-2"></i>Sleeping Bag & Matras</a></li>
-              <li><a class="dropdown-item" href="katalog.html?cat=masak"><i class="bi bi-fire text-brand-green me-2"></i>Kompor & Perlengkapan Masak</a></li>
-              <li><a class="dropdown-item" href="katalog.html?cat=penerangan"><i class="bi bi-lightbulb-fill text-brand-green me-2"></i>Lampu Tenda & Headlamp</a></li>
-              <li><a class="dropdown-item" href="katalog.html?cat=pakaian"><i class="bi bi-person-standing text-brand-green me-2"></i>Jaket & Sepatu Gunung</a></li>
-              <li><a class="dropdown-item" href="katalog.html?cat=gear"><i class="bi bi-tools text-brand-green me-2"></i>Trekking Pole, Meja & Kursi</a></li>
-              <li><hr class="dropdown-divider border-secondary" /></li>
-              <li><a class="dropdown-item text-brand-green fw-bold" href="katalog.html">Semua Kategori Produk →</a></li>
-            </ul>
-          </li>
           <li class="nav-item">
-            <a class="nav-link" href="katalog.html">Katalog Gear</a>
+            <a class="nav-link" href="katalog.html">Katalog Perlengkapan</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="cara-sewa.html">Cara Sewa</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="kontak.html">Kontak & Lokasi</a>
+            <a class="nav-link" href="kontak.html">Kontak &amp; Lokasi</a>
           </li>
           <li class="nav-item d-lg-none">
-            <a class="nav-link text-brand-green" href="register.html"><i class="bi bi-person-plus me-1"></i> Daftar Member</a>
+            <a class="nav-link text-brand-green" href="register.html"><i class="bi bi-person-plus-fill me-1"></i> Daftar Member</a>
           </li>
           <li class="nav-item d-lg-none">
             <a class="nav-link" href="login.html"><i class="bi bi-box-arrow-in-right me-1"></i> Masuk</a>
@@ -142,7 +125,7 @@
         <!-- Kolom Kiri: Informasi Utama & Penawaran Hero -->
         <div class="col-lg-8 col-xl-7">
           <div class="hero-pill-badge mb-3">
-            <span class="live-status-dot me-1"></span> 🌲 Siap Menjelajah, Tanpa Ribet · Member Diskon 10%
+            <span class="live-status-dot me-1"></span> <i class="bi bi-compass text-brand-green me-1"></i> Siap Menjelajah, Tanpa Ribet · Member Diskon 10%
           </div>
           <h1 class="hero-title mb-3">
             Sewa Gear Outdoor <br />
@@ -316,13 +299,69 @@
 
       <!-- Category Filter Tabs -->
       <div class="d-flex flex-wrap gap-2 mb-4 pb-2 overflow-x-auto">
-        <button class="btn category-tab-btn active" data-category="all">Semua Perlengkapan</button>
-        <button class="btn category-tab-btn btn-outline-secondary" data-category="tenda">🏕️ Tenda Camping</button>
-        <button class="btn category-tab-btn btn-outline-secondary" data-category="carrier">🎒 Carrier & Tas</button>
-        <button class="btn category-tab-btn btn-outline-secondary" data-category="tidur">🛌 Sleeping Bag & Matras</button>
-        <button class="btn category-tab-btn btn-outline-secondary" data-category="masak">🍳 Alat Masak</button>
-        <button class="btn category-tab-btn btn-outline-secondary" data-category="penerangan">💡 Senter & Lentera</button>
-        <button class="btn category-tab-btn btn-outline-secondary" data-category="gear">⛰️ Trekking Pole & Kursi</button>
+        <button class="btn category-tab-btn active" data-category="all">
+          <svg class="cat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" fill="currentColor" fill-opacity="0.25"></polygon>
+          </svg>
+          <span>Semua Perlengkapan</span>
+        </button>
+        <button class="btn category-tab-btn btn-outline-secondary" data-category="tenda">
+          <svg class="cat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 20L12 4L5 20h14z"></path>
+            <path d="M12 4v16"></path>
+            <path d="M12 14l4.5 6"></path>
+            <path d="M12 14l-4.5 6"></path>
+          </svg>
+          <span>Tenda Camping</span>
+        </button>
+        <button class="btn category-tab-btn btn-outline-secondary" data-category="carrier">
+          <svg class="cat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 6V4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2"></path>
+            <rect x="5" y="6" width="14" height="15" rx="3"></rect>
+            <path d="M9 10h6"></path>
+            <path d="M9 14h6"></path>
+            <path d="M5 11h2"></path>
+            <path d="M17 11h2"></path>
+          </svg>
+          <span>Carrier &amp; Tas</span>
+        </button>
+        <button class="btn category-tab-btn btn-outline-secondary" data-category="tidur">
+          <svg class="cat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="6" width="18" height="12" rx="3"></rect>
+            <circle cx="8" cy="12" r="2.5"></circle>
+            <path d="M13 9v6"></path>
+            <path d="M17 9v6"></path>
+          </svg>
+          <span>Sleeping Bag &amp; Matras</span>
+        </button>
+        <button class="btn category-tab-btn btn-outline-secondary" data-category="masak">
+          <svg class="cat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2c1.5 2 3.5 3.5 3.5 6a3.5 3.5 0 0 1-7 0c0-2.5 2-4 3.5-6z"></path>
+            <path d="M4 14h16"></path>
+            <path d="M6 14v4a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-4"></path>
+          </svg>
+          <span>Alat Masak Camping</span>
+        </button>
+        <button class="btn category-tab-btn btn-outline-secondary" data-category="penerangan">
+          <svg class="cat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6l-4-4H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-2-2z"></path>
+            <circle cx="12" cy="13" r="3"></circle>
+            <line x1="12" y1="2" x2="12" y2="4"></line>
+          </svg>
+          <span>Senter &amp; Lentera</span>
+        </button>
+        <button class="btn category-tab-btn btn-outline-secondary" data-category="gear">
+          <svg class="cat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="21" x2="19" y2="3"></line>
+            <line x1="19" y1="21" x2="5" y2="3"></line>
+            <circle cx="5" cy="3" r="1.5"></circle>
+            <circle cx="19" cy="3" r="1.5"></circle>
+            <path d="M4 19l2-1"></path>
+            <path d="M20 19l-2-1"></path>
+          </svg>
+          <span>Trekking Pole &amp; Kursi</span>
+        </button>
       </div>
 
       <!-- Product Cards Grid -->
@@ -445,7 +484,7 @@
         <!-- Testi 1 -->
         <div class="col-lg-4 col-md-6">
           <div class="testimonial-card h-100 d-flex flex-column">
-            <div class="text-warning mb-2 fs-5">★★★★★</div>
+            <div class="text-warning mb-2 fs-6"><i class="bi bi-star-fill me-1"></i><i class="bi bi-star-fill me-1"></i><i class="bi bi-star-fill me-1"></i><i class="bi bi-star-fill me-1"></i><i class="bi bi-star-fill"></i></div>
             <p class="text-dark fw-semibold mb-1">"Kondisi tenda super wangi & bersih!"</p>
             <p class="text-muted small mb-4 flex-grow-1">
               "Sewa tenda Borneo 4 Pro buat nanjak ke Prau. Pas dibuka tendanya beneran wangi dan nggak ada bocor sama sekali pas kena hujan malam. Adminnya juga ramah banget ngasih tips packing."
@@ -463,7 +502,7 @@
         <!-- Testi 2 -->
         <div class="col-lg-4 col-md-6">
           <div class="testimonial-card h-100 d-flex flex-column">
-            <div class="text-warning mb-2 fs-5">★★★★★</div>
+            <div class="text-warning mb-2 fs-6"><i class="bi bi-star-fill me-1"></i><i class="bi bi-star-fill me-1"></i><i class="bi bi-star-fill me-1"></i><i class="bi bi-star-fill me-1"></i><i class="bi bi-star-fill"></i></div>
             <p class="text-dark fw-semibold mb-1">"Carrier Deuter nyaman banget"</p>
             <p class="text-muted small mb-4 flex-grow-1">
               "Baru pertama kali nanjak Merbabu bawa carrier 50L. Backsystem Deuternya empuk beneran anti pegel pinggang. Harga sewanya juga sangat ramah kantong mahasiswa. Pasti langganan di Foresta Adventure!"
@@ -481,7 +520,7 @@
         <!-- Testi 3 -->
         <div class="col-lg-4 col-md-6">
           <div class="testimonial-card h-100 d-flex flex-column">
-            <div class="text-warning mb-2 fs-5">★★★★★</div>
+            <div class="text-warning mb-2 fs-6"><i class="bi bi-star-fill me-1"></i><i class="bi bi-star-fill me-1"></i><i class="bi bi-star-fill me-1"></i><i class="bi bi-star-fill me-1"></i><i class="bi bi-star-fill"></i></div>
             <p class="text-dark fw-semibold mb-1">"Proses checkout cepat via WhatsApp"</p>
             <p class="text-muted small mb-4 flex-grow-1">
               "Fitur pilih tanggal di webnya mantap, langsung kehitung otomatis tanggal kembalinya. Tinggal kirim ke WA langsung dikonfirmasi dalam 5 menit. Sukses terus Foresta Adventure!"
@@ -1201,8 +1240,10 @@
           </div>
 
           <div class="p-3 bg-light rounded-4 border d-flex align-items-center gap-3 mb-4">
-            <div class="rounded-circle bg-dark text-white d-flex align-items-center justify-content-center fw-bold fs-5" style="width: 48px; height: 48px;">
-              🍎
+            <div class="rounded-circle bg-dark text-white d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
+              <svg width="22" height="22" viewBox="0 0 170 170" fill="#ffffff">
+                <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.66-7.74-11.88-14.1-5.74-8.62-10.37-18.66-13.88-30.12-3.51-11.45-5.27-22.18-5.27-32.18 0-14.61 3.8-26.69 11.39-36.23 7.6-9.55 17.1-14.39 28.51-14.53 4.8 0 10.31 1.34 16.54 4.02 6.22 2.68 10.14 4.08 11.75 4.2 1.48-.12 5.56-1.58 12.24-4.38 6.68-2.8 12.24-4.04 16.68-3.72 12.74.84 22.84 5.76 30.3 14.77-11.05 6.72-16.45 15.82-16.2 27.32.25 9.12 3.82 16.89 10.72 23.31 4.54 4.25 9.87 7.23 16 8.94-2.31 6.84-5.14 13.91-8.5 21.21zm-24.97-106.94c0 7.37-2.67 14.07-8.01 20.1-5.83 6.44-12.87 10.23-21.12 11.37-.13-1.01-.2-1.9-.2-2.69 0-7.23 2.87-14.15 8.62-20.76 2.87-3.3 6.36-6.04 10.47-8.23 4.11-2.19 8.01-3.37 11.7-3.55.24 1.25.36 2.29.36 3.12z"/>
+              </svg>
             </div>
             <div class="flex-grow-1">
               <strong class="d-block text-dark small" id="appleUserName">Budi Santoso</strong>

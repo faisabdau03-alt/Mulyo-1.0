@@ -66,16 +66,16 @@
             <a class="nav-link" href="index.html">Beranda</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="katalog.html">Katalog Gear</a>
+            <a class="nav-link active" href="katalog.html">Katalog Perlengkapan</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="cara-sewa.html">Cara Sewa</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="kontak.html">Kontak & Lokasi</a>
+            <a class="nav-link" href="kontak.html">Kontak &amp; Lokasi</a>
           </li>
           <li class="nav-item d-lg-none">
-            <a class="nav-link text-brand-green" href="register.html"><i class="bi bi-person-plus me-1"></i> Daftar Member</a>
+            <a class="nav-link text-brand-green" href="register.html"><i class="bi bi-person-plus-fill me-1"></i> Daftar Member</a>
           </li>
           <li class="nav-item d-lg-none">
             <a class="nav-link" href="login.html"><i class="bi bi-box-arrow-in-right me-1"></i> Masuk</a>
@@ -115,116 +115,218 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb mb-2 small">
           <li class="breadcrumb-item"><a href="index.html" class="text-brand-green text-decoration-none">Beranda</a></li>
-          <li class="breadcrumb-item active text-white opacity-75" aria-current="page">Katalog Produk</li>
+          <li class="breadcrumb-item active text-white opacity-75" aria-current="page">Katalog Perlengkapan</li>
         </ol>
       </nav>
-      <h2 class="fw-bold mb-1">Katalog Perlengkapan Outdoor</h2>
-      <p class="text-muted small mb-0">Temukan tenda, carrier, matras, dan peralatan gunung berkualitas tinggi siap disewa.</p>
+      <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
+        <div>
+          <h1 class="fw-bold fs-2 mb-1">Katalog Perlengkapan</h1>
+          <p class="text-muted small mb-0">Temukan dan sewa berbagai perlengkapan pendakian gunung &amp; camping berkualitas tinggi siap pakai di sini.</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- 4. Main Catalog Content Grid -->
-  <section class="py-5">
+  <!-- 4. Main Catalog Content Grid & Integrated Categories -->
+  <section class="py-4 py-md-5" style="background-color: var(--color-body-bg); min-height: 75vh;">
     <div class="container">
+      
+      <!-- Integrated Category Chips Bar -->
+      <div class="katalog-category-bar mb-4">
+        <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-2">
+          <div class="d-flex align-items-center gap-2">
+            <span class="badge bg-success-subtle text-success fw-bold px-3 py-1.5 rounded-pill">
+              <i class="bi bi-tag-fill me-1"></i> KATEGORI GEAR
+            </span>
+            <span class="text-muted small d-none d-sm-inline">Pilih kategori untuk langsung menyaring perlengkapan:</span>
+          </div>
+          <button type="button" class="btn btn-sm btn-link text-decoration-none text-muted p-0 small fw-semibold" id="katalogTopResetBtn">
+            <i class="bi bi-arrow-counterclockwise me-1 text-success"></i> Tampilkan Semua Gear
+          </button>
+        </div>
+
+        <!-- Category Chips (Horizontal Scrollable with Realistic Outdoor Icons) -->
+        <div class="d-flex flex-nowrap overflow-x-auto gap-2 py-1 pb-2 katalog-chips-wrapper">
+          <button type="button" class="btn category-tab-btn active" data-category="all">
+            <svg class="cat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" fill="currentColor" fill-opacity="0.25"></polygon>
+            </svg>
+            <span>Semua Gear</span>
+          </button>
+
+          <button type="button" class="btn category-tab-btn btn-outline-secondary" data-category="tenda">
+            <svg class="cat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 20L12 4L5 20h14z"></path>
+              <path d="M12 4v16"></path>
+              <path d="M12 14l4.5 6"></path>
+              <path d="M12 14l-4.5 6"></path>
+            </svg>
+            <span>Tenda Camping</span>
+          </button>
+
+          <button type="button" class="btn category-tab-btn btn-outline-secondary" data-category="carrier">
+            <svg class="cat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 6V4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2"></path>
+              <rect x="5" y="6" width="14" height="15" rx="3"></rect>
+              <path d="M9 10h6"></path>
+              <path d="M9 14h6"></path>
+              <path d="M5 11h2"></path>
+              <path d="M17 11h2"></path>
+            </svg>
+            <span>Carrier &amp; Tas</span>
+          </button>
+
+          <button type="button" class="btn category-tab-btn btn-outline-secondary" data-category="tidur">
+            <svg class="cat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="6" width="18" height="12" rx="3"></rect>
+              <circle cx="8" cy="12" r="2.5"></circle>
+              <path d="M13 9v6"></path>
+              <path d="M17 9v6"></path>
+            </svg>
+            <span>Sleeping Bag &amp; Matras</span>
+          </button>
+
+          <button type="button" class="btn category-tab-btn btn-outline-secondary" data-category="masak">
+            <svg class="cat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2c1.5 2 3.5 3.5 3.5 6a3.5 3.5 0 0 1-7 0c0-2.5 2-4 3.5-6z"></path>
+              <path d="M4 14h16"></path>
+              <path d="M6 14v4a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-4"></path>
+            </svg>
+            <span>Alat Masak Camping</span>
+          </button>
+
+          <button type="button" class="btn category-tab-btn btn-outline-secondary" data-category="penerangan">
+            <svg class="cat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 6l-4-4H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-2-2z"></path>
+              <circle cx="12" cy="13" r="3"></circle>
+              <line x1="12" y1="2" x2="12" y2="4"></line>
+            </svg>
+            <span>Senter &amp; Lentera</span>
+          </button>
+
+          <button type="button" class="btn category-tab-btn btn-outline-secondary" data-category="pakaian">
+            <svg class="cat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.5a2 2 0 0 0 1.97 1.67H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10.86h1.17a2 2 0 0 0 1.97-1.67l.58-3.5a2 2 0 0 0-1.34-2.23z"></path>
+            </svg>
+            <span>Jaket &amp; Sepatu</span>
+          </button>
+
+          <button type="button" class="btn category-tab-btn btn-outline-secondary" data-category="gear">
+            <svg class="cat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="21" x2="19" y2="3"></line>
+              <line x1="19" y1="21" x2="5" y2="3"></line>
+              <circle cx="5" cy="3" r="1.5"></circle>
+              <circle cx="19" cy="3" r="1.5"></circle>
+              <path d="M4 19l2-1"></path>
+              <path d="M20 19l-2-1"></path>
+            </svg>
+            <span>Trekking Pole &amp; Kursi</span>
+          </button>
+        </div>
+      </div>
+
       <div class="row g-4">
         
-        <!-- Sidebar Filter (Desktop) -->
+        <!-- Sidebar Filter (Desktop & Collapsible on Mobile) -->
         <div class="col-lg-3">
-          <div class="card border-0 shadow-sm rounded-4 p-4 sticky-top" style="top: 90px;">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-              <h5 class="fw-bold mb-0 fs-6"><i class="bi bi-funnel me-1"></i> Filter Produk</h5>
-              <button class="btn btn-link text-decoration-none text-muted small p-0" id="katalogResetFilterBtn">Reset</button>
-            </div>
-
-            <!-- Search Input -->
-            <div class="mb-4">
-              <label class="form-label small fw-bold text-muted text-uppercase">Cari Produk</label>
-              <div class="input-group input-group-sm">
-                <input type="text" id="katalogSearchInput" class="form-control" placeholder="Nama atau kata kunci..." />
-                <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
+          <div class="collapse d-lg-block" id="sidebarFilterCollapse">
+            <div class="card border-0 shadow-sm rounded-4 p-4 sticky-top" style="top: 90px;">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="fw-bold mb-0 fs-6"><i class="bi bi-funnel text-success me-1"></i> Filter Lanjutan</h5>
+                <button type="button" class="btn btn-link text-decoration-none text-muted small p-0" id="katalogResetFilterBtn">Reset</button>
               </div>
-            </div>
 
-            <!-- Kategori Checkbox -->
-            <div class="mb-4">
-              <label class="form-label small fw-bold text-muted text-uppercase">Kategori Alat</label>
-              <div class="d-flex flex-column gap-2 small">
-                <div class="form-check">
-                  <input class="form-check-input category-checkbox" type="checkbox" value="tenda" id="catTenda" />
-                  <label class="form-check-label" for="catTenda">Tenda Camping (2-6P)</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input category-checkbox" type="checkbox" value="carrier" id="catCarrier" />
-                  <label class="form-check-label" for="catCarrier">Carrier & Ransel</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input category-checkbox" type="checkbox" value="tidur" id="catTidur" />
-                  <label class="form-check-label" for="catTidur">Sleeping Bag & Matras</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input category-checkbox" type="checkbox" value="masak" id="catMasak" />
-                  <label class="form-check-label" for="catMasak">Peralatan Masak Camping</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input category-checkbox" type="checkbox" value="penerangan" id="catLampu" />
-                  <label class="form-check-label" for="catLampu">Headlamp & Senter</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input category-checkbox" type="checkbox" value="pakaian" id="catPakaian" />
-                  <label class="form-check-label" for="catPakaian">Jaket & Sepatu Gunung</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input category-checkbox" type="checkbox" value="gear" id="catGear" />
-                  <label class="form-check-label" for="catGear">Trekking Pole, Meja & Kursi</label>
+              <!-- Search Input inside Sidebar -->
+              <div class="mb-4">
+                <label class="form-label small fw-bold text-muted text-uppercase" style="font-size: 0.72rem; letter-spacing: 0.5px;">Pencarian Gear</label>
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-muted"></i></span>
+                  <input type="text" id="sidebarSearchInput" class="form-control border-start-0 ps-0" placeholder="Ketik nama gear..." />
                 </div>
               </div>
-            </div>
 
-            <!-- Brand Checkbox -->
-            <div class="mb-4">
-              <label class="form-label small fw-bold text-muted text-uppercase">Merek / Brand</label>
-              <div class="d-flex flex-column gap-2 small">
-                <div class="form-check">
-                  <input class="form-check-input brand-checkbox" type="checkbox" value="eiger" id="brandEiger" />
-                  <label class="form-check-label" for="brandEiger">Eiger</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input brand-checkbox" type="checkbox" value="deuter" id="brandDeuter" />
-                  <label class="form-check-label" for="brandDeuter">Deuter</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input brand-checkbox" type="checkbox" value="osprey" id="brandOsprey" />
-                  <label class="form-check-label" for="brandOsprey">Osprey</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input brand-checkbox" type="checkbox" value="tendaki" id="brandTendaki" />
-                  <label class="form-check-label" for="brandTendaki">Tendaki</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input brand-checkbox" type="checkbox" value="naturehike" id="brandNaturehike" />
-                  <label class="form-check-label" for="brandNaturehike">Naturehike</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input brand-checkbox" type="checkbox" value="quechua" id="brandQuechua" />
-                  <label class="form-check-label" for="brandQuechua">Quechua</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input brand-checkbox" type="checkbox" value="arei" id="brandArei" />
-                  <label class="form-check-label" for="brandArei">Arei Outdoor</label>
+              <!-- Kategori Checkbox -->
+              <div class="mb-4">
+                <label class="form-label small fw-bold text-muted text-uppercase" style="font-size: 0.72rem; letter-spacing: 0.5px;">Kategori Alat</label>
+                <div class="d-flex flex-column gap-2 small">
+                  <div class="form-check">
+                    <input class="form-check-input category-checkbox" type="checkbox" value="tenda" id="catTenda" />
+                    <label class="form-check-label" for="catTenda">Tenda Camping (2-6P)</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input category-checkbox" type="checkbox" value="carrier" id="catCarrier" />
+                    <label class="form-check-label" for="catCarrier">Carrier &amp; Ransel</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input category-checkbox" type="checkbox" value="tidur" id="catTidur" />
+                    <label class="form-check-label" for="catTidur">Sleeping Bag &amp; Matras</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input category-checkbox" type="checkbox" value="masak" id="catMasak" />
+                    <label class="form-check-label" for="catMasak">Peralatan Masak Camping</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input category-checkbox" type="checkbox" value="penerangan" id="catLampu" />
+                    <label class="form-check-label" for="catLampu">Headlamp &amp; Senter</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input category-checkbox" type="checkbox" value="pakaian" id="catPakaian" />
+                    <label class="form-check-label" for="catPakaian">Jaket &amp; Sepatu Gunung</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input category-checkbox" type="checkbox" value="gear" id="catGear" />
+                    <label class="form-check-label" for="catGear">Trekking Pole, Meja &amp; Kursi</label>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <!-- Rentang Harga -->
-            <div class="mb-2">
-              <div class="d-flex justify-content-between align-items-center mb-1">
-                <label class="form-label small fw-bold text-muted text-uppercase mb-0">Harga Maks / Hari</label>
-                <span class="small fw-bold text-success" id="katalogMaxPriceLabel">Rp 250.000</span>
+              <!-- Brand Checkbox -->
+              <div class="mb-4">
+                <label class="form-label small fw-bold text-muted text-uppercase" style="font-size: 0.72rem; letter-spacing: 0.5px;">Merek / Brand</label>
+                <div class="d-flex flex-column gap-2 small">
+                  <div class="form-check">
+                    <input class="form-check-input brand-checkbox" type="checkbox" value="eiger" id="brandEiger" />
+                    <label class="form-check-label" for="brandEiger">Eiger</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input brand-checkbox" type="checkbox" value="deuter" id="brandDeuter" />
+                    <label class="form-check-label" for="brandDeuter">Deuter</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input brand-checkbox" type="checkbox" value="osprey" id="brandOsprey" />
+                    <label class="form-check-label" for="brandOsprey">Osprey</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input brand-checkbox" type="checkbox" value="tendaki" id="brandTendaki" />
+                    <label class="form-check-label" for="brandTendaki">Tendaki</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input brand-checkbox" type="checkbox" value="naturehike" id="brandNaturehike" />
+                    <label class="form-check-label" for="brandNaturehike">Naturehike</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input brand-checkbox" type="checkbox" value="quechua" id="brandQuechua" />
+                    <label class="form-check-label" for="brandQuechua">Quechua</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input brand-checkbox" type="checkbox" value="arei" id="brandArei" />
+                    <label class="form-check-label" for="brandArei">Arei Outdoor</label>
+                  </div>
+                </div>
               </div>
-              <input type="range" class="form-range" id="katalogMaxPrice" min="10000" max="250000" step="5000" value="250000" />
-              <div class="d-flex justify-content-between text-muted small" style="font-size: 0.75rem;">
-                <span>Rp 10.000</span>
-                <span>Rp 250.000</span>
+
+              <!-- Rentang Harga -->
+              <div class="mb-2">
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                  <label class="form-label small fw-bold text-muted text-uppercase mb-0" style="font-size: 0.72rem; letter-spacing: 0.5px;">Harga Maks / Hari</label>
+                  <span class="small fw-bold text-success" id="katalogMaxPriceLabel">Rp 250.000</span>
+                </div>
+                <input type="range" class="form-range" id="katalogMaxPrice" min="10000" max="250000" step="5000" value="250000" />
+                <div class="d-flex justify-content-between text-muted small" style="font-size: 0.75rem;">
+                  <span>Rp 10.000</span>
+                  <span>Rp 250.000</span>
+                </div>
               </div>
             </div>
           </div>
@@ -232,27 +334,59 @@
 
         <!-- Catalog Product Grid Area -->
         <div class="col-lg-9">
-          <!-- Top Bar Sorting & Results Info -->
+          <!-- Top Bar: Quick Search, Sorting & Results Info -->
           <div class="card border-0 shadow-sm rounded-4 p-3 mb-4">
-            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
-              <div class="text-muted small" id="katalogResultsCount">
-                Memuat katalog produk...
+            <div class="row g-2 align-items-center">
+              <!-- Search Bar -->
+              <div class="col-md-5 col-12">
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-muted"></i></span>
+                  <input type="text" id="katalogSearchInput" class="form-control border-start-0 ps-0" placeholder="Cari nama perlengkapan, brand, spesifikasi..." />
+                  <button class="btn btn-outline-secondary border-start-0 d-none" type="button" id="clearSearchBtn" title="Hapus pencarian"><i class="bi bi-x"></i></button>
+                </div>
               </div>
-              <div class="d-flex align-items-center gap-2">
-                <span class="small text-muted text-nowrap">Urutkan:</span>
-                <select id="katalogSortSelect" class="form-select form-select-sm py-1" style="width: auto;">
-                  <option value="rating">Rating Tertinggi ★</option>
-                  <option value="price-asc">Harga: Termurah ke Termahal</option>
-                  <option value="price-desc">Harga: Termahal ke Termurah</option>
-                  <option value="name-asc">Nama Produk: A ke Z</option>
-                </select>
+
+              <!-- Filter Info & Controls -->
+              <div class="col-md-7 col-12 d-flex flex-wrap justify-content-md-end justify-content-between align-items-center gap-2">
+                <!-- Mobile Filter Toggle Button -->
+                <button class="btn btn-sm btn-outline-dark rounded-pill d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarFilterCollapse" aria-expanded="false">
+                  <i class="bi bi-funnel"></i> Filter Lanjutan
+                </button>
+
+                <div class="text-muted small" id="katalogResultsCount">
+                  Memuat perlengkapan...
+                </div>
+
+                <div class="d-flex align-items-center gap-1">
+                  <span class="small text-muted text-nowrap d-none d-sm-inline">Urutkan:</span>
+                  <select id="katalogSortSelect" class="form-select form-select-sm py-1" style="width: auto;">
+                    <option value="rating">Rating Tertinggi ★</option>
+                    <option value="price-asc">Harga: Termurah</option>
+                    <option value="price-desc">Harga: Termahal</option>
+                    <option value="name-asc">Nama Produk: A-Z</option>
+                  </select>
+                </div>
               </div>
+            </div>
+
+            <!-- Active Filter Badges Bar -->
+            <div id="activeFilterPills" class="d-flex flex-wrap align-items-center gap-2 mt-2 pt-2 border-top d-none">
+              <span class="small text-muted fw-semibold" style="font-size: 0.78rem;">Filter Aktif:</span>
+              <span id="activeCatBadge" class="badge bg-success-subtle text-success border border-success-subtle rounded-pill py-1 px-2.5 small d-none">
+                <span id="activeCatText">Kategori</span> <i class="bi bi-x ms-1 cursor-pointer" id="removeCatFilter"></i>
+              </span>
+              <span id="activeSearchBadge" class="badge bg-light text-dark border rounded-pill py-1 px-2.5 small d-none">
+                <span id="activeSearchText">Pencarian</span> <i class="bi bi-x ms-1 cursor-pointer" id="removeSearchFilter"></i>
+              </span>
+              <button class="btn btn-link text-danger text-decoration-none p-0 small ms-auto fw-semibold" style="font-size: 0.78rem;" id="quickResetAllBtn">
+                <i class="bi bi-trash3 me-1"></i>Reset Semua
+              </button>
             </div>
           </div>
 
           <!-- Product Grid -->
           <div class="row" id="katalogProductsGrid">
-            <!-- Rendered by katalog.js -->
+            <!-- Rendered dynamically by katalog.js -->
           </div>
         </div>
 

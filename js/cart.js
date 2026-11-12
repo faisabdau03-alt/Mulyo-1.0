@@ -324,7 +324,7 @@ class CartService {
       <div id="${toastId}" class="toast align-items-center ${bgClass} border-0 shadow-lg" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="d-flex">
           <div class="toast-body d-flex align-items-center gap-2">
-            <span>${type === "error" ? "⚠️" : type === "info" ? "ℹ️" : "✅"}</span>
+            <span><i class="bi ${type === "error" ? "bi-exclamation-triangle-fill" : type === "info" ? "bi-info-circle-fill" : "bi-check-circle-fill"}"></i></span>
             <span>${message}</span>
           </div>
           <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>

@@ -557,11 +557,24 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Category Filter Tabs */
 .category-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   border-radius: 50px;
   font-weight: 600;
   font-size: 0.875rem;
-  padding: 0.5rem 1.25rem;
+  padding: 0.55rem 1.25rem;
   transition: var(--transition-normal);
+  white-space: nowrap;
+}
+
+.category-tab-btn .cat-icon {
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.category-tab-btn:hover .cat-icon {
+  transform: translateY(-1px);
 }
 
 .category-tab-btn.active {
@@ -1199,4 +1212,84 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #fffbeb;
   border: 1px solid #fef3c7;
   color: #92400e;
+}
+
+
+/* ==========================================================================
+   Katalog Perlengkapan Integrated Styles
+   ========================================================================== */
+.katalog-chips-wrapper {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(94, 221, 91, 0.4) transparent;
+  -webkit-overflow-scrolling: touch;
+}
+
+.katalog-chips-wrapper::-webkit-scrollbar {
+  height: 6px;
+}
+
+.katalog-chips-wrapper::-webkit-scrollbar-thumb {
+  background-color: rgba(94, 221, 91, 0.4);
+  border-radius: 10px;
+}
+
+.category-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 0.5rem 1.15rem;
+  border: 1.5px solid #e2e8f0;
+  background-color: #ffffff;
+  color: #334155;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.category-tab-btn:hover {
+  background-color: #f8fafc;
+  border-color: #cbd5e1;
+  color: #0f172a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+}
+
+.category-tab-btn.active {
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+  color: #000000 !important;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(94, 221, 91, 0.32);
+}
+
+.category-tab-btn .cat-icon {
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.category-tab-btn:hover .cat-icon {
+  transform: scale(1.1);
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* Card Animation when filter updates */
+@keyframes productFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.product-fade-in {
+  animation: productFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
