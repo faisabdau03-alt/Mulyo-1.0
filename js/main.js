@@ -542,6 +542,140 @@ function loginWithGoogle(googleUserData) {
   };
 }
 
+// Login atau Registrasi Cepat Menggunakan Apple ID (iOS)
+function loginWithApple(appleUserData = {}) {
+  const email = (appleUserData.email || "budi.apple@icloud.com").trim().toLowerCase();
+  const name = (appleUserData.name || "Budi Santoso").trim();
+
+  const users = getForestaRegisteredUsers();
+  let user = users.find((u) => u.email.toLowerCase() === email);
+
+  if (!user) {
+    const memberId = "FA-APPL" + Math.floor(1000 + Math.random() * 9000);
+    const options = { day: "numeric", month: "short", year: "numeric" };
+    const todayFormatted = new Date().toLocaleDateString("id-ID", options);
+
+    user = {
+      email: email,
+      password: "apple_verified_account",
+      name: name,
+      memberId: memberId,
+      joinDate: todayFormatted,
+      discount: 10,
+      status: "Member Apple (iOS) Prioritas",
+      authProvider: "apple",
+      avatar: ""
+    };
+    users.push(user);
+    try {
+      localStorage.setItem(REGISTERED_USERS_KEY, JSON.stringify(users));
+    } catch (e) {}
+  } else {
+    user.authProvider = "apple";
+    user.status = "Member Apple (iOS) Prioritas";
+    try {
+      localStorage.setItem(REGISTERED_USERS_KEY, JSON.stringify(users));
+    } catch (e) {}
+  }
+
+  setForestaMember(user);
+  return {
+    success: true,
+    user: user,
+    message: `Registrasi Apple ID (iOS) Berhasil! Selamat datang, ${user.name}. Diskon member 10% aktif!`
+  };
+}
+
+// Login atau Registrasi Cepat Menggunakan WhatsApp
+function loginWithWhatsApp(waData = {}) {
+  const phone = (waData.phone || "081234567890").replace(/[^0-9]/g, "");
+  const name = (waData.name || "Budi Santoso").trim();
+  const email = `${phone}@whatsapp.member`;
+
+  const users = getForestaRegisteredUsers();
+  let user = users.find((u) => u.email.toLowerCase() === email);
+
+  if (!user) {
+    const memberId = "FA-WA" + Math.floor(1000 + Math.random() * 9000);
+    const options = { day: "numeric", month: "short", year: "numeric" };
+    const todayFormatted = new Date().toLocaleDateString("id-ID", options);
+
+    user = {
+      email: email,
+      phone: phone,
+      password: "wa_verified_account",
+      name: name,
+      memberId: memberId,
+      joinDate: todayFormatted,
+      discount: 10,
+      status: "Member WhatsApp Prioritas",
+      authProvider: "whatsapp",
+      avatar: ""
+    };
+    users.push(user);
+    try {
+      localStorage.setItem(REGISTERED_USERS_KEY, JSON.stringify(users));
+    } catch (e) {}
+  } else {
+    user.authProvider = "whatsapp";
+    user.status = "Member WhatsApp Prioritas";
+    try {
+      localStorage.setItem(REGISTERED_USERS_KEY, JSON.stringify(users));
+    } catch (e) {}
+  }
+
+  setForestaMember(user);
+  return {
+    success: true,
+    user: user,
+    message: `Registrasi via WhatsApp Berhasil! Selamat datang, ${user.name}. Diskon member 10% aktif!`
+  };
+}
+
+// Login atau Registrasi Cepat Menggunakan Facebook
+function loginWithFacebook(fbData = {}) {
+  const email = (fbData.email || "budi.santoso@facebook.com").trim().toLowerCase();
+  const name = (fbData.name || "Budi Santoso").trim();
+
+  const users = getForestaRegisteredUsers();
+  let user = users.find((u) => u.email.toLowerCase() === email);
+
+  if (!user) {
+    const memberId = "FA-FB" + Math.floor(1000 + Math.random() * 9000);
+    const options = { day: "numeric", month: "short", year: "numeric" };
+    const todayFormatted = new Date().toLocaleDateString("id-ID", options);
+
+    user = {
+      email: email,
+      password: "fb_verified_account",
+      name: name,
+      memberId: memberId,
+      joinDate: todayFormatted,
+      discount: 10,
+      status: "Member Facebook Prioritas",
+      authProvider: "facebook",
+      avatar: ""
+    };
+    users.push(user);
+    try {
+      localStorage.setItem(REGISTERED_USERS_KEY, JSON.stringify(users));
+    } catch (e) {}
+  } else {
+    user.authProvider = "facebook";
+    user.status = "Member Facebook Prioritas";
+    try {
+      localStorage.setItem(REGISTERED_USERS_KEY, JSON.stringify(users));
+    } catch (e) {}
+  }
+
+  setForestaMember(user);
+  return {
+    success: true,
+    user: user,
+    message: `Login Facebook Berhasil! Selamat datang, ${user.name}. Diskon member 10% aktif!`
+  };
+}
+
 // Reset Kata Sandi Member Terdaftar
 function resetForestaPassword(email, newPassword) {
   email = (email || "").trim().toLowerCase();
@@ -797,6 +931,33 @@ function initMemberState() {
 
 // Handler Interaktif untuk Registrasi/Login Google & Lupa Kata Sandi
 function initGoogleAndForgotHandlers() {
+  // Helper: Eksekusi aksi sukses login/registrasi (update UI, toast, dan redirect)
+  function handleAuthSuccess(result) {
+    if (window.cartService) {
+      cartService.showToast(result.message, "success");
+    }
+    if (typeof updateAllMemberUI === "function") {
+      updateAllMemberUI();
+    }
+    if (typeof window.refreshMemberPage === "function") {
+      window.refreshMemberPage();
+    }
+
+    // Jika ada barang di keranjang dan berasal dari checkout gate
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get("redirect") === "cart" || (window.cartService && cartService.getCartCount() > 0)) {
+      const checkoutModalEl = document.getElementById("checkoutModal");
+      if (checkoutModalEl && window.bootstrap) {
+        const bsCheckout = new bootstrap.Modal(checkoutModalEl);
+        bsCheckout.show();
+      } else if (window.location.pathname.includes("register.html") || window.location.pathname.includes("login.html")) {
+        setTimeout(() => {
+          window.location.href = "katalog.html?openCart=true";
+        }, 1000);
+      }
+    }
+  }
+
   // 1. Tombol Google Auth (Membuka Modal Google)
   document.querySelectorAll(".btn-google-auth").forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -808,18 +969,13 @@ function initGoogleAndForgotHandlers() {
           const bsReq = bootstrap.Modal.getInstance(memberRequiredModalEl);
           if (bsReq) bsReq.hide();
         }
-
-        const bsGoogleModal = new bootstrap.Modal(googleModalEl);
-        bsGoogleModal.show();
+        const bsGoogle = new bootstrap.Modal(googleModalEl);
+        bsGoogle.show();
       } else {
-        // Fallback langsung login cepat dengan akun Google default
-        const result = loginWithGoogle({
-          name: "Budi Santoso",
-          email: "budi.pendaki@gmail.com"
-        });
+        // Fallback jika modal tidak ada di halaman ini: langsung login preset
+        const result = loginWithGoogle();
         if (result.success) {
-          if (window.cartService) cartService.showToast(result.message, "success");
-          if (window.refreshMemberPage) window.refreshMemberPage();
+          handleAuthSuccess(result);
         }
       }
     });
@@ -839,25 +995,7 @@ function initGoogleAndForgotHandlers() {
           const bsGoogle = bootstrap.Modal.getInstance(googleModalEl);
           if (bsGoogle) bsGoogle.hide();
         }
-
-        if (window.cartService) {
-          cartService.showToast(result.message, "success");
-        }
-
-        // Segarkan halaman jika di register / login
-        if (window.refreshMemberPage) {
-          window.refreshMemberPage();
-        }
-
-        // Jika ada barang di keranjang dan berasal dari checkout gate
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get("redirect") === "cart" || (window.cartService && cartService.getCartCount() > 0)) {
-          const checkoutModalEl = document.getElementById("checkoutModal");
-          if (checkoutModalEl && window.bootstrap) {
-            const bsCheckout = new bootstrap.Modal(checkoutModalEl);
-            bsCheckout.show();
-          }
-        }
+        handleAuthSuccess(result);
       }
     });
   });
@@ -877,16 +1015,127 @@ function initGoogleAndForgotHandlers() {
           const bsGoogle = bootstrap.Modal.getInstance(googleModalEl);
           if (bsGoogle) bsGoogle.hide();
         }
-
-        if (window.cartService) {
-          cartService.showToast(result.message, "success");
-        }
-
-        if (window.refreshMemberPage) {
-          window.refreshMemberPage();
-        }
+        handleAuthSuccess(result);
       } else {
         alert(result.message);
+      }
+    });
+  }
+
+  // 3B. Handler Tombol Apple ID (iOS)
+  document.querySelectorAll(".btn-apple-auth").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const appleModalEl = document.getElementById("appleLoginModal");
+      if (appleModalEl && window.bootstrap) {
+        // Tutup modal lain
+        const memberReq = document.getElementById("memberRequiredModal");
+        if (memberReq) {
+          const bsReq = bootstrap.Modal.getInstance(memberReq);
+          if (bsReq) bsReq.hide();
+        }
+        const bsApple = new bootstrap.Modal(appleModalEl);
+        bsApple.show();
+      } else {
+        const result = loginWithApple();
+        if (result.success) {
+          handleAuthSuccess(result);
+        }
+      }
+    });
+  });
+
+  // Konfirmasi Apple Login di Modal
+  const confirmAppleBtn = document.getElementById("confirmAppleAuthBtn");
+  if (confirmAppleBtn) {
+    confirmAppleBtn.addEventListener("click", () => {
+      const email = document.getElementById("appleUserEmail")?.textContent || "budi.apple@icloud.com";
+      const name = document.getElementById("appleUserName")?.textContent || "Budi Santoso";
+
+      const result = loginWithApple({ email, name });
+      if (result.success) {
+        const appleModalEl = document.getElementById("appleLoginModal");
+        if (appleModalEl && window.bootstrap) {
+          const bsApple = bootstrap.Modal.getInstance(appleModalEl);
+          if (bsApple) bsApple.hide();
+        }
+        handleAuthSuccess(result);
+      }
+    });
+  }
+
+  // 3C. Handler Tombol WhatsApp
+  document.querySelectorAll(".btn-whatsapp-auth").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const waModalEl = document.getElementById("whatsappRegisterModal");
+      if (waModalEl && window.bootstrap) {
+        const memberReq = document.getElementById("memberRequiredModal");
+        if (memberReq) {
+          const bsReq = bootstrap.Modal.getInstance(memberReq);
+          if (bsReq) bsReq.hide();
+        }
+        const bsWa = new bootstrap.Modal(waModalEl);
+        bsWa.show();
+      } else {
+        const result = loginWithWhatsApp();
+        if (result.success) {
+          handleAuthSuccess(result);
+        }
+      }
+    });
+  });
+
+  // Submit Form WhatsApp di Modal
+  const formWaAuth = document.getElementById("formWaRegister");
+  if (formWaAuth) {
+    formWaAuth.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const phone = document.getElementById("waInputPhone")?.value || "081234567890";
+      const name = document.getElementById("waInputName")?.value || "Budi Santoso";
+
+      const result = loginWithWhatsApp({ phone, name });
+      if (result.success) {
+        const waModalEl = document.getElementById("whatsappRegisterModal");
+        if (waModalEl && window.bootstrap) {
+          const bsWa = bootstrap.Modal.getInstance(waModalEl);
+          if (bsWa) bsWa.hide();
+        }
+        handleAuthSuccess(result);
+      }
+    });
+  }
+
+  // 3D. Handler Tombol Facebook
+  document.querySelectorAll(".btn-facebook-auth").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const fbModalEl = document.getElementById("facebookLoginModal");
+      if (fbModalEl && window.bootstrap) {
+        const memberReq = document.getElementById("memberRequiredModal");
+        if (memberReq) {
+          const bsReq = bootstrap.Modal.getInstance(memberReq);
+          if (bsReq) bsReq.hide();
+        }
+        const bsFb = new bootstrap.Modal(fbModalEl);
+        bsFb.show();
+      } else {
+        const result = loginWithFacebook();
+        if (result.success) {
+          handleAuthSuccess(result);
+        }
+      }
+    });
+  });
+
+  const confirmFbBtn = document.getElementById("confirmFbAuthBtn");
+  if (confirmFbBtn) {
+    confirmFbBtn.addEventListener("click", () => {
+      const result = loginWithFacebook();
+      if (result.success) {
+        const fbModalEl = document.getElementById("facebookLoginModal");
+        if (fbModalEl && window.bootstrap) {
+          const bsFb = bootstrap.Modal.getInstance(fbModalEl);
+          if (bsFb) bsFb.hide();
+        }
+        handleAuthSuccess(result);
       }
     });
   }

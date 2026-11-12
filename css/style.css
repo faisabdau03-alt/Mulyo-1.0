@@ -1025,31 +1025,78 @@ h1, h2, h3, h4, h5, h6 {
   color: #7c3aed;
 }
 
+/* Social & iOS Auth Buttons */
+.btn-social-auth {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-size: 0.925rem;
+  font-weight: 600;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+}
+
+.btn-social-auth:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+}
+
+.btn-social-auth:active {
+  transform: translateY(0);
+}
+
 /* Google Auth Button */
 .btn-google-auth {
   background-color: #ffffff;
   color: #1e293b;
   border: 1.5px solid #e2e8f0;
-  font-size: 0.9rem;
-  font-weight: 600;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.65rem;
 }
 
 .btn-google-auth:hover {
   background-color: #f8fafc;
   border-color: #cbd5e1;
   color: #0f172a;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
-  transform: translateY(-1px);
 }
 
-.btn-google-auth:active {
-  transform: translateY(0);
+/* Apple ID (iOS) Button */
+.btn-apple-auth {
+  background-color: #000000;
+  color: #ffffff;
+  border: 1.5px solid #000000;
+}
+
+.btn-apple-auth:hover {
+  background-color: #18181b;
+  border-color: #18181b;
+  color: #ffffff;
+}
+
+/* WhatsApp Auth Button */
+.btn-whatsapp-auth {
+  background-color: #25D366;
+  color: #ffffff;
+  border: 1.5px solid #25D366;
+}
+
+.btn-whatsapp-auth:hover {
+  background-color: #1fae53;
+  border-color: #1fae53;
+  color: #ffffff;
+}
+
+/* Facebook Auth Button */
+.btn-facebook-auth {
+  background-color: #1877F2;
+  color: #ffffff;
+  border: 1.5px solid #1877F2;
+}
+
+.btn-facebook-auth:hover {
+  background-color: #0f65d4;
+  border-color: #0f65d4;
+  color: #ffffff;
 }
 
 /* Auth Divider */
