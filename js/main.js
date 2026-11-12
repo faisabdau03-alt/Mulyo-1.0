@@ -540,7 +540,7 @@ function updateAllMemberUI() {
     if (member && member.email) {
       container.innerHTML = `
         <div class="dropdown">
-          <button class="btn btn-nav-member logged-in dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <button class="btn btn-nav-member logged-in dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="height: 34px; font-size: 0.78rem;">
             <i class="bi bi-person-check-fill text-brand-green"></i>
             <span class="d-none d-xl-inline text-truncate" style="max-width: 130px;">${member.name || member.email}</span>
             <span class="badge bg-success-subtle text-success small py-0 px-1">10% OFF</span>
@@ -564,9 +564,9 @@ function updateAllMemberUI() {
       `;
     } else {
       container.innerHTML = `
-        <div class="d-flex align-items-center gap-2">
-          <a href="register.html" class="btn btn-sm btn-brand-primary px-3 rounded-pill fw-bold" style="font-size: 0.8rem;">
-            Daftar
+        <div class="d-flex align-items-center gap-1">
+          <a href="register.html" class="btn btn-sm btn-brand-primary rounded-pill fw-bold" style="font-size: 0.78rem; height: 34px; padding: 0 0.75rem; display: inline-flex; align-items: center; gap: 0.25rem;">
+            <i class="bi bi-person-plus"></i> Daftar
           </a>
           <a href="login.html" class="btn btn-nav-member" title="Masuk ke Akun Member">
             <i class="bi bi-box-arrow-in-right"></i>
