@@ -564,10 +564,15 @@ function updateAllMemberUI() {
       `;
     } else {
       container.innerHTML = `
-        <a href="login.html" class="btn btn-nav-member" title="Masuk atau Daftar Member (Diskon 10%)" style="height: 34px; font-size: 0.78rem; padding: 0 0.75rem; display: inline-flex; align-items: center; gap: 0.35rem;">
-          <i class="bi bi-person-circle"></i>
-          <span>Member</span>
-        </a>
+        <div class="d-flex align-items-center gap-1">
+          <a href="register.html" class="btn btn-sm btn-brand-primary rounded-pill fw-bold" style="font-size: 0.78rem; height: 34px; padding: 0 0.75rem; display: inline-flex; align-items: center; gap: 0.25rem;">
+            <i class="bi bi-person-plus"></i> Daftar
+          </a>
+          <a href="login.html" class="btn btn-nav-member" title="Masuk ke Akun Member">
+            <i class="bi bi-box-arrow-in-right"></i>
+            <span>Masuk</span>
+          </a>
+        </div>
       `;
     }
   });
@@ -581,7 +586,7 @@ function updateAllMemberUI() {
       `;
     } else {
       topBarMemberSlot.innerHTML = `
-        <span>Lebih dari <b class="text-brand-green">1.000+</b> perlengkapan camping siap sewa</span>
+        <span>Wajib Daftar Member Sebelum Menyewa · <b class="text-brand-green">Diskon 10% Otomatis</b></span>
       `;
     }
   }
