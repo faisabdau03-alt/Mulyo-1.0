@@ -60,25 +60,40 @@ Proyek ini dibangun untuk kebutuhan tugas perkuliahan Semester 5 (Bu Fersel).
    - Formulir pesan langsung ke WhatsApp admin.
    - Tombol mengambang (Floating Action Button) WhatsApp dengan animasi berdenyut.
 
+10. **Sistem Member Penyewa & Proteksi Checkout (`register.html` & `login.html`)**:
+    - **Wajib Jadi Member Sebelum Sewa**: Calon penyewa harus terdaftar/login sebagai member sebelum melakukan pemesanan sewa untuk validasi data jaminan identitas dan klaim diskon.
+    - **Pendaftaran & Login Simpel (Email & Kata Sandi)**: Cukup gunakan email aktif dan kata sandi akun sederhana tanpa formulir berbelit, dilengkapi tombol intip sandi (*toggle eye*).
+    - **Kartu Member Digital VIP**: Seketika mendapatkan Kartu Member Digital VIP interaktif lengkap dengan ID Member unik (`FA-XXXXX`) dan stempel status aktif.
+    - **Diskon Otomatis 10%**: Otomatis memotong 10% subtotal sewa di keranjang belanja (`cart.js`) dan rincian pesan WhatsApp.
+    - **Bebas Uang Jaminan Tunai & Prioritas WhatsApp Booking**.
+
+11. **Hero Section & Beranda Modern Visual Upgrade**:
+    - **Aksen Radial Green Lighting & High-Contrast Typography**: Efek pencahayaan lembut di latar belakang gelap dengan teks gradien hijau segar.
+    - **Floating Glassmorphism Rental Pass Card**: Kartu preview dinamis di sisi kanan desktop yang menampilkan jam operasional, ringkasan statistik (1.000+ gear, diskon 10%, Rp 0 deposit), dan jaminan KTP/KTM asli.
+    - **Floating Search & Date Bar**: Kotak pemilih tanggal sewa dan durasi mengambang dengan elevasi ganda dan aksen garis hijau halus.
+    - **Tata Letak UI Terjaga Utuh**: Seluruh posisi elemen grid, filter, dan alur navigasi tetap familiar dan tidak berubah.
+
 ---
 
 ## 📁 Struktur Berkas Proyek
 
 ```
 Mulyo 1.0/
-├── index.html            # Halaman utama beranda (Mirip forestaadventure.com)
+├── index.html            # Halaman utama beranda dengan Hero Section visual upgrade
 ├── katalog.html          # Halaman katalog produk dengan filter sidebar & sorting
 ├── cara-sewa.html        # Halaman panduan sewa, syarat jaminan & denda
 ├── kontak.html           # Halaman informasi kontak, peta toko & form pesan
+├── register.html         # Halaman pendaftaran member penyewa (cukup email & sandi)
+├── login.html            # Halaman masuk akun member penyewa (email & sandi)
 ├── package.json          # Konfigurasi npm script untuk local development
 ├── README.md             # Dokumentasi proyek
 ├── css/
-│   └── style.css         # Styling custom modern outdoor green & dark theme
+│   └── style.css         # Styling custom modern outdoor green, glassmorphism & dark theme
 └── js/
     ├── products-data.js  # Database produk perlengkapan outdoor
-    ├── cart.js           # Logika keranjang belanja & generator pesan WhatsApp
+    ├── cart.js           # Logika keranjang sewa, diskon 10% & proteksi member gate
     ├── katalog.js        # Logika filter kategori, harga & sorting katalog
-    └── main.js           # Logika interaktif tanggal, modal produk & navbar
+    └── main.js           # Logika auth member, tanggal, modal produk, & sticky navbar
 ```
 
 ---

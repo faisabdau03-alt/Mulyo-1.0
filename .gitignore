@@ -3,4 +3,5 @@ node_modules/
 Thumbs.db
 *.log
 .vscode/
-
+foresta_home.html
+.vercel

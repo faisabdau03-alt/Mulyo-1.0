@@ -131,11 +131,28 @@ class CartService {
     return this.cart.reduce((total, item) => total + item.qty, 0);
   }
 
-  getCartTotal() {
+  getMemberDiscount() {
+    if (typeof getForestaMember === "function") {
+      const member = getForestaMember();
+      if (member && member.email) {
+        return 0.10; // Diskon 10% untuk member aktif
+      }
+    }
+    return 0;
+  }
+
+  getCartRawTotal() {
     return this.cart.reduce((total, item) => {
       const dur = item.duration || this.bookingState.duration || 2;
       return total + item.price * item.qty * dur;
     }, 0);
+  }
+
+  getCartTotal() {
+    const raw = this.getCartRawTotal();
+    const discountRate = this.getMemberDiscount();
+    const discountAmount = Math.round(raw * discountRate);
+    return Math.max(0, raw - discountAmount);
   }
 
   updateUI() {
@@ -161,7 +178,24 @@ class CartService {
     if (!container) return;
 
     if (countEl) countEl.textContent = `${this.getCartCount()} Item`;
-    if (totalEl) totalEl.textContent = formatRupiah(this.getCartTotal());
+    const rawTotal = this.getCartRawTotal();
+    const discountRate = this.getMemberDiscount();
+    const discountAmount = Math.round(rawTotal * discountRate);
+    const finalTotal = rawTotal - discountAmount;
+
+    if (totalEl) {
+      if (discountRate > 0) {
+        totalEl.innerHTML = `
+          <div class="text-end">
+            <span class="text-decoration-line-through text-muted small fw-normal d-block" style="font-size: 0.8rem;">${formatRupiah(rawTotal)}</span>
+            <span class="text-success fw-bold">${formatRupiah(finalTotal)}</span>
+            <span class="badge bg-success-subtle text-success small py-0 px-2 ms-1">Member 10% OFF</span>
+          </div>
+        `;
+      } else {
+        totalEl.textContent = formatRupiah(finalTotal);
+      }
+    }
 
     if (this.cart.length === 0) {
       container.innerHTML = "";
@@ -172,6 +206,24 @@ class CartService {
 
     if (emptyNotice) emptyNotice.style.display = "none";
     if (footerEl) footerEl.style.display = "block";
+
+    const isMember = (typeof isForestaMemberLoggedIn === "function") ? isForestaMemberLoggedIn() : false;
+    const checkoutBtn = document.getElementById("btnProceedToCheckout");
+    const memberGateNotice = document.getElementById("cartMemberGateNotice");
+
+    if (checkoutBtn) {
+      if (isMember) {
+        checkoutBtn.innerHTML = `<i class="bi bi-whatsapp"></i> Lanjut Booking via WhatsApp`;
+        checkoutBtn.className = "btn btn-brand-primary py-2 d-flex align-items-center justify-content-center gap-2";
+      } else {
+        checkoutBtn.innerHTML = `<i class="bi bi-person-lock"></i> Daftar / Masuk untuk Booking`;
+        checkoutBtn.className = "btn btn-warning text-dark fw-bold py-2 d-flex align-items-center justify-content-center gap-2 shadow-sm";
+      }
+    }
+
+    if (memberGateNotice) {
+      memberGateNotice.style.display = isMember ? "none" : "flex";
+    }
 
     container.innerHTML = this.cart
       .map((item) => {
@@ -218,6 +270,41 @@ class CartService {
       `;
       })
       .join("");
+  }
+
+  proceedToCheckout() {
+    if (this.cart.length === 0) {
+      this.showToast("Keranjang sewa Anda masih kosong!", "error");
+      return;
+    }
+
+    const isMember = (typeof isForestaMemberLoggedIn === "function") ? isForestaMemberLoggedIn() : false;
+    if (!isMember) {
+      // Tutup offcanvas cart jika terbuka
+      const offcanvasEl = document.getElementById("cartOffcanvas");
+      if (offcanvasEl && window.bootstrap) {
+        const bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvasEl) || new bootstrap.Offcanvas(offcanvasEl);
+        bsOffcanvas.hide();
+      }
+      if (typeof openMemberRequiredModal === "function") {
+        openMemberRequiredModal();
+      } else {
+        window.location.href = "register.html?redirect=cart";
+      }
+      return;
+    }
+
+    // Jika sudah menjadi member: buka modal konfirmasi checkout WhatsApp
+    const offcanvasEl = document.getElementById("cartOffcanvas");
+    if (offcanvasEl && window.bootstrap) {
+      const bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvasEl) || new bootstrap.Offcanvas(offcanvasEl);
+      bsOffcanvas.hide();
+    }
+    const checkoutModalEl = document.getElementById("checkoutModal");
+    if (checkoutModalEl && window.bootstrap) {
+      const bsModal = new bootstrap.Modal(checkoutModalEl);
+      bsModal.show();
+    }
   }
 
   showToast(message, type = "success") {
@@ -279,17 +366,35 @@ class CartService {
       itemLines += `${index + 1}. *${item.name}*\n   • Jumlah: ${item.qty} pcs\n   • Durasi: ${dur} hari (@ ${formatRupiah(item.price)}/hari)\n   • Subtotal: ${formatRupiah(subtotal)}\n\n`;
     });
 
+    const rawTotal = grandTotal;
+    const discountRate = this.getMemberDiscount();
+    const discountAmount = Math.round(rawTotal * discountRate);
+    const finalTotal = rawTotal - discountAmount;
+
+    const member = (typeof getForestaMember === "function") ? getForestaMember() : null;
+    let memberStatusLine = "";
+    if (member && member.email) {
+      memberStatusLine = `• *Status Member*: 🌟 Member Prioritas (${member.email} | ID: ${member.memberId || 'FA-MEMBER'}) - Diskon 10% Diterapkan\n`;
+    }
+
+    let totalPricingText = `💵 *TOTAL ESTIMASI SEWA*: *${formatRupiah(finalTotal)}*`;
+    if (discountRate > 0) {
+      totalPricingText = `💵 *SUBTOTAL SEWA*: ${formatRupiah(rawTotal)}
+🏷️ *POTONGAN DISKON MEMBER (10%)*: -${formatRupiah(discountAmount)}
+💵 *TOTAL AKHIR*: *${formatRupiah(finalTotal)}* (Hemat ${formatRupiah(discountAmount)})`;
+    }
+
     const message = `Halo Admin *Foresta Adventure*! 👋
 Saya ingin melakukan booking sewa perlengkapan outdoor melalui website:
 
 🏕️ *DATA PENYEWA*:
 • *Nama*: ${nama}
 • *No. WhatsApp*: ${wa}
-• *Tgl Ambil*: ${tglAmbil}
+${memberStatusLine}• *Tgl Ambil*: ${tglAmbil}
 • *Tgl Kembali (Maks)*: ${tglKembali}
 
 📦 *DAFTAR ALAT YANG DISEWA*:
-${itemLines}💵 *TOTAL ESTIMASI SEWA*: *${formatRupiah(grandTotal)}*
+${itemLines}${totalPricingText}
 📝 *Catatan / Tambahan*: ${catatan}
 
 Mohon konfirmasi ketersediaan barang dan persyaratan jaminannya ya admin. Terima kasih! 🌲🏔️`;

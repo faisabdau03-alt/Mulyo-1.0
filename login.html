@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Masuk Member Penyewa | Foresta Adventure</title>
+  <meta name="description" content="Masuk ke akun member Foresta Adventure cukup dengan email dan kata sandi. Dapatkan diskon sewa 10%, prioritas booking, dan kemudahan sewa tanpa deposit tunai!" />
+  <meta name="keywords" content="member foresta adventure, login member sewa tenda, rental outdoor, diskon camping" />
+  <meta name="author" content="Foresta Adventure" />
+
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- 1. Top Announcement Bar -->
+  <div class="top-bar-announcement py-2 text-white">
+    <div class="container d-flex flex-wrap justify-content-between align-items-center gap-2">
+      <div class="d-flex align-items-center gap-3">
+        <a href="https://wa.me/6281234567890" target="_blank" class="text-white text-decoration-none d-flex align-items-center gap-1">
+          <i class="bi bi-telephone-fill text-brand-green"></i>
+          <span>0812-3456-7890</span>
+        </a>
+        <span class="text-secondary d-none d-sm-inline">|</span>
+        <a href="mailto:info@forestaadventure.com" class="text-white text-decoration-none d-none d-sm-flex align-items-center gap-1">
+          <i class="bi bi-envelope-fill text-brand-green"></i>
+          <span>info@forestaadventure.com</span>
+        </a>
+      </div>
+      <div class="d-flex align-items-center gap-2 ms-auto">
+        <span class="d-none d-md-inline text-light" id="topBarMemberSlot">🌟 Masuk Member &amp; Nikmati <b class="text-brand-green">Diskon 10%</b> Semua Alat</span>
+        <a href="register.html" class="btn btn-sm btn-outline-light rounded-pill px-2 py-1 text-decoration-none d-none d-sm-inline-flex align-items-center gap-1" style="font-size: 0.75rem;">
+          <i class="bi bi-person-plus text-brand-green"></i> Belum Punya Akun? Daftar
+        </a>
+        <a href="katalog.html" class="btn btn-sm bg-brand-green text-dark fw-bold rounded-pill px-3 py-1" style="font-size: 0.75rem;">
+          Lihat Katalog <i class="bi bi-arrow-right ms-1"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Navbar Utama Sticky -->
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-foresta sticky-top navbar-sticky">
+    <div class="container">
+      <!-- Logo Foresta Adventure -->
+      <a class="navbar-brand-logo" href="index.html">
+        <span class="p-2 rounded-3 bg-brand-green text-dark d-inline-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
+          <i class="bi bi-compass fs-5"></i>
+        </span>
+        <span>FORESTA<span class="accent">.</span>ADVENTURE</span>
+      </a>
+
+      <!-- Tombol Aksi Mobile (Cart + Hamburger) -->
+      <div class="d-flex align-items-center gap-2 d-lg-none">
+        <button class="btn btn-nav-cart position-relative px-3 py-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" style="height: 38px;">
+          <i class="bi bi-cart3"></i>
+          <span class="cart-count-badge" style="display: none;">0</span>
+        </button>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#forestaNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+
+      <!-- Menu Navigasi -->
+      <div class="collapse navbar-collapse" id="forestaNavbar">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Beranda</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+              Kategori
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark-custom">
+              <li><a class="dropdown-item" href="katalog.html?cat=tenda"><i class="bi bi-triangle-fill text-brand-green me-2"></i>Tenda Camping (2-6 Orang)</a></li>
+              <li><a class="dropdown-item" href="katalog.html?cat=carrier"><i class="bi bi-backpack-fill text-brand-green me-2"></i>Carrier &amp; Semi Carrier (35L - 75L)</a></li>
+              <li><a class="dropdown-item" href="katalog.html?cat=tidur"><i class="bi bi-moon-stars-fill text-brand-green me-2"></i>Sleeping Bag &amp; Matras</a></li>
+              <li><a class="dropdown-item" href="katalog.html?cat=masak"><i class="bi bi-fire text-brand-green me-2"></i>Kompor &amp; Perlengkapan Masak</a></li>
+              <li><a class="dropdown-item" href="katalog.html?cat=penerangan"><i class="bi bi-lightbulb-fill text-brand-green me-2"></i>Lampu Tenda &amp; Headlamp</a></li>
+              <li><a class="dropdown-item" href="katalog.html?cat=pakaian"><i class="bi bi-person-standing text-brand-green me-2"></i>Jaket &amp; Sepatu Gunung</a></li>
+              <li><a class="dropdown-item" href="katalog.html?cat=gear"><i class="bi bi-tools text-brand-green me-2"></i>Trekking Pole, Meja &amp; Kursi</a></li>
+              <li><hr class="dropdown-divider border-secondary" /></li>
+              <li><a class="dropdown-item text-brand-green fw-bold" href="katalog.html">Semua Kategori Produk →</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="katalog.html">Katalog Gear</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="cara-sewa.html">Cara Sewa</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="kontak.html">Kontak &amp; Lokasi</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active text-brand-green" href="login.html">
+              <i class="bi bi-person-circle me-1"></i> Masuk Member
+            </a>
+          </li>
+        </ul>
+
+        <!-- Action Buttons Desktop -->
+        <div class="d-none d-lg-flex align-items-center navbar-actions">
+          <!-- Member Slot Container -->
+          <div class="member-nav-slot">
+            <a href="login.html" class="btn btn-nav-member" title="Masuk atau Daftar Member">
+              <i class="bi bi-person-circle"></i>
+              <span>Member / Masuk</span>
+            </a>
+          </div>
+
+          <!-- Cart Button -->
+          <button class="btn btn-nav-cart position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+            <i class="bi bi-cart3 fs-5"></i>
+            <span>Keranjang</span>
+            <span class="cart-count-badge" style="display: none;">0</span>
+          </button>
+
+          <!-- WhatsApp Direct -->
+          <a href="https://wa.me/6281234567890" target="_blank" class="btn btn-brand-primary">
+            <i class="bi bi-whatsapp fs-5"></i>
+            <span>Hubungi Kami</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 3. Breadcrumb & Header Section -->
+  <section class="bg-brand-dark text-white py-4 border-bottom border-secondary border-opacity-25">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-2 small">
+          <li class="breadcrumb-item"><a href="index.html" class="text-brand-green text-decoration-none">Beranda</a></li>
+          <li class="breadcrumb-item active text-white opacity-75" aria-current="page">Masuk Member</li>
+        </ol>
+      </nav>
+      <h2 class="fw-bold mb-1">Masuk ke Akun Member Foresta</h2>
+      <p class="text-muted small mb-0">Gunakan email dan kata sandi Anda untuk mengakses diskon sewa 10% dan riwayat booking.</p>
+    </div>
+  </section>
+
+  <!-- 4. Main Member Section -->
+  <section class="py-5" style="background-color: var(--color-body-bg); min-height: 70vh;">
+    <div class="container">
+      
+      <!-- STATE 1: FORM LOGIN (Tampil jika belum login) -->
+      <div id="authFormSection" class="row g-4 align-items-center justify-content-center">
+        <!-- Kolom Info Keuntungan Member -->
+        <div class="col-lg-6">
+          <div class="pe-lg-4">
+            <span class="badge bg-success-subtle text-success px-3 py-2 rounded-pill fw-bold mb-3">
+              🌲 MEMBER RESMI FORESTA ADVENTURE
+            </span>
+            <h1 class="fw-bold display-6 text-dark mb-3">
+              Masuk Member Cukup Pakai <span class="text-success">Email &amp; Kata Sandi</span>.
+            </h1>
+            <p class="text-muted mb-4 lead fs-6">
+              Masuk ke akun Anda sebelum memesan alat outdoor untuk otomatis menikmati potongan harga 10% dan fasilitas bebas uang deposit jaminan tunai.
+            </p>
+
+            <div class="d-flex flex-column gap-3 mb-4">
+              <div class="member-benefit-pill">
+                <div class="fs-3 text-success">🎟️</div>
+                <div>
+                  <h6 class="fw-bold mb-1 text-dark">Diskon 10% Otomatis Setiap Sewa</h6>
+                  <p class="text-muted small mb-0">Potongan langsung 10% untuk semua tenda, carrier, dan peralatan camping di keranjang belanja Anda.</p>
+                </div>
+              </div>
+
+              <div class="member-benefit-pill">
+                <div class="fs-3 text-success">⚡</div>
+                <div>
+                  <h6 class="fw-bold mb-1 text-dark">Prioritas Verifikasi &amp; Booking</h6>
+                  <p class="text-muted small mb-0">Pesanan WhatsApp member diproses lebih cepat oleh tim gudang dan admin kami.</p>
+                </div>
+              </div>
+
+              <div class="member-benefit-pill">
+                <div class="fs-3 text-success">🛡️</div>
+                <div>
+                  <h6 class="fw-bold mb-1 text-dark">Bebas Uang Jaminan Tunai</h6>
+                  <p class="text-muted small mb-0">Sebagai member terpercaya, Anda cukup menjaminkan KTP/KTM asli tanpa perlu titip uang deposit sewa.</p>
+                </div>
+              </div>
+
+              <div class="member-benefit-pill">
+                <div class="fs-3 text-success">💳</div>
+                <div>
+                  <h6 class="fw-bold mb-1 text-dark">Kartu Member Digital VIP</h6>
+                  <p class="text-muted small mb-0">Mendapatkan kartu member digital eksklusif dengan nomor ID khusus komunitas pendaki.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex align-items-center gap-2 text-muted small">
+              <i class="bi bi-shield-check-fill text-success fs-5"></i>
+              <span>Lebih dari <strong>1.500+ pendaki</strong> telah terdaftar dan aktif menyewa di Foresta Adventure.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kolom Form Masuk / Login -->
+        <div class="col-lg-5 col-md-8">
+          <div class="member-auth-card p-4 p-md-5">
+            
+            <!-- Notifikasi jika dialihkan dari Keranjang -->
+            <div id="redirectNotice" class="alert alert-warning border-0 rounded-3 p-3 mb-4 d-none">
+              <div class="d-flex align-items-center gap-2">
+                <i class="bi bi-exclamation-triangle-fill fs-5 text-warning flex-shrink-0"></i>
+                <div class="small text-dark">
+                  <strong>Peralatan sudah ada di keranjang!</strong> Silakan masuk ke akun member Anda untuk langsung melanjutkan booking via WhatsApp.
+                </div>
+              </div>
+            </div>
+
+            <div class="text-center mb-4">
+              <div class="d-inline-flex p-3 rounded-circle bg-success-subtle text-success mb-3">
+                <i class="bi bi-box-arrow-in-right fs-2"></i>
+              </div>
+              <h3 class="fw-bold text-dark mb-1">Masuk Akun Member</h3>
+              <p class="text-muted small mb-0">Masukkan email &amp; kata sandi akun Anda.</p>
+            </div>
+
+            <form id="loginMemberForm">
+              <!-- Input Email -->
+              <div class="mb-3">
+                <label for="loginEmailInput" class="form-label fw-bold small text-dark">
+                  Alamat Email Terdaftar <span class="text-danger">*</span>
+                </label>
+                <div class="input-group">
+                  <span class="input-group-text bg-light border-end-0">
+                    <i class="bi bi-envelope text-muted"></i>
+                  </span>
+                  <input 
+                    type="email" 
+                    class="form-control form-control-lg border-start-0 ps-0" 
+                    id="loginEmailInput" 
+                    placeholder="nama@email.com" 
+                    required 
+                    autocomplete="email"
+                    autofocus
+                  />
+                </div>
+              </div>
+
+              <!-- Input Kata Sandi -->
+              <div class="mb-4">
+                <label for="loginPasswordInput" class="form-label fw-bold small text-dark">
+                  Kata Sandi Akun <span class="text-danger">*</span>
+                </label>
+                <div class="input-group">
+                  <span class="input-group-text bg-light border-end-0">
+                    <i class="bi bi-key text-muted"></i>
+                  </span>
+                  <input 
+                    type="password" 
+                    class="form-control form-control-lg border-start-0 border-end-0 ps-0" 
+                    id="loginPasswordInput" 
+                    placeholder="Masukkan kata sandi" 
+                    required 
+                    autocomplete="current-password"
+                  />
+                  <button class="btn btn-outline-secondary border-start-0 toggle-password-btn" type="button" data-target="loginPasswordInput" title="Lihat/Sembunyikan Sandi">
+                    <i class="bi bi-eye"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" class="btn btn-brand-primary w-100 py-3 rounded-pill fw-bold fs-6 mb-3 shadow-sm d-flex align-items-center justify-content-center gap-2">
+                <span>🔑 Masuk ke Akun Member</span>
+              </button>
+
+              <!-- Footer Switch to Register -->
+              <div class="p-3 bg-light rounded-3 text-center mb-3">
+                <span class="small text-muted">Belum pernah mendaftar sebagai member?</span><br />
+                <a href="register.html" class="fw-bold text-success text-decoration-none small">
+                  <i class="bi bi-person-plus-fill me-1"></i> Daftar Member Baru di Sini (Gratis)
+                </a>
+              </div>
+
+              <div class="d-flex justify-content-center gap-3 text-muted small text-center">
+                <span><i class="bi bi-check-circle-fill text-success me-1"></i>Keamanan Terjamin</span>
+                <span><i class="bi bi-check-circle-fill text-success me-1"></i>Akses Diskon 10%</span>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATE 2: KARTU MEMBER AKTIF (Tampil jika sudah login) -->
+      <div id="memberDashboardSection" class="row g-4 justify-content-center align-items-center" style="display: none;">
+        <div class="col-lg-6 col-md-9">
+          
+          <!-- Alert Sambutan -->
+          <div class="alert alert-success d-flex align-items-center gap-3 rounded-4 shadow-sm p-3 mb-4 border-0">
+            <span class="fs-2">🎉</span>
+            <div>
+              <h6 class="fw-bold mb-1 text-success">Selamat Datang, Member Foresta Adventure!</h6>
+              <p class="mb-0 small text-dark">Akun Anda aktif. Diskon 10% sudah otomatis diterapkan pada keranjang sewa Anda.</p>
+            </div>
+          </div>
+
+          <!-- KARTU MEMBER DIGITAL VIP -->
+          <div class="member-vip-card mb-4 position-relative">
+            <div class="d-flex justify-content-between align-items-start mb-4">
+              <div class="d-flex align-items-center gap-2">
+                <span class="p-2 rounded-3 bg-brand-green text-dark d-inline-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                  <i class="bi bi-compass fs-5"></i>
+                </span>
+                <div>
+                  <h6 class="fw-bold mb-0 text-white letter-spacing-1">FORESTA ADVENTURE</h6>
+                  <span class="small text-brand-green" style="font-size: 0.72rem; letter-spacing: 1px;">VIP MEMBER PASS</span>
+                </div>
+              </div>
+
+              <!-- Chip & Badge -->
+              <div class="d-flex align-items-center gap-2">
+                <div class="member-chip"></div>
+                <div class="member-active-badge">
+                  <span class="member-pulse-dot"></span>
+                  <span>AKTIF</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Member Info -->
+            <div class="my-4">
+              <span class="small text-white-50 text-uppercase letter-spacing-1 d-block mb-1">Nama Member</span>
+              <h4 class="fw-bold text-white mb-2" id="cardMemberName">Budi Santoso</h4>
+              
+              <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mt-3 pt-3 border-top border-white border-opacity-10">
+                <div>
+                  <span class="small text-white-50 d-block">Alamat Email</span>
+                  <span class="fw-semibold text-white small" id="cardMemberEmail">budi@gmail.com</span>
+                </div>
+                <div>
+                  <span class="small text-white-50 d-block">Nomor ID Member</span>
+                  <span class="fw-bold text-brand-green font-monospace fs-6" id="cardMemberId">FA-89241</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom Card Benefit -->
+            <div class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top border-white border-opacity-10">
+              <div class="d-flex align-items-center gap-2">
+                <span class="badge bg-warning text-dark fw-bold px-2 py-1">DISCOUNT 10% ACTIVE</span>
+                <span class="small text-white-50 d-none d-sm-inline">Bebas Biaya Deposit</span>
+              </div>
+              <div class="text-end">
+                <span class="small text-white-50 d-block" style="font-size: 0.7rem;">Bergabung</span>
+                <span class="small text-white" id="cardMemberJoinDate">Hari ini</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tombol Aksi Member -->
+          <div class="card border-0 rounded-4 shadow-sm p-4 text-center">
+            <h5 class="fw-bold text-dark mb-2">Mau Sewa Alat Apa Hari Ini?</h5>
+            <p class="text-muted small mb-4">Gunakan keuntungan member Anda sekarang untuk mendapatkan harga sewa lebih hemat.</p>
+
+            <div class="d-grid gap-2 d-sm-flex justify-content-center">
+              <a href="katalog.html" class="btn btn-brand-primary rounded-pill px-4 py-2 fw-bold d-flex align-items-center justify-content-center gap-2">
+                <i class="bi bi-grid-fill"></i> Mulai Sewa di Katalog (Diskon 10%)
+              </a>
+              <button type="button" class="btn btn-outline-dark rounded-pill px-4 py-2 fw-semibold d-flex align-items-center justify-content-center gap-2" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+                <i class="bi bi-cart3"></i> Cek Keranjang
+              </button>
+            </div>
+
+            <hr class="my-4 text-secondary opacity-25" />
+
+            <div class="d-flex justify-content-between align-items-center text-muted small">
+              <span>Login sebagai <strong id="loggedAsText">budi@gmail.com</strong></span>
+              <button type="button" class="btn btn-link text-danger text-decoration-none p-0 small fw-semibold" id="logoutMemberBtn">
+                <i class="bi bi-box-arrow-right me-1"></i> Keluar / Ganti Akun
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 5. Footer -->
+  <footer class="footer-foresta">
+    <div class="container">
+      <div class="row g-4 pb-4">
+        <!-- Kolom Brand -->
+        <div class="col-lg-4 col-md-6">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <span class="p-2 rounded-3 bg-brand-green text-dark d-inline-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+              <i class="bi bi-compass fs-5"></i>
+            </span>
+            <span class="text-white fw-bold fs-5 font-heading">FORESTA<span class="text-brand-green">.</span>ADVENTURE</span>
+          </div>
+          <p class="small text-muted mb-3">
+            Pusat rental dan persewaan alat camping, mendaki gunung, dan outdoor gear terlengkap dengan harga bersahabat dan peralatan terawat bersih.
+          </p>
+        </div>
+
+        <!-- Kolom Menu Cepat -->
+        <div class="col-lg-2 col-md-6 col-6">
+          <h6 class="footer-heading">Navigasi</h6>
+          <ul class="footer-links">
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="katalog.html">Katalog Gear</a></li>
+            <li><a href="cara-sewa.html">Cara Sewa</a></li>
+            <li><a href="kontak.html">Kontak &amp; Lokasi</a></li>
+            <li><a href="register.html">Daftar Member</a></li>
+            <li><a href="login.html" class="text-brand-green">Masuk Member</a></li>
+          </ul>
+        </div>
+
+        <!-- Kolom Kategori Favorit -->
+        <div class="col-lg-3 col-md-6 col-6">
+          <h6 class="footer-heading">Perlengkapan</h6>
+          <ul class="footer-links">
+            <li><a href="katalog.html?cat=tenda">Tenda Dome (2 - 6P)</a></li>
+            <li><a href="katalog.html?cat=carrier">Carrier (35L - 75L)</a></li>
+            <li><a href="katalog.html?cat=tidur">Sleeping Bag &amp; Matras</a></li>
+            <li><a href="katalog.html?cat=masak">Kompor &amp; Cooking Set</a></li>
+            <li><a href="katalog.html?cat=penerangan">Headlamp &amp; Lampu Tenda</a></li>
+          </ul>
+        </div>
+
+        <!-- Kolom Kontak Cepat -->
+        <div class="col-lg-3 col-md-6">
+          <h6 class="footer-heading">Hubungi Basecamp</h6>
+          <p class="small text-muted mb-2">Jl. Kaliurang KM 5, Sleman, D.I. Yogyakarta</p>
+          <p class="small text-muted mb-2">WhatsApp: <strong class="text-white">0812-3456-7890</strong></p>
+          <p class="small text-muted">Buka Setiap Hari: 08.00 - 21.00 WIB</p>
+        </div>
+      </div>
+
+      <div class="border-top border-secondary border-opacity-25 pt-3 text-center small text-muted">
+        &copy; 2026 <strong>Foresta Adventure</strong>. Seluruh Hak Cipta Dilindungi.
+      </div>
+    </div>
+  </footer>
+
+  <!-- 6. Offcanvas Keranjang Sewa -->
+  <div class="offcanvas offcanvas-end cart-offcanvas" tabindex="-1" id="cartOffcanvas">
+    <div class="offcanvas-header border-bottom">
+      <h5 class="offcanvas-title fw-bold d-flex align-items-center gap-2">
+        <i class="bi bi-cart3 text-success"></i> Keranjang Sewa Anda
+      </h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    
+    <div class="offcanvas-body p-0">
+      <div id="cartEmptyNotice" class="text-center py-5 px-3" style="display: none;">
+        <i class="bi bi-cart-x fs-1 text-muted d-block mb-3"></i>
+        <h6 class="fw-bold text-dark">Keranjang Anda Masih Kosong</h6>
+        <p class="text-muted small mb-3">Silakan pilih tenda atau perlengkapan outdoor di katalog kami.</p>
+        <a href="katalog.html" class="btn btn-brand-primary btn-sm rounded-pill px-4 mt-2" data-bs-dismiss="offcanvas">
+          Buka Katalog Gear
+        </a>
+      </div>
+
+      <div id="cartDrawerItems" class="p-3">
+        <!-- Rendered by cart.js -->
+      </div>
+    </div>
+
+    <div class="offcanvas-footer border-top p-3 bg-light" id="cartDrawerFooter">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <span class="text-muted">Total Estimasi Sewa:</span>
+        <h5 class="fw-bold text-success mb-0" id="cartDrawerTotal">Rp 0</h5>
+      </div>
+      <div class="d-grid gap-2">
+        <button class="btn btn-brand-primary py-2 d-flex align-items-center justify-content-center gap-2" onclick="cartService.proceedToCheckout()">
+          <i class="bi bi-whatsapp"></i> Lanjut Booking via WhatsApp
+        </button>
+        <button class="btn btn-outline-danger btn-sm py-1" onclick="cartService.clearCart()">
+          <i class="bi bi-trash"></i> Kosongkan Keranjang
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. Modal Form Checkout WhatsApp -->
+  <div class="modal fade" id="checkoutModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg rounded-4">
+        <div class="modal-header border-bottom">
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-whatsapp text-success fs-4"></i>
+            <h5 class="modal-title fw-bold">Form Konfirmasi Booking</h5>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="whatsappCheckoutForm">
+          <div class="modal-body p-4">
+            <p class="text-muted small mb-3">
+              Isi data diri Anda di bawah ini. Sistem kami akan otomatis membuat pesan reservasi rapi yang siap dikirim langsung ke WhatsApp Admin Foresta Adventure.
+            </p>
+
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Nama Lengkap Penyewa *</label>
+              <input type="text" id="coName" class="form-control" placeholder="Contoh: Budi Santoso" required />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Nomor WhatsApp Aktif *</label>
+              <input type="tel" id="coPhone" class="form-control" placeholder="Contoh: 081234567890" required />
+            </div>
+
+            <div class="row g-2 mb-3">
+              <div class="col-6">
+                <label class="form-label small fw-bold">Tanggal Ambil *</label>
+                <input type="date" id="coStartDate" class="form-control" required />
+              </div>
+              <div class="col-6">
+                <label class="form-label small fw-bold">Tanggal Pengembalian *</label>
+                <input type="date" id="coEndDate" class="form-control" required />
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Catatan / Kebutuhan Tambahan (Opsional)</label>
+              <textarea id="coNotes" class="form-control" rows="2" placeholder="Contoh: Ambil tenda warna hijau, butuh gas kaleng tambahan"></textarea>
+            </div>
+
+            <div class="alert alert-info py-2 small mb-0 d-flex gap-2 align-items-center">
+              <i class="bi bi-info-circle-fill fs-5"></i>
+              <span>Setelah klik tombol di bawah, Anda akan diarahkan ke WhatsApp untuk verifikasi stok dan jaminan.</span>
+            </div>
+          </div>
+          <div class="modal-footer border-top">
+            <button type="button" class="btn btn-secondary rounded-pill px-3" data-bs-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-brand-primary rounded-pill px-4 fw-bold">
+              Kirim ke WhatsApp <i class="bi bi-arrow-right ms-1"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. Modal Wajib Jadi Member Sebelum Sewa -->
+  <div class="modal fade" id="memberRequiredModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+        <div class="modal-header border-0 bg-brand-dark text-white p-4 pb-3">
+          <div class="d-flex align-items-center gap-3">
+            <span class="p-2 rounded-3 bg-brand-green text-dark d-inline-flex align-items-center justify-content-center" style="width: 44px; height: 44px;">
+              <i class="bi bi-shield-lock-fill fs-4"></i>
+            </span>
+            <div>
+              <h5 class="modal-title fw-bold mb-0">Wajib Daftar / Masuk Member</h5>
+              <p class="text-white-50 small mb-0">Sebelum melanjutkan proses sewa alat camping</p>
+            </div>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body p-4">
+          <div class="alert alert-success-subtle border border-success-subtle rounded-3 p-3 mb-4">
+            <div class="d-flex gap-2">
+              <i class="bi bi-info-circle-fill text-success fs-5 flex-shrink-0"></i>
+              <div class="small text-dark">
+                <strong>Mengapa wajib jadi member?</strong><br>
+                Untuk validasi data jaminan identitas, pembebasan biaya deposit tunai, serta pemberian <strong>diskon sewa 10% otomatis</strong>. Cukup gunakan email dan kata sandi!
+              </div>
+            </div>
+          </div>
+
+          <ul class="nav nav-pills nav-fill mb-3 p-1 bg-light rounded-pill" id="modalAuthTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link rounded-pill fw-bold small py-2" id="modal-tab-register" data-bs-toggle="pill" data-bs-target="#modalTabRegisterContent" type="button" role="tab">
+                <i class="bi bi-person-plus me-1"></i> Daftar Cepat
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active rounded-pill fw-bold small py-2" id="modal-tab-login" data-bs-toggle="pill" data-bs-target="#modalTabLoginContent" type="button" role="tab">
+                <i class="bi bi-box-arrow-in-right me-1"></i> Sudah Punya Akun
+              </button>
+            </li>
+          </ul>
+
+          <div class="tab-content" id="modalAuthTabContent">
+            <!-- TAB 1: DAFTAR CEPAT -->
+            <div class="tab-pane fade" id="modalTabRegisterContent" role="tabpanel">
+              <form id="modalQuickRegisterForm">
+                <div class="mb-3">
+                  <label class="form-label small fw-bold text-dark">Alamat Email Aktif <span class="text-danger">*</span></label>
+                  <div class="input-group">
+                    <span class="input-group-text bg-light border-end-0"><i class="bi bi-envelope text-muted"></i></span>
+                    <input type="email" class="form-control border-start-0 ps-0" id="modalRegEmail" placeholder="nama@email.com" required autocomplete="email" />
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label small fw-bold text-dark">Kata Sandi Email / Akun <span class="text-danger">*</span></label>
+                  <div class="input-group">
+                    <span class="input-group-text bg-light border-end-0"><i class="bi bi-key text-muted"></i></span>
+                    <input type="password" class="form-control border-start-0 border-end-0 ps-0" id="modalRegPassword" placeholder="Minimal 4 karakter" minlength="4" required autocomplete="new-password" />
+                    <button class="btn btn-outline-secondary border-start-0 toggle-password-btn" type="button" data-target="modalRegPassword" title="Lihat/Sembunyikan Sandi">
+                      <i class="bi bi-eye"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label small fw-bold text-dark d-flex justify-content-between">
+                    <span>Nama Lengkap Penyewa</span>
+                    <span class="text-muted fw-normal small">(Opsional)</span>
+                  </label>
+                  <div class="input-group">
+                    <span class="input-group-text bg-light border-end-0"><i class="bi bi-person text-muted"></i></span>
+                    <input type="text" class="form-control border-start-0 ps-0" id="modalRegName" placeholder="Contoh: Budi Santoso" />
+                  </div>
+                </div>
+
+                <button type="submit" class="btn btn-brand-primary w-100 py-2 rounded-pill fw-bold d-flex align-items-center justify-content-center gap-2 mb-2">
+                  <i class="bi bi-check2-circle fs-5"></i> Daftar &amp; Lanjut Selesaikan Sewa
+                </button>
+              </form>
+            </div>
+
+            <!-- TAB 2: MASUK CEPAT -->
+            <div class="tab-pane fade show active" id="modalTabLoginContent" role="tabpanel">
+              <form id="modalQuickLoginForm">
+                <div class="mb-3">
+                  <label class="form-label small fw-bold text-dark">Alamat Email Terdaftar <span class="text-danger">*</span></label>
+                  <div class="input-group">
+                    <span class="input-group-text bg-light border-end-0"><i class="bi bi-envelope text-muted"></i></span>
+                    <input type="email" class="form-control border-start-0 ps-0" id="modalLoginEmail" placeholder="nama@email.com" required autocomplete="email" />
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label small fw-bold text-dark">Kata Sandi <span class="text-danger">*</span></label>
+                  <div class="input-group">
+                    <span class="input-group-text bg-light border-end-0"><i class="bi bi-key text-muted"></i></span>
+                    <input type="password" class="form-control border-start-0 border-end-0 ps-0" id="modalLoginPassword" placeholder="Masukkan kata sandi" required autocomplete="current-password" />
+                    <button class="btn btn-outline-secondary border-start-0 toggle-password-btn" type="button" data-target="modalLoginPassword" title="Lihat/Sembunyikan Sandi">
+                      <i class="bi bi-eye"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <button type="submit" class="btn btn-brand-primary w-100 py-2 rounded-pill fw-bold d-flex align-items-center justify-content-center gap-2 mb-2">
+                  <i class="bi bi-box-arrow-in-right fs-5"></i> Masuk &amp; Lanjut Selesaikan Sewa
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap 5.3 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Data & Application Logic -->
+  <script src="js/products-data.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+
+  <!-- Login Controller Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const authFormSection = document.getElementById("authFormSection");
+      const memberDashboardSection = document.getElementById("memberDashboardSection");
+      const loginMemberForm = document.getElementById("loginMemberForm");
+      const loginEmailInput = document.getElementById("loginEmailInput");
+      const loginPasswordInput = document.getElementById("loginPasswordInput");
+      const logoutMemberBtn = document.getElementById("logoutMemberBtn");
+      const redirectNotice = document.getElementById("redirectNotice");
+
+      // Elements for digital card
+      const cardMemberName = document.getElementById("cardMemberName");
+      const cardMemberEmail = document.getElementById("cardMemberEmail");
+      const cardMemberId = document.getElementById("cardMemberId");
+      const cardMemberJoinDate = document.getElementById("cardMemberJoinDate");
+      const loggedAsText = document.getElementById("loggedAsText");
+
+      // Cek parameter query redirect
+      const urlParams = new URLSearchParams(window.location.search);
+      const isRedirectFromCart = urlParams.get("redirect") === "cart";
+      if (isRedirectFromCart && redirectNotice) {
+        redirectNotice.classList.remove("d-none");
+      }
+
+      // Cek apakah sudah login sebagai member
+      function checkMemberState() {
+        const member = getForestaMember();
+        if (member && member.email) {
+          // Tampilkan Dashboard & Kartu Member
+          authFormSection.style.display = "none";
+          memberDashboardSection.style.display = "flex";
+
+          cardMemberName.textContent = member.name || member.email.split("@")[0];
+          cardMemberEmail.textContent = member.email;
+          cardMemberId.textContent = member.memberId || "FA-8921";
+          cardMemberJoinDate.textContent = member.joinDate || "Aktif";
+          loggedAsText.textContent = member.email;
+        } else {
+          // Tampilkan Form Masuk
+          authFormSection.style.display = "flex";
+          memberDashboardSection.style.display = "none";
+        }
+      }
+
+      // Handle Submit Form Login: Email & Kata Sandi
+      if (loginMemberForm) {
+        loginMemberForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const email = loginEmailInput.value.trim().toLowerCase();
+          const password = loginPasswordInput.value.trim();
+
+          if (!email) {
+            alert("Silakan masukkan alamat email.");
+            return;
+          }
+
+          if (!password) {
+            alert("Silakan masukkan kata sandi Anda.");
+            return;
+          }
+
+          const result = loginForestaMember(email, password);
+          if (result.success) {
+            if (window.cartService) {
+              cartService.showToast(`Selamat datang kembali ${result.user.name}! Diskon member 10% aktif.`, "success");
+            }
+
+            if (isRedirectFromCart) {
+              setTimeout(() => {
+                window.location.href = "katalog.html?openCart=true";
+              }, 1200);
+            } else {
+              checkMemberState();
+              updateAllMemberUI();
+            }
+          } else {
+            if (result.notRegistered) {
+              if (confirm("Email ini belum terdaftar sebagai member. Apakah Anda ingin mendaftar sekarang?")) {
+                window.location.href = "register.html";
+              }
+            } else {
+              alert(result.message);
+            }
+          }
+        });
+      }
+
+      // Handle Logout
+      if (logoutMemberBtn) {
+        logoutMemberBtn.addEventListener("click", () => {
+          if (confirm("Apakah Anda ingin keluar dari akun member?")) {
+            logoutForestaMember();
+            if (window.cartService) {
+              cartService.showToast("Anda telah keluar dari akun member.", "info");
+            }
+            checkMemberState();
+            updateAllMemberUI();
+          }
+        });
+      }
+
+      // Jalankan pengecekan awal
+      checkMemberState();
+    });
+  </script>
+</body>
+</html>
