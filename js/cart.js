@@ -82,6 +82,61 @@ class CartService {
     return true;
   }
 
+  addBundleToCart(bundleId, qty = 1, customDuration = null) {
+    if (typeof bundlesService === "undefined") {
+      this.showToast("Layanan paket bundling tidak ditemukan!", "error");
+      return false;
+    }
+
+    const bundle = bundlesService.getBundleById(bundleId);
+    if (!bundle) {
+      this.showToast("Paket bundling tidak ditemukan!", "error");
+      return false;
+    }
+
+    const metrics = bundlesService.calculateMetrics(bundle);
+    if (!metrics.isAvailable || metrics.maxBundlesAvailable < qty) {
+      this.showToast("Maaf, stok perlengkapan untuk paket ini sedang tidak mencukupi!", "error");
+      return false;
+    }
+
+    const duration = customDuration || this.bookingState.duration || 2;
+    const existingIndex = this.cart.findIndex((item) => item.id === bundleId);
+    const existingQty = existingIndex > -1 ? this.cart[existingIndex].qty : 0;
+
+    if (existingQty + qty > metrics.maxBundlesAvailable) {
+      this.showToast(`Stok tidak mencukupi! Maksimal ${metrics.maxBundlesAvailable} paket berdasarkan sisa alat di gudang.`, "error");
+      return false;
+    }
+
+    if (existingIndex > -1) {
+      this.cart[existingIndex].qty += qty;
+    } else {
+      this.cart.push({
+        id: bundle.id,
+        isBundle: true,
+        name: bundle.name,
+        category: "Paket Bundling",
+        price: bundle.price,
+        normalPrice: metrics.normalPrice,
+        savingsPerDay: metrics.savingsAmount,
+        savingsPercent: metrics.savingsPercent,
+        image: bundle.image,
+        qty: qty,
+        duration: duration,
+        bundleItems: metrics.itemsDetail.map((i) => ({
+          name: i.name,
+          qty: i.qty,
+          unitPrice: i.unitPrice
+        }))
+      });
+    }
+
+    this.saveCart();
+    this.showToast(`Berhasil menambahkan "${bundle.name}" ke keranjang sewa!`, "success");
+    return true;
+  }
+
   removeFromCart(productId) {
     const item = this.cart.find((i) => i.id === productId);
     this.cart = this.cart.filter((i) => i.id !== productId);
@@ -229,6 +284,7 @@ class CartService {
       .map((item) => {
         const itemDuration = item.duration || this.bookingState.duration || 2;
         const subtotal = item.price * item.qty * itemDuration;
+        const isBundle = item.isBundle || false;
 
         return `
         <div class="cart-item border-bottom py-3">
@@ -236,10 +292,22 @@ class CartService {
             <img src="${item.image}" alt="${item.name}" class="rounded-3" style="width: 70px; height: 70px; object-fit: cover; flex-shrink: 0;" />
             <div class="flex-grow-1 min-w-0">
               <div class="d-flex justify-content-between align-items-start">
-                <h6 class="mb-1 text-truncate fw-bold fs-6">${item.name}</h6>
+                <div>
+                  ${isBundle ? '<span class="badge bg-success text-dark small py-0 px-2 fw-bold me-1" style="font-size: 0.65rem;">Paket Bundling</span>' : ''}
+                  <h6 class="mb-1 text-truncate fw-bold fs-6 d-inline">${item.name}</h6>
+                </div>
                 <button type="button" class="btn-close btn-sm ms-2 text-danger" title="Hapus" onclick="cartService.removeFromCart('${item.id}')"></button>
               </div>
-              <p class="text-muted small mb-2">${item.category} • <span class="text-success fw-semibold">${formatRupiah(item.price)}/hari</span></p>
+              <p class="text-muted small mb-1">
+                ${isBundle && item.normalPrice ? `<span class="text-decoration-line-through text-muted small me-1">${formatRupiah(item.normalPrice)}</span>` : ''}
+                <span class="text-success fw-semibold">${formatRupiah(item.price)}/hari</span>
+                ${isBundle && item.savingsPercent ? `<span class="badge bg-success-subtle text-success small py-0 px-1 ms-1">Hemat ${item.savingsPercent}%</span>` : ''}
+              </p>
+              ${isBundle && item.bundleItems ? `
+                <div class="small text-muted bg-light p-1 rounded-2 mb-2" style="font-size: 0.72rem; line-height: 1.2;">
+                  <i class="bi bi-box-seam me-1 text-success"></i> ${item.bundleItems.map(b => `${b.qty}x ${b.name}`).join(', ')}
+                </div>
+              ` : ''}
               
               <div class="d-flex flex-wrap align-items-center justify-content-between gap-2">
                 <!-- Qty Control -->
@@ -363,7 +431,17 @@ class CartService {
       const subtotal = item.price * item.qty * dur;
       grandTotal += subtotal;
 
-      itemLines += `${index + 1}. *${item.name}*\n   • Jumlah: ${item.qty} pcs\n   • Durasi: ${dur} hari (@ ${formatRupiah(item.price)}/hari)\n   • Subtotal: ${formatRupiah(subtotal)}\n\n`;
+      if (item.isBundle) {
+        const bundleItemsStr = item.bundleItems ? item.bundleItems.map(b => `${b.qty}x ${b.name}`).join(', ') : '';
+        itemLines += `${index + 1}. *[PAKET BUNDLING] ${item.name}*\n` +
+          `   • Isi Paket: ${bundleItemsStr}\n` +
+          `   • Jumlah Paket: ${item.qty} paket\n` +
+          `   • Durasi: ${dur} hari (@ ${formatRupiah(item.price)}/hari)\n` +
+          (item.savingsPerDay ? `   • Hemat: ${formatRupiah(item.savingsPerDay * item.qty * dur)} (Dibanding sewa terpisah)\n` : '') +
+          `   • Subtotal: ${formatRupiah(subtotal)}\n\n`;
+      } else {
+        itemLines += `${index + 1}. *${item.name}*\n   • Jumlah: ${item.qty} pcs\n   • Durasi: ${dur} hari (@ ${formatRupiah(item.price)}/hari)\n   • Subtotal: ${formatRupiah(subtotal)}\n\n`;
+      }
     });
 
     const rawTotal = grandTotal;

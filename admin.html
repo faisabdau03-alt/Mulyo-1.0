@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Admin - Pengelolaan Paket Bundling | Foresta Adventure</title>
+  <meta name="description" content="Dashboard Pengelolaan Paket Bundling Foresta Adventure. Atur isi paket, harga bundling, foto, dan ketersediaan stok." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    .admin-navbar {
+      background-color: #0e131f;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .metric-card {
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      transition: transform 0.2s ease;
+    }
+    .metric-card:hover {
+      transform: translateY(-3px);
+    }
+  </style>
+</head>
+<body class="bg-light">
+
+  <!-- Admin Header -->
+  <header class="admin-navbar py-3 sticky-top" style="z-index: 1040;">
+    <div class="container-fluid px-4 d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center gap-3">
+        <a class="navbar-brand-logo" href="admin.html">
+          <span class="p-2 rounded-3 bg-brand-green text-dark d-inline-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
+            <i class="bi bi-shield-lock fs-5"></i>
+          </span>
+          <span class="text-white">FORESTA<span class="accent">.</span>ADMIN</span>
+        </a>
+        <span class="badge bg-success-subtle text-success border border-success border-opacity-25 d-none d-md-inline-block">
+          Modul Paket Bundling Aktif
+        </span>
+      </div>
+
+      <div class="d-flex align-items-center gap-2">
+        <a href="paket-bundling.html" target="_blank" class="btn btn-sm btn-outline-light rounded-pill px-3">
+          <i class="bi bi-box-arrow-up-right me-1"></i> Buka Halaman Pengunjung
+        </a>
+        <a href="index.html" class="btn btn-sm btn-outline-secondary rounded-pill px-3 text-white border-secondary">
+          <i class="bi bi-house me-1"></i> Beranda
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Admin Content -->
+  <main class="container-fluid px-4 py-4">
+    <!-- Breadcrumb & Page Title -->
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-4">
+      <div>
+        <h3 class="fw-bold text-dark mb-1">Pengelolaan Paket Bundling</h3>
+        <p class="text-muted small mb-0">
+          Atur kombinasi perlengkapan camping/hiking, harga promo bundling, stok komponen, dan status tayang paket.
+        </p>
+      </div>
+      <div class="d-flex gap-2">
+        <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill px-3 bg-white" onclick="resetAllBundlesToDefault()">
+          <i class="bi bi-arrow-counterclockwise me-1"></i> Reset ke Default
+        </button>
+        <button type="button" class="btn btn-brand-primary btn-sm rounded-pill px-4 fw-bold shadow-sm" onclick="openAdminCreateModal()">
+          <i class="bi bi-plus-lg me-1"></i> + Tambah Paket Baru
+        </button>
+      </div>
+    </div>
+
+    <!-- Metrics Cards -->
+    <div class="row g-3 mb-4">
+      <div class="col-xl-3 col-sm-6">
+        <div class="card metric-card rounded-4 p-3 bg-white shadow-sm">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <span class="text-muted small text-uppercase fw-bold" style="font-size: 0.72rem;">Total Paket Bundling</span>
+              <h3 class="fw-extrabold text-dark mb-0 mt-1" id="adminMetricTotalBundles">4</h3>
+            </div>
+            <div class="p-3 rounded-circle bg-success-subtle text-success fs-4">
+              <i class="bi bi-collection"></i>
+            </div>
+          </div>
+          <div class="small text-muted mt-2 pt-2 border-top" style="font-size: 0.75rem;">
+            Tersimpan dalam database lokal browser
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-3 col-sm-6">
+        <div class="card metric-card rounded-4 p-3 bg-white shadow-sm">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <span class="text-muted small text-uppercase fw-bold" style="font-size: 0.72rem;">Status Publikasi</span>
+              <h3 class="fw-extrabold text-success mb-0 mt-1" id="adminMetricActiveBundles">4 Aktif</h3>
+            </div>
+            <div class="p-3 rounded-circle bg-primary-subtle text-primary fs-4">
+              <i class="bi bi-broadcast"></i>
+            </div>
+          </div>
+          <div class="small text-muted mt-2 pt-2 border-top" style="font-size: 0.75rem;">
+            Dapat diakses langsung oleh pengunjung website
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-3 col-sm-6">
+        <div class="card metric-card rounded-4 p-3 bg-white shadow-sm">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <span class="text-muted small text-uppercase fw-bold" style="font-size: 0.72rem;">Penghematan Tertinggi</span>
+              <h3 class="fw-extrabold text-dark mb-0 mt-1" id="adminMetricMaxSavings">Rp 114.000 / hari</h3>
+            </div>
+            <div class="p-3 rounded-circle bg-warning-subtle text-warning fs-4">
+              <i class="bi bi-piggy-bank"></i>
+            </div>
+          </div>
+          <div class="small text-muted mt-2 pt-2 border-top" style="font-size: 0.75rem;">
+            Nilai promosi sewa dibanding harga satuan
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-3 col-sm-6">
+        <div class="card metric-card rounded-4 p-3 bg-white shadow-sm">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <span class="text-muted small text-uppercase fw-bold" style="font-size: 0.72rem;">Katalog Alat Terhubung</span>
+              <h3 class="fw-extrabold text-dark mb-0 mt-1" id="adminMetricProductsCount">20 Perlengkapan</h3>
+            </div>
+            <div class="p-3 rounded-circle bg-info-subtle text-info fs-4">
+              <i class="bi bi-box-seam"></i>
+            </div>
+          </div>
+          <div class="small text-muted mt-2 pt-2 border-top" style="font-size: 0.75rem;">
+            Stok dicek otomatis tanpa duplikasi data
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table Card -->
+    <div class="card border-0 shadow-sm rounded-4 overflow-hidden bg-white mb-4">
+      <div class="card-header bg-white py-3 px-4 border-bottom d-flex justify-content-between align-items-center">
+        <h5 class="fw-bold mb-0 text-dark fs-6 d-flex align-items-center gap-2">
+          <i class="bi bi-table text-success"></i> Daftar Seluruh Paket Bundling
+        </h5>
+        <span class="small text-muted">
+          Perubahan otomatis tersimpan &amp; langsung aktif di website pengunjung.
+        </span>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-hover mb-0 align-middle">
+          <thead class="table-light">
+            <tr class="small text-uppercase text-muted" style="font-size: 0.75rem; letter-spacing: 0.5px;">
+              <th class="text-center" style="width: 50px;">#</th>
+              <th>Paket Bundling</th>
+              <th>Perlengkapan di Dalamnya</th>
+              <th>Harga Normal vs Bundling</th>
+              <th class="text-center">Ketersediaan Stok</th>
+              <th class="text-center" style="width: 100px;">Status</th>
+              <th class="text-center" style="width: 120px;">Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="adminBundlesTableBody">
+            <!-- Rendered by js/admin-bundles.js -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Quick Reference Gudang Stok -->
+    <div class="card border-0 shadow-sm rounded-4 bg-white p-4">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="fw-bold mb-0 text-dark fs-6">
+          <i class="bi bi-info-circle text-success me-1"></i> Panduan Pengelolaan Stok &amp; Kompatibilitas
+        </h5>
+        <span class="badge bg-light text-muted border">Aturan Bundling Otomatis</span>
+      </div>
+      <div class="row g-3 small text-muted">
+        <div class="col-md-4">
+          <strong class="text-dark d-block mb-1">1. Perhitungan Stok Otomatis</strong>
+          Stok paket bundling dihitung dari kuota terkecil perlengkapan yang menjadi isinya. Jika Tenda 4P sisa 2 unit, maka paket yang butuh 1 tenda maksimal hanya dapat disewa 2 kali.
+        </div>
+        <div class="col-md-4">
+          <strong class="text-dark d-block mb-1">2. Tidak Ada Stok Ganda</strong>
+          Sistem menggunakan satu sumber inventaris (`PRODUCTS_DATA`). Penyewaan bundling dan satuan saling mengurangi kuota nyata di gudang secara akurat.
+        </div>
+        <div class="col-md-4">
+          <strong class="text-dark d-block mb-1">3. Fleksibilitas Admin</strong>
+          Admin dapat menonaktifkan paket sewaktu-waktu jika ada alat yang sedang dalam masa perawatan (*maintenance*), tanpa harus menghapus paket secara permanen.
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal Tambah / Edit Paket Bundling (#bundleEditModal) -->
+  <div class="modal fade" id="bundleEditModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content border-0 shadow-lg rounded-4">
+        <div class="modal-header border-bottom bg-light">
+          <h5 class="modal-title fw-bold text-dark fs-6" id="bundleModalTitle">
+            Tambah Paket Bundling Baru
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <form id="bundleEditForm">
+          <div class="modal-body p-4">
+            <!-- Hidden ID -->
+            <input type="hidden" id="formBundleId" />
+
+            <!-- Row 1: Nama & Badge -->
+            <div class="row g-3 mb-3">
+              <div class="col-md-7">
+                <label class="form-label small fw-bold">Nama Paket Bundling *</label>
+                <input type="text" id="formBundleName" class="form-control" placeholder="Contoh: Paket Camping Basic" required />
+              </div>
+              <div class="col-md-3 col-8">
+                <label class="form-label small fw-bold">Label / Tagline</label>
+                <input type="text" id="formBundleBadge" class="form-control" placeholder="Contoh: Paling Hemat" />
+              </div>
+              <div class="col-md-2 col-4">
+                <label class="form-label small fw-bold">Warna Label</label>
+                <select id="formBundleBadgeColor" class="form-select">
+                  <option value="success" selected>Hijau</option>
+                  <option value="warning">Kuning</option>
+                  <option value="primary">Biru</option>
+                  <option value="danger">Merah</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Row 2: Foto Paket & Preset -->
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Foto Paket (URL Gambar) *</label>
+              <div class="input-group mb-2">
+                <input type="url" id="formBundleImage" class="form-control" placeholder="https://images.unsplash.com/..." oninput="updateImagePreview()" required />
+                <button type="button" class="btn btn-outline-secondary" onclick="updateImagePreview()">Preview</button>
+              </div>
+
+              <!-- Preset Pilihan Cepat Gambar Outdoor Keren -->
+              <div class="d-flex flex-wrap gap-2 align-items-center">
+                <span class="small text-muted" style="font-size: 0.75rem;">Preset Foto Cepat:</span>
+                <button type="button" class="btn btn-xs btn-outline-secondary rounded-pill py-0 px-2" style="font-size: 0.72rem;" onclick="setPresetImage('https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=900&q=80')">
+                  ⛺ Tenda Hutan
+                </button>
+                <button type="button" class="btn btn-xs btn-outline-secondary rounded-pill py-0 px-2" style="font-size: 0.72rem;" onclick="setPresetImage('https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=900&q=80')">
+                  🎒 Pendaki Carrier
+                </button>
+                <button type="button" class="btn btn-xs btn-outline-secondary rounded-pill py-0 px-2" style="font-size: 0.72rem;" onclick="setPresetImage('https://images.unsplash.com/photo-1510312305653-8ed496efae75?auto=format&fit=crop&w=900&q=80')">
+                  🏕️ Campfire Lengkap
+                </button>
+                <button type="button" class="btn btn-xs btn-outline-secondary rounded-pill py-0 px-2" style="font-size: 0.72rem;" onclick="setPresetImage('https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?auto=format&fit=crop&w=900&q=80')">
+                  👥 Group Rombongan
+                </button>
+              </div>
+
+              <!-- Live Preview Foto -->
+              <div class="mt-2 text-center bg-light p-2 rounded-3 border" style="max-height: 140px; overflow: hidden;">
+                <img id="formImagePreview" src="" alt="Preview" class="rounded-2" style="max-height: 120px; object-fit: cover;" />
+              </div>
+            </div>
+
+            <!-- Row 3: Deskripsi Paket -->
+            <div class="mb-4">
+              <label class="form-label small fw-bold">Deskripsi Singkat Paket *</label>
+              <textarea id="formBundleDesc" class="form-control" rows="2" placeholder="Jelaskan peruntukan paket, keunggulan, dan kelengkapannya..." required></textarea>
+            </div>
+
+            <!-- Row 4: Builder Daftar Perlengkapan di Dalam Paket -->
+            <div class="mb-4 border-top pt-3">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <div>
+                  <h6 class="fw-bold mb-0 text-dark">Daftar Perlengkapan di Dalam Paket *</h6>
+                  <span class="text-muted small" style="font-size: 0.75rem;">Pilih barang dari katalog produk Foresta Adventure &amp; tentukan kuantitasnya:</span>
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-success rounded-pill px-3" onclick="addFormItemRow()">
+                  <i class="bi bi-plus-circle me-1"></i> + Tambah Barang
+                </button>
+              </div>
+
+              <!-- Dynamic Items Container -->
+              <div id="formItemsContainer">
+                <!-- Rendered by js/admin-bundles.js -->
+              </div>
+            </div>
+
+            <!-- Row 5: Harga Bundling & Kalkulasi Penghematan Real-Time -->
+            <div class="border-top pt-3 bg-light p-3 rounded-4 border">
+              <h6 class="fw-bold mb-3 text-dark"><i class="bi bi-cash-coin text-success me-1"></i> Penentuan Harga Bundling &amp; Simulasi Penghematan</h6>
+              
+              <div class="row g-3 align-items-center">
+                <div class="col-md-5">
+                  <label class="form-label small fw-bold text-dark">Harga Bundling / Hari (Rp) *</label>
+                  <div class="input-group">
+                    <span class="input-group-text bg-white">Rp</span>
+                    <input type="number" id="formBundlePrice" class="form-control fw-bold text-success fs-5" step="1000" min="5000" required />
+                  </div>
+                  <div class="form-text small" style="font-size: 0.72rem;">Masukkan harga paket sewa harian yang diinginkan.</div>
+                </div>
+
+                <div class="col-md-7">
+                  <div class="card bg-white border p-3 rounded-3 shadow-none">
+                    <div class="d-flex justify-content-between text-muted small mb-1">
+                      <span>Total Harga Normal Satuan:</span>
+                      <strong class="text-dark" id="formPreviewNormalPrice">Rp 0 / hari</strong>
+                    </div>
+                    <div class="d-flex justify-content-between text-muted small mb-1">
+                      <span>Harga Bundling yang Ditetapkan:</span>
+                      <strong class="text-success" id="formPreviewBundlePrice">Rp 0 / hari</strong>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center pt-2 border-top mt-1">
+                      <span class="small fw-bold">Besaran Penghematan:</span>
+                      <span id="formPreviewSavings" class="text-success fw-bold">Hemat Rp 0 (0%)</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Switch Status Aktif -->
+              <div class="form-check form-switch mt-3 pt-2 border-top">
+                <input class="form-check-input" type="checkbox" id="formBundleIsActive" checked />
+                <label class="form-check-label fw-bold small text-dark" for="formBundleIsActive">
+                  Aktifkan Paket (Tampilkan langsung di halaman publik pengunjung)
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer border-top bg-light">
+            <button type="button" class="btn btn-secondary rounded-pill px-3" data-bs-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-brand-primary rounded-pill px-4 fw-bold shadow-sm">
+              <i class="bi bi-save me-1"></i> Simpan Paket Bundling
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Konfirmasi Hapus Paket (#deleteConfirmModal) -->
+  <div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+      <div class="modal-content border-0 shadow-lg rounded-4 text-center p-3">
+        <div class="modal-body">
+          <div class="p-3 d-inline-block rounded-circle bg-danger-subtle text-danger mb-3">
+            <i class="bi bi-exclamation-triangle-fill fs-2"></i>
+          </div>
+          <h5 class="fw-bold mb-2">Hapus Paket Ini?</h5>
+          <p class="text-muted small mb-3">
+            Paket <strong id="deleteBundleNameLabel" class="text-dark"></strong> akan dihapus dari daftar paket bundling website.
+          </p>
+          <div class="d-flex gap-2 justify-content-center">
+            <button type="button" class="btn btn-light rounded-pill px-3 btn-sm" data-bs-dismiss="modal">Batal</button>
+            <button type="button" class="btn btn-danger rounded-pill px-3 btn-sm fw-bold" onclick="executeDeleteBundle()">
+              Ya, Hapus Paket
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/products-data.js"></script>
+  <script src="js/bundles-data.js"></script>
+  <script src="js/admin-bundles.js"></script>
+</body>
+</html>
