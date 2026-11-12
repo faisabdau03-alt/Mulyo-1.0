@@ -974,6 +974,157 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateY(-2px);
 }
 
+/* Modern Member Benefit Cards */
+.member-benefit-card {
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 16px;
+  padding: 1.15rem 1.25rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.member-benefit-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 12px 24px -6px rgba(94, 221, 91, 0.16);
+  transform: translateY(-2px);
+}
+
+.member-benefit-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.member-benefit-icon-box.green {
+  background: rgba(94, 221, 91, 0.15);
+  color: #16a34a;
+}
+
+.member-benefit-icon-box.blue {
+  background: rgba(56, 189, 248, 0.15);
+  color: #0284c7;
+}
+
+.member-benefit-icon-box.amber {
+  background: rgba(251, 191, 36, 0.15);
+  color: #d97706;
+}
+
+.member-benefit-icon-box.purple {
+  background: rgba(168, 85, 247, 0.15);
+  color: #7c3aed;
+}
+
+/* Google Auth Button */
+.btn-google-auth {
+  background-color: #ffffff;
+  color: #1e293b;
+  border: 1.5px solid #e2e8f0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+}
+
+.btn-google-auth:hover {
+  background-color: #f8fafc;
+  border-color: #cbd5e1;
+  color: #0f172a;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+  transform: translateY(-1px);
+}
+
+.btn-google-auth:active {
+  transform: translateY(0);
+}
+
+/* Auth Divider */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin: 1rem 0;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.auth-divider span {
+  padding: 0 0.85rem;
+}
+
+/* Form Input Enhancements */
+.member-auth-card {
+  box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(15, 23, 42, 0.04);
+}
+
+.member-auth-card .form-control:focus,
+.modal .form-control:focus {
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 3px rgba(94, 221, 91, 0.2) !important;
+}
+
+.member-auth-card .input-group:focus-within .input-group-text,
+.modal .input-group:focus-within .input-group-text {
+  border-color: var(--color-primary) !important;
+  color: var(--color-primary) !important;
+}
+
+/* Google Account Chooser in Modal */
+.google-account-item {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: #ffffff;
+}
+
+.google-account-item:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.google-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #4285F4;
+  color: white;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
 
 /* Password Toggle & Member Gate Utility Styles */
 .input-group .toggle-password-btn {

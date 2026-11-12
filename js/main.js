@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initMemberState();
   initPasswordToggles();
   initMemberModalHandlers();
+  initGoogleAndForgotHandlers();
 });
 
 // 1. Inisialisasi Tanggal & Kalkulasi Durasi Sewa
@@ -488,6 +489,94 @@ function loginForestaMember(email, password) {
   };
 }
 
+// Login atau Registrasi Cepat Menggunakan Akun Google
+function loginWithGoogle(googleUserData) {
+  const email = (googleUserData.email || "").trim().toLowerCase();
+  let name = (googleUserData.name || "").trim();
+
+  if (!email || !email.includes("@")) {
+    return { success: false, message: "Alamat email Google tidak valid." };
+  }
+
+  if (!name) {
+    const rawPrefix = email.split("@")[0].replace(/[._-]/g, " ");
+    name = rawPrefix.charAt(0).toUpperCase() + rawPrefix.slice(1);
+  }
+
+  const users = getForestaRegisteredUsers();
+  let user = users.find((u) => u.email.toLowerCase() === email);
+
+  if (!user) {
+    const memberId = "FA-G" + Math.floor(10000 + Math.random() * 90000);
+    const options = { day: "numeric", month: "short", year: "numeric" };
+    const todayFormatted = new Date().toLocaleDateString("id-ID", options);
+
+    user = {
+      email: email,
+      password: "google_verified_account",
+      name: name,
+      memberId: memberId,
+      joinDate: todayFormatted,
+      discount: 10,
+      status: "Member Google Prioritas",
+      authProvider: "google",
+      avatar: googleUserData.avatar || ""
+    };
+    users.push(user);
+    try {
+      localStorage.setItem(REGISTERED_USERS_KEY, JSON.stringify(users));
+    } catch (e) {}
+  } else {
+    user.authProvider = "google";
+    user.status = "Member Google Terverifikasi";
+    try {
+      localStorage.setItem(REGISTERED_USERS_KEY, JSON.stringify(users));
+    } catch (e) {}
+  }
+
+  setForestaMember(user);
+  return {
+    success: true,
+    user: user,
+    message: `Login Google Berhasil! Selamat datang, ${user.name}. Diskon member 10% aktif.`
+  };
+}
+
+// Reset Kata Sandi Member Terdaftar
+function resetForestaPassword(email, newPassword) {
+  email = (email || "").trim().toLowerCase();
+  newPassword = (newPassword || "").trim();
+
+  if (!email || !email.includes("@")) {
+    return { success: false, message: "Silakan masukkan alamat email yang valid." };
+  }
+  if (!newPassword || newPassword.length < 4) {
+    return { success: false, message: "Kata sandi baru minimal 4 karakter." };
+  }
+
+  const users = getForestaRegisteredUsers();
+  const user = users.find((u) => u.email.toLowerCase() === email);
+
+  if (!user) {
+    return {
+      success: false,
+      notRegistered: true,
+      message: "Email belum terdaftar sebagai member Foresta Adventure. Silakan daftar member baru terlebih dahulu."
+    };
+  }
+
+  user.password = newPassword;
+  try {
+    localStorage.setItem(REGISTERED_USERS_KEY, JSON.stringify(users));
+  } catch (e) {}
+
+  return {
+    success: true,
+    user: user,
+    message: "Kata sandi berhasil diperbarui! Silakan gunakan kata sandi baru Anda untuk masuk."
+  };
+}
+
 function isForestaMemberLoggedIn() {
   const member = getForestaMember();
   return !!(member && member.email);
@@ -700,6 +789,206 @@ function initMemberState() {
         const coName = document.getElementById("coName");
         if (coName && !coName.value) {
           coName.value = member.name || "";
+        }
+      }
+    });
+  }
+}
+
+// Handler Interaktif untuk Registrasi/Login Google & Lupa Kata Sandi
+function initGoogleAndForgotHandlers() {
+  // 1. Tombol Google Auth (Membuka Modal Google)
+  document.querySelectorAll(".btn-google-auth").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const googleModalEl = document.getElementById("googleLoginModal");
+      if (googleModalEl && window.bootstrap) {
+        // Tutup modal member required jika sedang terbuka
+        const memberRequiredModalEl = document.getElementById("memberRequiredModal");
+        if (memberRequiredModalEl) {
+          const bsReq = bootstrap.Modal.getInstance(memberRequiredModalEl);
+          if (bsReq) bsReq.hide();
+        }
+
+        const bsGoogleModal = new bootstrap.Modal(googleModalEl);
+        bsGoogleModal.show();
+      } else {
+        // Fallback langsung login cepat dengan akun Google default
+        const result = loginWithGoogle({
+          name: "Budi Santoso",
+          email: "budi.pendaki@gmail.com"
+        });
+        if (result.success) {
+          if (window.cartService) cartService.showToast(result.message, "success");
+          if (window.refreshMemberPage) window.refreshMemberPage();
+        }
+      }
+    });
+  });
+
+  // 2. Klik Akun Google Preset di Modal
+  document.querySelectorAll(".btn-select-google-account").forEach((item) => {
+    item.addEventListener("click", () => {
+      const email = item.getAttribute("data-email") || "budi.pendaki@gmail.com";
+      const name = item.getAttribute("data-name") || "Budi Santoso";
+
+      const result = loginWithGoogle({ email, name });
+      if (result.success) {
+        // Tutup modal Google
+        const googleModalEl = document.getElementById("googleLoginModal");
+        if (googleModalEl && window.bootstrap) {
+          const bsGoogle = bootstrap.Modal.getInstance(googleModalEl);
+          if (bsGoogle) bsGoogle.hide();
+        }
+
+        if (window.cartService) {
+          cartService.showToast(result.message, "success");
+        }
+
+        // Segarkan halaman jika di register / login
+        if (window.refreshMemberPage) {
+          window.refreshMemberPage();
+        }
+
+        // Jika ada barang di keranjang dan berasal dari checkout gate
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get("redirect") === "cart" || (window.cartService && cartService.getCartCount() > 0)) {
+          const checkoutModalEl = document.getElementById("checkoutModal");
+          if (checkoutModalEl && window.bootstrap) {
+            const bsCheckout = new bootstrap.Modal(checkoutModalEl);
+            bsCheckout.show();
+          }
+        }
+      }
+    });
+  });
+
+  // 3. Form Custom Akun Google di Modal
+  const customGoogleForm = document.getElementById("formCustomGoogleLogin");
+  if (customGoogleForm) {
+    customGoogleForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = document.getElementById("customGoogleEmail")?.value;
+      const name = document.getElementById("customGoogleName")?.value;
+
+      const result = loginWithGoogle({ email, name });
+      if (result.success) {
+        const googleModalEl = document.getElementById("googleLoginModal");
+        if (googleModalEl && window.bootstrap) {
+          const bsGoogle = bootstrap.Modal.getInstance(googleModalEl);
+          if (bsGoogle) bsGoogle.hide();
+        }
+
+        if (window.cartService) {
+          cartService.showToast(result.message, "success");
+        }
+
+        if (window.refreshMemberPage) {
+          window.refreshMemberPage();
+        }
+      } else {
+        alert(result.message);
+      }
+    });
+  }
+
+  // 4. Tombol Buka Modal Lupa Kata Sandi
+  document.querySelectorAll(".open-forgot-password-modal").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const forgotModalEl = document.getElementById("forgotPasswordModal");
+      if (forgotModalEl && window.bootstrap) {
+        // Reset state modal ke langkah 1
+        const step1 = document.getElementById("forgotStep1");
+        const step2 = document.getElementById("forgotStep2");
+        const stepSuccess = document.getElementById("forgotStepSuccess");
+        const alertBox = document.getElementById("forgotAlertBox");
+
+        if (step1) step1.style.display = "block";
+        if (step2) step2.style.display = "none";
+        if (stepSuccess) stepSuccess.style.display = "none";
+        if (alertBox) alertBox.classList.add("d-none");
+
+        // Tutup modal lain jika ada
+        const memberRequiredModalEl = document.getElementById("memberRequiredModal");
+        if (memberRequiredModalEl) {
+          const bsReq = bootstrap.Modal.getInstance(memberRequiredModalEl);
+          if (bsReq) bsReq.hide();
+        }
+
+        const bsForgot = new bootstrap.Modal(forgotModalEl);
+        bsForgot.show();
+      }
+    });
+  });
+
+  // 5. Form Langkah 1: Cek Email Terdaftar
+  const forgotEmailForm = document.getElementById("forgotEmailForm");
+  if (forgotEmailForm) {
+    forgotEmailForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = document.getElementById("forgotEmailInput")?.value?.trim()?.toLowerCase();
+      const alertBox = document.getElementById("forgotAlertBox");
+
+      const users = getForestaRegisteredUsers();
+      const user = users.find((u) => u.email.toLowerCase() === email);
+
+      if (!user) {
+        if (alertBox) {
+          alertBox.className = "alert alert-danger rounded-3 small p-3 mb-3";
+          alertBox.innerHTML = `<i class="bi bi-exclamation-circle-fill me-1"></i> Email <strong>${email}</strong> belum terdaftar sebagai member. Silakan <a href="register.html" class="fw-bold text-dark text-decoration-underline">Daftar Member Baru</a>.`;
+          alertBox.classList.remove("d-none");
+        }
+        return;
+      }
+
+      // Email ditemukan, lanjut ke Langkah 2 (Set Sandi Baru)
+      const step1 = document.getElementById("forgotStep1");
+      const step2 = document.getElementById("forgotStep2");
+      const verifiedDisplay = document.getElementById("forgotVerifiedEmailDisplay");
+      const hiddenEmail = document.getElementById("forgotTargetEmail");
+
+      if (alertBox) alertBox.classList.add("d-none");
+      if (step1) step1.style.display = "none";
+      if (step2) step2.style.display = "block";
+      if (verifiedDisplay) verifiedDisplay.textContent = user.email;
+      if (hiddenEmail) hiddenEmail.value = user.email;
+    });
+  }
+
+  // 6. Form Langkah 2: Buat Sandi Baru
+  const forgotResetPasswordForm = document.getElementById("forgotResetPasswordForm");
+  if (forgotResetPasswordForm) {
+    forgotResetPasswordForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = document.getElementById("forgotTargetEmail")?.value?.trim()?.toLowerCase();
+      const newPassword = document.getElementById("forgotNewPasswordInput")?.value?.trim();
+      const confirmPassword = document.getElementById("forgotConfirmPasswordInput")?.value?.trim();
+      const step2AlertBox = document.getElementById("forgotStep2AlertBox");
+
+      if (newPassword !== confirmPassword) {
+        if (step2AlertBox) {
+          step2AlertBox.className = "alert alert-warning rounded-3 small p-3 mb-3";
+          step2AlertBox.innerHTML = `<i class="bi bi-exclamation-triangle-fill me-1"></i> Konfirmasi kata sandi tidak cocok.`;
+          step2AlertBox.classList.remove("d-none");
+        }
+        return;
+      }
+
+      const result = resetForestaPassword(email, newPassword);
+      if (result.success) {
+        const step2 = document.getElementById("forgotStep2");
+        const stepSuccess = document.getElementById("forgotStepSuccess");
+        if (step2) step2.style.display = "none";
+        if (stepSuccess) stepSuccess.style.display = "block";
+
+        if (window.cartService) {
+          cartService.showToast("Kata sandi berhasil diperbarui! Silakan masuk.", "success");
+        }
+      } else {
+        if (step2AlertBox) {
+          step2AlertBox.className = "alert alert-danger rounded-3 small p-3 mb-3";
+          step2AlertBox.textContent = result.message;
+          step2AlertBox.classList.remove("d-none");
         }
       }
     });
