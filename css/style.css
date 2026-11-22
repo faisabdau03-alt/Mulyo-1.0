@@ -70,7 +70,7 @@ h1, h2, h3, h4, h5, h6 {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  z-index: 1050 !important;
+  z-index: 1030 !important;
 }
 
 .navbar-foresta .container,
@@ -848,6 +848,24 @@ h1, h2, h3, h4, h5, h6 {
 .cart-offcanvas {
   width: 440px !important;
   max-width: 90vw !important;
+}
+
+/* Layering agar panel keranjang & modal menutup navbar dan elemen lain dengan sempurna */
+.offcanvas,
+.cart-offcanvas {
+  z-index: 1060 !important;
+}
+
+.offcanvas-backdrop {
+  z-index: 1055 !important;
+}
+
+.modal {
+  z-index: 1070 !important;
+}
+
+.modal-backdrop {
+  z-index: 1065 !important;
 }
 
 
