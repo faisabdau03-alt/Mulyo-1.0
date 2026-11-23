@@ -105,7 +105,7 @@ function renderBundlesList() {
           }
 
           return `
-            <span class="badge bg-white text-dark border me-1 mb-1 fw-normal d-inline-flex align-items-center py-1 px-2 rounded-2" style="font-size: 0.75rem;">
+            <span class="badge bg-white text-dark border me-1 mb-1 fw-normal d-inline-flex align-items-center py-1 px-1-5 rounded-2" style="font-size: 0.7rem;">
               ${svgIcon}<span>${item.qty}x ${item.name}</span>
             </span>
           `;
@@ -113,86 +113,91 @@ function renderBundlesList() {
         .join("");
 
       return `
-        <div class="col-lg-6 col-md-12 mb-4">
-          <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden bundle-card transition-all d-flex flex-column">
-            <!-- Foto Paket Atas -->
-            <div class="position-relative overflow-hidden" style="height: 250px; background-color: #1e293b;">
+        <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+          <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden bundle-card transition-all d-flex flex-column hover-lift">
+            <!-- Foto Paket Atas (Ukuran Compact Seperti Katalog) -->
+            <div class="position-relative overflow-hidden" style="height: 185px; background-color: #1e293b;">
               <img src="${bundle.image}" alt="${bundle.name}" class="w-100 h-100 object-fit-cover bundle-img" loading="lazy" />
               
               <!-- Badge Atas Foto -->
-              <div class="position-absolute top-0 start-0 m-3 d-flex flex-wrap gap-2" style="max-width: 90%;">
+              <div class="position-absolute top-0 start-0 m-2 d-flex flex-column gap-1" style="max-width: 85%;">
                 ${bundle.badge ? `
-                  <span class="badge bg-${badgeColor} text-dark fw-bold px-3 py-2 shadow-sm rounded-pill d-inline-flex align-items-center gap-1" style="font-size: 0.78rem;">
+                  <span class="badge bg-${badgeColor} text-dark fw-bold px-2 py-1 shadow-sm rounded-pill d-inline-flex align-items-center gap-1 text-truncate" style="font-size: 0.7rem;">
                     <i class="bi bi-compass"></i><span>${bundle.badge}</span>
                   </span>
                 ` : ""}
                 ${m.savingsPercent > 0 ? `
-                  <span class="badge bg-danger text-white fw-bold px-3 py-2 shadow-sm rounded-pill d-inline-flex align-items-center gap-1" style="font-size: 0.78rem;">
-                    <i class="bi bi-lightning-fill"></i><span>Hemat ${m.savingsPercent}%</span>
+                  <span class="badge bg-danger text-white fw-bold px-2 py-0-5 shadow-sm rounded-pill align-self-start" style="font-size: 0.68rem;">
+                    <i class="bi bi-lightning-fill"></i> Hemat ${m.savingsPercent}%
                   </span>
                 ` : ""}
               </div>
 
               <!-- Status Ketersediaan Stok -->
-              <div class="position-absolute bottom-0 start-0 w-100 p-2 text-white text-center" style="background: linear-gradient(to top, rgba(0,0,0,0.85), transparent); font-size: 0.78rem;">
-                ${isAvailable ? `<span class="text-brand-green fw-semibold"><i class="bi bi-check-circle-fill me-1"></i>Ready (Stok: ${m.maxBundlesAvailable} Paket Siap Disewa)</span>` : `<span class="text-danger fw-semibold"><i class="bi bi-x-circle-fill me-1"></i>Stok Alat Sedang Habis</span>`}
+              <div class="position-absolute bottom-0 start-0 w-100 px-2 py-1 text-white text-center" style="background: linear-gradient(to top, rgba(0,0,0,0.85), transparent); font-size: 0.72rem;">
+                ${isAvailable ? `<span class="text-brand-green fw-semibold"><i class="bi bi-check-circle-fill me-1"></i>Ready (${m.maxBundlesAvailable} Paket)</span>` : `<span class="text-danger fw-semibold"><i class="bi bi-x-circle-fill me-1"></i>Stok Habis</span>`}
               </div>
             </div>
 
-            <!-- Konten Kartu -->
-            <div class="card-body d-flex flex-column p-4 flex-grow-1">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="badge bg-success-subtle text-success fw-bold px-2 py-1 rounded-pill" style="font-size: 0.75rem;">
-                  <i class="bi bi-collection me-1"></i>${m.itemCount} Jenis Perlengkapan
+            <!-- Konten Kartu (Compact) -->
+            <div class="card-body d-flex flex-column p-3 flex-grow-1">
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <span class="badge bg-success-subtle text-success fw-bold px-2 py-0-5 rounded-pill" style="font-size: 0.7rem;">
+                  <i class="bi bi-collection me-1"></i>${m.itemCount} Jenis Alat
                 </span>
-                <span class="text-muted small fw-semibold" style="font-size: 0.78rem;">
-                  Total ${m.totalPieces} Unit Alat
+                <span class="text-muted small" style="font-size: 0.72rem;">
+                  Total ${m.totalPieces} Unit
                 </span>
               </div>
 
-              <h4 class="fw-bold mb-2 text-dark fs-5">${bundle.name}</h4>
-              <p class="text-muted small mb-3" style="font-size: 0.85rem; line-height: 1.5; min-height: 42px;">${bundle.desc || ""}</p>
+              <h5 class="card-title fw-bold text-dark mb-1 text-truncate" style="font-size: 0.95rem;" title="${bundle.name}">
+                ${bundle.name}
+              </h5>
+              <p class="text-muted small mb-2 text-truncate-2" style="font-size: 0.78rem; line-height: 1.35; min-height: 32px;">
+                ${bundle.desc || ""}
+              </p>
 
-              <!-- Items Box Preview -->
-              <div class="p-3 bg-light rounded-3 mb-4 border border-light-subtle">
-                <div class="small fw-bold text-muted text-uppercase mb-2 d-flex align-items-center justify-content-between" style="font-size: 0.72rem; letter-spacing: 0.5px;">
-                  <span><i class="bi bi-box-seam text-success me-1"></i>Isi Perlengkapan Paket:</span>
-                  <span class="text-success fw-semibold">${m.totalPieces} Pcs</span>
+              <!-- Items Box Preview (Compact) -->
+              <div class="p-2 bg-light rounded-3 mb-3 border border-light-subtle flex-grow-1" style="font-size: 0.72rem;">
+                <div class="text-muted fw-bold text-uppercase mb-1" style="font-size: 0.68rem; letter-spacing: 0.3px;">
+                  <i class="bi bi-box-seam text-success me-1"></i>Isi Perlengkapan:
                 </div>
-                <div class="d-flex flex-wrap gap-1">${itemsChips}</div>
+                <div class="d-flex flex-wrap gap-1" style="max-height: 58px; overflow: hidden;">
+                  ${itemsChips}
+                </div>
               </div>
 
-              <!-- Pricing & Action (Selalu di bagian bawah) -->
-              <div class="mt-auto pt-3 border-top">
-                <div class="d-flex justify-content-between align-items-end mb-3">
+              <!-- Pricing & Action (Bagian Bawah) -->
+              <div class="mt-auto pt-2 border-top">
+                <div class="d-flex justify-content-between align-items-end mb-2">
                   <div>
-                    <div class="text-muted small text-decoration-line-through" style="font-size: 0.8rem;">
-                      ${formatRupiah(m.normalPrice)} / hari
+                    <div class="text-muted small text-decoration-line-through" style="font-size: 0.72rem;">
+                      ${formatRupiah(m.normalPrice)}/hr
                     </div>
                     <div class="d-flex align-items-baseline gap-1">
-                      <span class="fs-4 fw-extrabold text-success">${formatRupiah(m.bundlePrice)}</span>
-                      <span class="text-muted small">/ hari</span>
+                      <span class="fs-5 fw-bold text-success">${formatRupiah(m.bundlePrice)}</span>
+                      <span class="text-muted" style="font-size: 0.72rem;">/hari</span>
                     </div>
                   </div>
                   ${m.savingsAmount > 0 ? `
                     <div class="text-end">
-                      <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-1-5 rounded-pill fw-bold" style="font-size: 0.78rem;">
-                        <i class="bi bi-piggy-bank me-1"></i>Hemat ${formatRupiah(m.savingsAmount)}/hari
+                      <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1 rounded-pill fw-bold" style="font-size: 0.7rem;">
+                        Hemat ${formatRupiah(m.savingsAmount)}
                       </span>
                     </div>
                   ` : ""}
                 </div>
 
                 <!-- Tombol Aksi -->
-                <div class="row g-2">
+                <div class="row g-1">
                   <div class="col-6">
-                    <button type="button" class="btn btn-outline-dark rounded-pill w-100 py-2 fw-semibold btn-sm d-inline-flex align-items-center justify-content-center gap-1" onclick="openBundleDetailModal('${bundle.id}')">
-                      <i class="bi bi-eye"></i><span>Lihat Detail</span>
+                    <button type="button" class="btn btn-outline-dark rounded-pill w-100 py-1-5 fw-semibold btn-sm d-inline-flex align-items-center justify-content-center gap-1" style="font-size: 0.75rem;" onclick="openBundleDetailModal('${bundle.id}')">
+                      <i class="bi bi-eye"></i> Detail
                     </button>
                   </div>
                   <div class="col-6">
-                    <button type="button" class="btn btn-brand-primary rounded-pill w-100 py-2 fw-bold btn-sm shadow-sm d-inline-flex align-items-center justify-content-center gap-1" ${!isAvailable ? "disabled" : ""} onclick="quickRentBundle('${bundle.id}')">
-                      <i class="bi bi-cart-plus"></i><span>Sewa Paket</span>
+                    <button type="button" class="btn btn-brand-primary rounded-pill w-100 py-1-5 fw-bold btn-sm shadow-sm d-inline-flex align-items-center justify-content-center gap-1" style="font-size: 0.75rem;" ${!isAvailable ? "disabled" : ""} onclick="quickRentBundle('${bundle.id}')">
+                      <i class="bi bi-cart-plus"></i> Sewa
                     </button>
                   </div>
                 </div>

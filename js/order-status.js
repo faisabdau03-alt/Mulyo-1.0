@@ -446,7 +446,6 @@ class OrderStatusManager {
   handleUrlHash() {
     const hash = window.location.hash;
     const statusTabBtn = document.getElementById("tab-status-btn");
-    const riwayatTabBtn = document.getElementById("tab-riwayat-btn");
     const panduanTabBtn = document.getElementById("tab-panduan-btn");
 
     if (hash === "#panduan" || hash === "#syarat" || hash === "#denda") {
@@ -454,12 +453,7 @@ class OrderStatusManager {
         const tab = new bootstrap.Tab(panduanTabBtn);
         tab.show();
       }
-    } else if (hash === "#riwayat") {
-      if (riwayatTabBtn && window.bootstrap) {
-        const tab = new bootstrap.Tab(riwayatTabBtn);
-        tab.show();
-      }
-    } else if (hash === "#status") {
+    } else if (hash === "#status" || hash === "#riwayat") {
       if (statusTabBtn && window.bootstrap) {
         const tab = new bootstrap.Tab(statusTabBtn);
         tab.show();
