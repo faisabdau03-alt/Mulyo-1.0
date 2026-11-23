@@ -1589,6 +1589,40 @@ h1, h2, h3, h4, h5, h6 {
   padding: 1.25rem;
 }
 
+.order-penalty-breakdown-card.critical {
+  background: #fff1f2;
+  border: 2px dashed #f43f5e;
+}
+
+/* Styling Banner Keterlambatan Darurat Hari ke-2 */
+.order-reminder-banner.penalty-critical {
+  background-color: #ffe4e6;
+  border: 1.5px solid rgba(225, 29, 72, 0.6);
+  box-shadow: 0 4px 20px rgba(225, 29, 72, 0.12);
+}
+
+.bell-radiant-badge.penalty-critical {
+  background-color: #be123c;
+  box-shadow: 0 6px 16px rgba(190, 18, 60, 0.45);
+}
+
+.btn-detail-pesanan.penalty-critical {
+  background-color: #881337;
+}
+
+.btn-detail-pesanan.penalty-critical:hover {
+  background-color: #be123c;
+  box-shadow: 0 4px 12px rgba(190, 18, 60, 0.35);
+}
+
+/* Status Card Bebas Denda (Normal) */
+.order-fee-free-card {
+  background-color: #f0fdf4;
+  border: 1.5px solid rgba(74, 222, 128, 0.35);
+  border-radius: 16px;
+  padding: 1.1rem 1.4rem;
+}
+
 /* Header Notification Bell & Popover */
 .notif-bell-btn {
   width: 40px;

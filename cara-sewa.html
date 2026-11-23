@@ -185,18 +185,18 @@
           <div class="card border-0 shadow-sm rounded-4 p-3 mb-4 bg-white">
             <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
               <div class="d-flex align-items-center gap-2">
-                <span class="badge bg-dark rounded-pill px-2.5 py-1 text-nowrap"><i class="bi bi-sliders me-1"></i> Simulasi Sistem</span>
-                <span class="small text-muted">Uji coba status pengembalian & denda keterlambatan 50%:</span>
+                <span class="badge bg-dark rounded-pill px-2.5 py-1 text-nowrap"><i class="bi bi-sliders me-1"></i> Simulasi Status</span>
+                <span class="small text-muted">Pilih status kartu pesanan untuk melihat perbedaan:</span>
               </div>
-              <div class="btn-group btn-group-sm flex-wrap" role="group">
-                <button type="button" class="btn btn-sm btn-outline-secondary" id="btnSimulateOnTime">
-                  <i class="bi bi-clock-history"></i> Normal (Sebelum Batas Sewa)
+              <div class="btn-group btn-group-sm flex-wrap shadow-sm rounded-pill overflow-hidden" role="group">
+                <button type="button" class="btn btn-sm btn-success fw-bold px-3 py-1.5" id="btnStatusNormal">
+                  <i class="bi bi-shield-check me-1"></i> Normal (Bebas Denda)
                 </button>
-                <button type="button" class="btn btn-sm btn-danger active fw-bold" id="btnSimulateOverdue">
-                  <i class="bi bi-exclamation-triangle-fill"></i> Notifikasi Diabaikan (Denda 50% Aktif)
+                <button type="button" class="btn btn-sm btn-outline-danger fw-semibold px-3 py-1.5" id="btnStatusLate1Day">
+                  <i class="bi bi-exclamation-triangle-fill me-1"></i> Melebihi Batas 1 Hari (Denda 50%)
                 </button>
-                <button type="button" class="btn btn-sm btn-outline-danger" id="btnAddOverdueDay" title="Tambah 1 hari keterlambatan untuk melihat denda bertambah secara berkala">
-                  +1 Hari Terlambat
+                <button type="button" class="btn btn-sm btn-outline-danger fw-semibold px-3 py-1.5" id="btnStatusLate2Days">
+                  <i class="bi bi-exclamation-octagon-fill me-1"></i> Melebihi Batas 2 Hari (Denda 100%)
                 </button>
               </div>
             </div>
