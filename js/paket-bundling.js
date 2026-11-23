@@ -45,6 +45,7 @@ function renderBundlesList() {
       if (currentActiveFilter === "camping" && !bId.includes("camping") && !bName.includes("camping")) return false;
       if (currentActiveFilter === "hiking" && !bId.includes("hiking") && !bName.includes("hiking") && !bName.includes("gunung")) return false;
       if (currentActiveFilter === "rombongan" && !bId.includes("rombongan") && !bName.includes("rombongan") && !bName.includes("group")) return false;
+      if (currentActiveFilter === "porter" && !bId.includes("porter") && !bName.includes("porter")) return false;
     }
 
     // Filter pencarian
@@ -92,6 +93,8 @@ function renderBundlesList() {
 
           if (cat.includes("tenda")) {
             svgIcon = `<svg class="me-1 text-success flex-shrink-0" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 20L12 4L5 20h14z"></path><path d="M12 4v16"></path></svg>`;
+          } else if (cat.includes("porter") || (item.name || "").toLowerCase().includes("porter")) {
+            svgIcon = `<svg class="me-1 text-primary flex-shrink-0" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 4v16"></path><circle cx="9" cy="4" r="2"></circle><path d="M5 21l3-7 4 3 3-7"></path></svg>`;
           } else if (cat.includes("carrier") || cat.includes("tas")) {
             svgIcon = `<svg class="me-1 text-primary flex-shrink-0" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 6V4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2"></path><rect x="5" y="6" width="14" height="15" rx="3"></rect><path d="M9 10h6"></path></svg>`;
           } else if (cat.includes("tidur") || cat.includes("sleeping") || cat.includes("matras")) {
@@ -123,6 +126,7 @@ function renderBundlesList() {
                 <!-- Badge Atas Foto -->
                 <div class="position-absolute top-0 start-0 p-3 d-flex flex-column gap-1">
                   ${bundle.badge ? `<span class="badge bg-${badgeColor} text-dark fw-bold px-3 py-2 shadow-sm rounded-pill d-inline-flex align-items-center gap-1" style="font-size: 0.75rem;"><i class="bi bi-compass"></i><span>${bundle.badge}</span></span>` : ""}
+                  ${(bundle.isPorterIncluded || bundle.isPorterOnly || bundle.id.includes("porter")) ? `<span class="badge bg-dark text-white fw-bold px-2 py-1 shadow-sm rounded-pill d-inline-flex align-items-center gap-1" style="font-size: 0.72rem;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5"><path d="M13 4v16"></path><circle cx="9" cy="4" r="2"></circle><path d="M5 21l3-7 4 3 3-7"></path></svg> Include Porter</span>` : ""}
                   ${m.savingsPercent > 0 ? `<span class="badge bg-danger text-white fw-bold px-2 py-1 shadow-sm rounded-pill" style="font-size: 0.72rem;">Hemat ${m.savingsPercent}%</span>` : ""}
                 </div>
 
@@ -537,4 +541,16 @@ Mohon konfirmasi ketersediaan paket untuk tanggal tersebut ya admin. Terima kasi
 function formatRupiah(num) {
   return "Rp " + (Number(num) || 0).toLocaleString("id-ID");
 }
+
+function filterByPorter() {
+  const porterBtn = document.querySelector('.bundle-filter-btn[data-filter="porter"]');
+  if (porterBtn) {
+    porterBtn.click();
+    const filterSection = document.querySelector('.sticky-top');
+    if (filterSection) {
+      window.scrollTo({ top: filterSection.offsetTop - 20, behavior: 'smooth' });
+    }
+  }
+}
+
 

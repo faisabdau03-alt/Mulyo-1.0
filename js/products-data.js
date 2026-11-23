@@ -463,6 +463,29 @@ const PRODUCTS_DATA = [
       "Kabel Termasuk": "Type C & Lightning"
     },
     stock: 12
+  },
+  {
+    id: "service-porter-01",
+    name: "Jasa Porter Gunung Berpengalaman (Maks 20 Kg)",
+    category: "porter",
+    categoryName: "Jasa Porter",
+    brand: "Foresta Team",
+    basePrice: 220000,
+    rating: 5.0,
+    reviewsCount: 112,
+    badge: "Official Porter",
+    image: "https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=800&q=80",
+    images: [
+      "https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=800&q=80"
+    ],
+    desc: "Porter lokal profesional bersertifikat. Siap membawa perlengkapan tenda, carrier, dan logistik seberat maks 20 kg, bantu mendirikan tenda, serta menyiapkan air bersih di camp.",
+    specs: {
+      "Kapasitas Angkut": "Maksimal 20 kg",
+      "Layanan": "Bawa logistik, pasang tenda, ambil air & panduan jalur",
+      "Jalur Dikuasai": "Merbabu, Lawu, Prau, Sindoro, Sumbing",
+      "Kondisi Fisik": "Sangat prima, ramah & berpengalaman 5+ tahun"
+    },
+    stock: 10
   }
 ];
 
