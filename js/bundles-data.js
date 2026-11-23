@@ -59,7 +59,7 @@ const DEFAULT_BUNDLES = [
   {
     id: "bundle-rombongan",
     name: "Paket Rombongan (Group Camping)",
-    badge: "Pilihan Terbaik Rombongan (6-8 Orang)",
+    badge: "Favorit Rombongan (6-8P)",
     badgeColor: "danger",
     image: "https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?auto=format&fit=crop&w=900&q=80",
     desc: "Paket skala besar untuk rombongan teman kantor, keluarga, atau komunitas pecinta alam. Kapasitas multi-tenda dengan logistik masak ganda dan flysheet pelindung.",
@@ -89,6 +89,12 @@ class BundlesService {
       if (data) {
         const parsed = JSON.parse(data);
         if (Array.isArray(parsed) && parsed.length > 0) {
+          // Normalisasi badge jika ada badge lama yang terlalu panjang
+          parsed.forEach((b) => {
+            if (b.id === "bundle-rombongan" && b.badge && b.badge.includes("Pilihan Terbaik")) {
+              b.badge = "Favorit Rombongan (6-8P)";
+            }
+          });
           return parsed;
         }
       }
