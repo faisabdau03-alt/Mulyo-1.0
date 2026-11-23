@@ -63,8 +63,10 @@ class CartService {
     const duration = customDuration || this.bookingState.duration || 2;
     const existingIndex = this.cart.findIndex((item) => item.id === productId);
 
+    let toastMsg = "";
     if (existingIndex > -1) {
       this.cart[existingIndex].qty += qty;
+      toastMsg = `"${product.name}" diperbarui (${this.cart[existingIndex].qty} unit di keranjang)`;
     } else {
       this.cart.push({
         id: product.id,
@@ -75,10 +77,11 @@ class CartService {
         qty: qty,
         duration: duration
       });
+      toastMsg = `Berhasil menambahkan "${product.name}" ke keranjang sewa!`;
     }
 
     this.saveCart();
-    this.showToast(`Berhasil menambahkan "${product.name}" ke keranjang sewa!`, "success");
+    this.showToast(toastMsg, "success");
     return true;
   }
 
@@ -109,8 +112,10 @@ class CartService {
       return false;
     }
 
+    let toastMsg = "";
     if (existingIndex > -1) {
       this.cart[existingIndex].qty += qty;
+      toastMsg = `"${bundle.name}" diperbarui (${this.cart[existingIndex].qty} paket di keranjang)`;
     } else {
       this.cart.push({
         id: bundle.id,
@@ -130,10 +135,11 @@ class CartService {
           unitPrice: i.unitPrice
         }))
       });
+      toastMsg = `Berhasil menambahkan "${bundle.name}" ke keranjang sewa!`;
     }
 
     this.saveCart();
-    this.showToast(`Berhasil menambahkan "${bundle.name}" ke keranjang sewa!`, "success");
+    this.showToast(toastMsg, "success");
     return true;
   }
 
@@ -385,15 +391,27 @@ class CartService {
       document.body.appendChild(toastContainer);
     }
 
+    // Bersihkan toast sebelumnya agar tidak bertumpuk memenuhi layar saat memesan banyak item
+    const existingToasts = toastContainer.querySelectorAll(".toast");
+    existingToasts.forEach((el) => {
+      try {
+        if (window.bootstrap && bootstrap.Toast) {
+          const bs = bootstrap.Toast.getInstance(el);
+          if (bs) bs.dispose();
+        }
+      } catch (e) {}
+      el.remove();
+    });
+
     const toastId = "toast_" + Date.now();
     const bgClass = type === "error" ? "bg-danger text-white" : type === "info" ? "bg-dark text-white" : "bg-success text-white";
 
     const toastHtml = `
-      <div id="${toastId}" class="toast align-items-center ${bgClass} border-0 shadow-lg" role="alert" aria-live="assertive" aria-atomic="true">
+      <div id="${toastId}" class="toast align-items-center ${bgClass} border-0 shadow-lg rounded-3" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="d-flex">
-          <div class="toast-body d-flex align-items-center gap-2">
-            <span><i class="bi ${type === "error" ? "bi-exclamation-triangle-fill" : type === "info" ? "bi-info-circle-fill" : "bi-check-circle-fill"}"></i></span>
-            <span>${message}</span>
+          <div class="toast-body d-flex align-items-center gap-2 py-2 px-3">
+            <i class="bi ${type === "error" ? "bi-exclamation-triangle-fill" : type === "info" ? "bi-info-circle-fill" : "bi-check-circle-fill"} fs-5"></i>
+            <span class="small fw-semibold">${message}</span>
           </div>
           <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
@@ -403,11 +421,11 @@ class CartService {
     toastContainer.insertAdjacentHTML("beforeend", toastHtml);
     const toastEl = document.getElementById(toastId);
     if (window.bootstrap && bootstrap.Toast) {
-      const bsToast = new bootstrap.Toast(toastEl, { delay: 3500 });
+      const bsToast = new bootstrap.Toast(toastEl, { delay: 2000 });
       bsToast.show();
       toastEl.addEventListener("hidden.bs.toast", () => toastEl.remove());
     } else {
-      setTimeout(() => toastEl.remove(), 3500);
+      setTimeout(() => toastEl.remove(), 2000);
     }
   }
 

@@ -513,13 +513,25 @@ function showAdminToast(message) {
     document.body.appendChild(toastContainer);
   }
 
+  // Bersihkan toast sebelumnya agar tidak menumpuk
+  const existingToasts = toastContainer.querySelectorAll(".toast");
+  existingToasts.forEach((el) => {
+    try {
+      if (window.bootstrap && bootstrap.Toast) {
+        const bs = bootstrap.Toast.getInstance(el);
+        if (bs) bs.dispose();
+      }
+    } catch (e) {}
+    el.remove();
+  });
+
   const toastId = "toast_" + Date.now();
   const html = `
-    <div id="${toastId}" class="toast align-items-center bg-dark text-white border-success border shadow-lg" role="alert" aria-live="assertive" aria-atomic="true">
+    <div id="${toastId}" class="toast align-items-center bg-dark text-white border-success border shadow-lg rounded-3" role="alert" aria-live="assertive" aria-atomic="true">
       <div class="d-flex">
-        <div class="toast-body d-flex align-items-center gap-2">
+        <div class="toast-body d-flex align-items-center gap-2 py-2 px-3">
           <i class="bi bi-check-circle-fill text-success fs-5"></i>
-          <span>${message}</span>
+          <span class="small">${message}</span>
         </div>
         <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
       </div>
@@ -529,9 +541,11 @@ function showAdminToast(message) {
   toastContainer.insertAdjacentHTML("beforeend", html);
   const toastEl = document.getElementById(toastId);
   if (window.bootstrap && bootstrap.Toast) {
-    const bsToast = new bootstrap.Toast(toastEl, { delay: 3500 });
+    const bsToast = new bootstrap.Toast(toastEl, { delay: 2000 });
     bsToast.show();
     toastEl.addEventListener("hidden.bs.toast", () => toastEl.remove());
+  } else {
+    setTimeout(() => toastEl.remove(), 2000);
   }
 }
 
