@@ -84,39 +84,11 @@ function renderBundlesList() {
       const badgeColor = bundle.badgeColor || (m.savingsPercent >= 20 ? "warning" : "success");
       const isAvailable = m.isAvailable;
 
-      // Buat ringkasan item chips dengan icon realistis seputar dunia pendakian
-      const itemsChips = m.itemsDetail
-        .map((item) => {
-          let svgIcon = "";
-          const cat = (item.categoryName || "").toLowerCase();
-
-          if (cat.includes("tenda")) {
-            svgIcon = `<svg class="me-1 text-success flex-shrink-0" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 20L12 4L5 20h14z"></path><path d="M12 4v16"></path></svg>`;
-          } else if (cat.includes("carrier") || cat.includes("tas")) {
-            svgIcon = `<svg class="me-1 text-primary flex-shrink-0" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 6V4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2"></path><rect x="5" y="6" width="14" height="15" rx="3"></rect><path d="M9 10h6"></path></svg>`;
-          } else if (cat.includes("tidur") || cat.includes("sleeping") || cat.includes("matras")) {
-            svgIcon = `<svg class="me-1 text-info flex-shrink-0" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="3"></rect><circle cx="8" cy="12" r="2.5"></circle></svg>`;
-          } else if (cat.includes("masak") || cat.includes("kompor")) {
-            svgIcon = `<svg class="me-1 text-warning flex-shrink-0" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2c1.5 2 3.5 3.5 3.5 6a3.5 3.5 0 0 1-7 0c0-2.5 2-4 3.5-6z"></path><path d="M4 14h16"></path></svg>`;
-          } else if (cat.includes("penerangan") || cat.includes("headlamp") || cat.includes("lentera")) {
-            svgIcon = `<svg class="me-1 text-warning flex-shrink-0" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line></svg>`;
-          } else {
-            svgIcon = `<svg class="me-1 text-success flex-shrink-0" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="21" x2="19" y2="3"></line><line x1="19" y1="21" x2="5" y2="3"></line></svg>`;
-          }
-
-          return `
-            <span class="badge bg-white text-dark border me-1 mb-1 fw-normal d-inline-flex align-items-center py-1 px-1-5 rounded-2" style="font-size: 0.7rem;">
-              ${svgIcon}<span>${item.qty}x ${item.name}</span>
-            </span>
-          `;
-        })
-        .join("");
-
       return `
         <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
           <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden bundle-card transition-all d-flex flex-column hover-lift">
             <!-- Foto Paket Atas (Ukuran Compact Seperti Katalog) -->
-            <div class="position-relative overflow-hidden" style="height: 185px; background-color: #1e293b;">
+            <div class="position-relative overflow-hidden" style="height: 190px; background-color: #1e293b;">
               <img src="${bundle.image}" alt="${bundle.name}" class="w-100 h-100 object-fit-cover bundle-img" loading="lazy" />
               
               <!-- Badge Atas Foto -->
@@ -139,36 +111,26 @@ function renderBundlesList() {
               </div>
             </div>
 
-            <!-- Konten Kartu (Compact) -->
+            <!-- Konten Kartu (Clean & Uncluttered) -->
             <div class="card-body d-flex flex-column p-3 flex-grow-1">
-              <div class="d-flex justify-content-between align-items-center mb-1">
-                <span class="badge bg-success-subtle text-success fw-bold px-2 py-0-5 rounded-pill" style="font-size: 0.7rem;">
-                  <i class="bi bi-collection me-1"></i>${m.itemCount} Jenis Alat
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="badge bg-success-subtle text-success fw-bold px-2 py-0-5 rounded-pill" style="font-size: 0.72rem;">
+                  <i class="bi bi-box-seam me-1"></i>${m.itemCount} Jenis Perlengkapan
                 </span>
-                <span class="text-muted small" style="font-size: 0.72rem;">
-                  Total ${m.totalPieces} Unit
+                <span class="text-muted small fw-semibold" style="font-size: 0.74rem;">
+                  Total ${m.totalPieces} Unit Alat
                 </span>
               </div>
 
-              <h5 class="card-title fw-bold text-dark mb-1 text-truncate" style="font-size: 0.95rem;" title="${bundle.name}">
+              <h5 class="card-title fw-bold text-dark mb-1 text-truncate" style="font-size: 0.98rem;" title="${bundle.name}">
                 ${bundle.name}
               </h5>
-              <div class="text-muted small mb-2 text-truncate" style="font-size: 0.75rem;" title="Klik Detail untuk membaca deskripsi lengkap">
+              <div class="text-muted small mb-3 text-truncate" style="font-size: 0.78rem;" title="Klik Detail untuk membaca informasi lengkap">
                 <i class="bi bi-info-circle text-success me-1"></i>${bundle.shortDesc || (bundle.desc ? (bundle.desc.length > 42 ? bundle.desc.substring(0, 39) + '...' : bundle.desc) : 'Paket sewa outdoor hemat')}
               </div>
 
-              <!-- Items Box Preview (Compact) -->
-              <div class="p-2 bg-light rounded-3 mb-3 border border-light-subtle flex-grow-1" style="font-size: 0.72rem;">
-                <div class="text-muted fw-bold text-uppercase mb-1" style="font-size: 0.68rem; letter-spacing: 0.3px;">
-                  <i class="bi bi-box-seam text-success me-1"></i>Isi Perlengkapan:
-                </div>
-                <div class="d-flex flex-wrap gap-1" style="max-height: 58px; overflow: hidden;">
-                  ${itemsChips}
-                </div>
-              </div>
-
               <!-- Pricing & Action (Bagian Bawah) -->
-              <div class="mt-auto pt-2 border-top">
+              <div class="mt-auto pt-3 border-top">
                 <div class="d-flex justify-content-between align-items-end mb-2">
                   <div>
                     <div class="text-muted small text-decoration-line-through" style="font-size: 0.72rem;">
@@ -181,7 +143,7 @@ function renderBundlesList() {
                   </div>
                   ${m.savingsAmount > 0 ? `
                     <div class="text-end">
-                      <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1 rounded-pill fw-bold" style="font-size: 0.7rem;">
+                      <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1 rounded-pill fw-bold" style="font-size: 0.72rem;">
                         Hemat ${formatRupiah(m.savingsAmount)}
                       </span>
                     </div>
@@ -191,12 +153,12 @@ function renderBundlesList() {
                 <!-- Tombol Aksi -->
                 <div class="row g-1">
                   <div class="col-6">
-                    <button type="button" class="btn btn-outline-dark rounded-pill w-100 py-1-5 fw-semibold btn-sm d-inline-flex align-items-center justify-content-center gap-1" style="font-size: 0.75rem;" onclick="openBundleDetailModal('${bundle.id}')">
+                    <button type="button" class="btn btn-outline-dark rounded-pill w-100 py-1-5 fw-semibold btn-sm d-inline-flex align-items-center justify-content-center gap-1" style="font-size: 0.78rem;" onclick="openBundleDetailModal('${bundle.id}')">
                       <i class="bi bi-eye"></i> Detail
                     </button>
                   </div>
                   <div class="col-6">
-                    <button type="button" class="btn btn-brand-primary rounded-pill w-100 py-1-5 fw-bold btn-sm shadow-sm d-inline-flex align-items-center justify-content-center gap-1" style="font-size: 0.75rem;" ${!isAvailable ? "disabled" : ""} onclick="quickRentBundle('${bundle.id}')">
+                    <button type="button" class="btn btn-brand-primary rounded-pill w-100 py-1-5 fw-bold btn-sm shadow-sm d-inline-flex align-items-center justify-content-center gap-1" style="font-size: 0.78rem;" ${!isAvailable ? "disabled" : ""} onclick="quickRentBundle('${bundle.id}')">
                       <i class="bi bi-cart-plus"></i> Sewa
                     </button>
                   </div>
