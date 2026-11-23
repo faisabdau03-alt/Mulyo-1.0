@@ -1,12 +1,13 @@
 /**
  * Foresta Adventure - Status Pesanan & Riwayat Pemesanan Logic
  * Terintegrasi di halaman cara-sewa.html
+ * Fitur: Status Pesanan, Riwayat, Notifikasi, serta Denda Keterlambatan Berkala (50% dari harga barang/sewa)
  */
 
 const ORDER_STORAGE_KEY = "foresta_orders";
 const NOTIF_STORAGE_KEY = "foresta_notifications";
 
-// Data Sample Awal (Sesuai Desain Acuan UI)
+// Data Sample Awal (Sesuai Desain Acuan UI dengan Fitur Denda Berkala)
 const DEFAULT_SAMPLE_ORDERS = [
   {
     id: "FA-20261120-045",
@@ -18,9 +19,15 @@ const DEFAULT_SAMPLE_ORDERS = [
     image: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=500&q=80",
     tglSewa: "21 Nov 2026",
     tglKembali: "22 Nov 2026",
-    status: "Sedang Disewa",
-    statusBadgeClass: "bg-success-subtle text-success border border-success-subtle",
+    deadlineTime: "22 November 2026 pukul 17.00 WIB",
     isActive: true,
+    // Aturan Denda Keterlambatan Berkala (50% harga barang yang disewa)
+    isOverdue: true, // Default aktif denda saat notifikasi pengembalian tidak digubris
+    overdueDays: 1,  // Keterlambatan bertambah secara berkala per hari
+    penaltyRate: 0.5, // 50% dari harga sewa barang
+    penaltyPerDay: 50000, // 50% * Rp 100.000 = Rp 50.000 / hari
+    status: "Terlambat & Denda Aktif",
+    statusBadgeClass: "bg-danger text-white border border-danger",
     steps: [
       { name: "Pesanan Dikonfirmasi", status: "done", icon: "bi-check-lg" },
       { name: "Barang Diserahkan", status: "done", icon: "bi-check-lg" },
@@ -75,31 +82,6 @@ const DEFAULT_SAMPLE_ORDERS = [
   }
 ];
 
-const DEFAULT_SAMPLE_NOTIFICATIONS = [
-  {
-    id: 1,
-    type: "reminder",
-    title: "Pengingat Pengembalian Barang",
-    time: "1 jam lalu",
-    desc: "Masa sewa Anda akan berakhir besok, 22 November 2026. Pastikan barang dikembalikan tepat waktu.",
-    icon: "bi-clock-history",
-    iconBg: "rgba(34, 165, 31, 0.15)",
-    iconColor: "#22a51f",
-    isRead: false
-  },
-  {
-    id: 2,
-    type: "confirm",
-    title: "Pesanan Dikonfirmasi",
-    time: "1 hari lalu",
-    desc: "Pesanan #FA-20261120-045 telah dikonfirmasi.",
-    icon: "bi-check-circle-fill",
-    iconBg: "rgba(34, 165, 31, 0.15)",
-    iconColor: "#22a51f",
-    isRead: false
-  }
-];
-
 class OrderStatusManager {
   constructor() {
     this.orders = this.loadOrders();
@@ -111,7 +93,18 @@ class OrderStatusManager {
       const data = localStorage.getItem(ORDER_STORAGE_KEY);
       if (data) {
         const parsed = JSON.parse(data);
-        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          // Pastikan activeOrder memiliki field denda
+          const active = parsed.find(o => o.isActive);
+          if (active) {
+            if (active.isOverdue === undefined) active.isOverdue = true;
+            if (!active.overdueDays) active.overdueDays = 1;
+            if (!active.penaltyRate) active.penaltyRate = 0.5;
+            if (!active.penaltyPerDay) active.penaltyPerDay = Math.round((active.price || 100000) * 0.5);
+            if (!active.deadlineTime) active.deadlineTime = "22 November 2026 pukul 17.00 WIB";
+          }
+          return parsed;
+        }
       }
     } catch (e) {
       console.warn("Error reading orders:", e);
@@ -122,17 +115,53 @@ class OrderStatusManager {
   }
 
   loadNotifications() {
-    try {
-      const data = localStorage.getItem(NOTIF_STORAGE_KEY);
-      if (data) {
-        const parsed = JSON.parse(data);
-        if (Array.isArray(parsed)) return parsed;
-      }
-    } catch (e) {
-      console.warn("Error reading notifications:", e);
+    const active = this.getActiveOrder();
+    const isOverdue = active && active.isOverdue;
+    const days = (active && active.overdueDays) || 1;
+    const penaltyPerDay = (active && active.penaltyPerDay) || 50000;
+    const totalDenda = days * penaltyPerDay;
+
+    const notifs = [];
+
+    if (isOverdue) {
+      notifs.push({
+        id: "notif-penalty",
+        type: "penalty",
+        title: "⚠️ Denda Keterlambatan Berlaku",
+        time: "Baru saja",
+        desc: `Notifikasi pengembalian tidak digubris. Batas toleransi terlewati (${days} hari). Denda berkala 50% (Rp ${penaltyPerDay.toLocaleString("id-ID")}/hari) telah diberlakukan. Total denda saat ini: Rp ${totalDenda.toLocaleString("id-ID")}.`,
+        icon: "bi-exclamation-triangle-fill",
+        iconBg: "rgba(220, 38, 38, 0.15)",
+        iconColor: "#dc2626",
+        isRead: false
+      });
     }
-    localStorage.setItem(NOTIF_STORAGE_KEY, JSON.stringify(DEFAULT_SAMPLE_NOTIFICATIONS));
-    return DEFAULT_SAMPLE_NOTIFICATIONS;
+
+    notifs.push({
+      id: "notif-reminder",
+      type: "reminder",
+      title: "Pengingat Pengembalian Barang",
+      time: "1 hari lalu",
+      desc: "Masa sewa Anda akan berakhir pada 22 November 2026 pukul 17.00 WIB. Pastikan barang dikembalikan tepat waktu.",
+      icon: "bi-clock-history",
+      iconBg: "rgba(34, 165, 31, 0.15)",
+      iconColor: "#22a51f",
+      isRead: false
+    });
+
+    notifs.push({
+      id: "notif-confirm",
+      type: "confirm",
+      title: "Pesanan Dikonfirmasi",
+      time: "2 hari lalu",
+      desc: "Pesanan #FA-20261120-045 telah dikonfirmasi dan disiapkan di Basecamp.",
+      icon: "bi-check-circle-fill",
+      iconBg: "rgba(34, 165, 31, 0.15)",
+      iconColor: "#22a51f",
+      isRead: true
+    });
+
+    return notifs;
   }
 
   saveOrders() {
@@ -173,16 +202,20 @@ class OrderStatusManager {
       return;
     }
 
-    if (badgeEl) badgeEl.style.display = "block";
+    if (badgeEl) {
+      badgeEl.style.display = "block";
+      const hasPenalty = this.notifications.some(n => n.type === "penalty");
+      badgeEl.style.backgroundColor = hasPenalty ? "#dc2626" : "#22a51f";
+    }
 
     listEl.innerHTML = this.notifications.map(n => `
-      <div class="notif-item">
+      <div class="notif-item ${n.type === 'penalty' ? 'border-start border-danger border-3 ps-2' : ''}">
         <div class="notif-icon-circle" style="background-color: ${n.iconBg}; color: ${n.iconColor};">
           <i class="bi ${n.icon}"></i>
         </div>
         <div class="flex-grow-1">
           <div class="d-flex justify-content-between align-items-center mb-1">
-            <strong class="small text-dark fw-bold">${n.title}</strong>
+            <strong class="small fw-bold ${n.type === 'penalty' ? 'text-danger' : 'text-dark'}">${n.title}</strong>
             <span class="text-muted" style="font-size: 0.72rem;">${n.time}</span>
           </div>
           <p class="text-muted small mb-0" style="font-size: 0.78rem; line-height: 1.35;">${n.desc}</p>
@@ -209,10 +242,58 @@ class OrderStatusManager {
       return;
     }
 
-    // Render Banner Pengingat
+    const isOverdue = !!activeOrder.isOverdue;
+    const overdueDays = activeOrder.overdueDays || 1;
+    const penaltyPerDay = activeOrder.penaltyPerDay || Math.round(activeOrder.price * 0.5);
+    const penaltyTotal = isOverdue ? overdueDays * penaltyPerDay : 0;
+    const totalDue = activeOrder.price + penaltyTotal;
+
+    // 1. Render Banner Pengingat atau Banner Peringatan Denda
     if (reminderBox) {
-      if (activeOrder.hasReminder) {
-        reminderBox.style.display = "block";
+      reminderBox.style.display = "block";
+
+      if (isOverdue) {
+        // Mode Denda Keterlambatan Aktif (Notifikasi Pengembalian Tidak Digubris)
+        reminderBox.className = "order-reminder-banner penalty-active mb-4";
+        reminderBox.innerHTML = `
+          <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
+            <div class="d-flex align-items-start gap-3">
+              <div class="bell-radiant-wrapper">
+                <div class="bell-radiant-badge penalty">
+                  <i class="bi bi-exclamation-triangle-fill"></i>
+                </div>
+                <div class="bell-radiant-sparkle penalty">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="12" y1="2" x2="12" y2="6"></line>
+                    <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
+                    <line x1="2" y1="12" x2="6" y2="12"></line>
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <div class="d-flex align-items-center gap-2 mb-1">
+                  <h4 class="fw-extrabold text-danger mb-0" style="font-size: 1.25rem;">
+                    ⚠️ Denda Keterlambatan Berlaku
+                  </h4>
+                  <span class="badge bg-danger text-white rounded-pill px-2.5 py-0-5 small fw-bold">
+                    Notifikasi Diabaikan
+                  </span>
+                </div>
+                <p class="text-dark small mb-0" style="font-size: 0.88rem; max-width: 680px; line-height: 1.45;">
+                  Batas waktu pengembalian telah terlewat <b>${overdueDays} Hari</b> (${activeOrder.deadlineTime || '22 Nov 2026'}). Karena notifikasi pengembalian sebelumnya tidak digubris, <b>denda berkala sebesar 50% dari harga barang (Rp ${penaltyPerDay.toLocaleString("id-ID")}/hari)</b> telah diaktifkan secara otomatis. Total denda saat ini: <b class="text-danger">Rp ${penaltyTotal.toLocaleString("id-ID")}</b>.
+                </p>
+              </div>
+            </div>
+            <div class="text-md-end flex-shrink-0">
+              <a href="#orderPenaltyBreakdown" class="btn-detail-pesanan penalty">
+                Rincian Denda & Bayar <i class="bi bi-arrow-down"></i>
+              </a>
+            </div>
+          </div>
+        `;
+      } else if (activeOrder.hasReminder) {
+        // Mode Normal: Pengingat Ramah Sebelum Batas Pengembalian
+        reminderBox.className = "order-reminder-banner mb-4";
         reminderBox.innerHTML = `
           <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
             <div class="d-flex align-items-start gap-3">
@@ -247,23 +328,116 @@ class OrderStatusManager {
       }
     }
 
-    // Render Detail Pesanan Card
+    // 2. Render Detail Pesanan Card
     if (detailBox) {
       const formattedPrice = "Rp " + activeOrder.price.toLocaleString("id-ID");
       
-      const stepsHtml = activeOrder.steps.map(step => {
-        const isDone = step.status === "done";
-        const isInProgress = step.status === "in-progress";
-        const nodeClass = isDone ? "" : isInProgress ? "in-progress" : "bg-light text-muted border";
-        return `
-          <div class="order-tracker-step">
-            <div class="order-step-node ${nodeClass}">
-              <i class="bi ${step.icon}"></i>
+      // Status Badge
+      const statusBadge = isOverdue
+        ? `<span class="badge rounded-pill bg-danger text-white px-3 py-1.5 fw-bold d-inline-flex align-items-center gap-1 shadow-sm"><i class="bi bi-exclamation-triangle-fill"></i> Terlambat & Denda Aktif</span>`
+        : `<span class="badge rounded-pill bg-success-subtle text-success border border-success-subtle px-3 py-1.5 fw-bold d-inline-flex align-items-center gap-1"><i class="bi bi-check-circle-fill"></i> Sedang Disewa</span>`;
+
+      // Timeline Stepper
+      const stepsHtml = `
+        <div class="order-tracker-step">
+          <div class="order-step-node">
+            <i class="bi bi-check-lg"></i>
+          </div>
+          <div class="order-step-label">Pesanan Dikonfirmasi</div>
+        </div>
+        <div class="order-tracker-step">
+          <div class="order-step-node">
+            <i class="bi bi-check-lg"></i>
+          </div>
+          <div class="order-step-label">Barang Diserahkan</div>
+        </div>
+        <div class="order-tracker-step">
+          <div class="order-step-node ${isOverdue ? 'penalty penalty-active-pulse' : 'in-progress'}">
+            <i class="bi ${isOverdue ? 'bi-exclamation-triangle-fill' : 'bi-box-seam'}"></i>
+          </div>
+          <div class="order-step-label ${isOverdue ? 'text-danger fw-bold' : ''}">
+            ${isOverdue ? `Lewat Batas (+${overdueDays} Hari)` : 'Menunggu Pengembalian'}
+          </div>
+        </div>
+      `;
+
+      // Box Rincian Denda Berkala (Muncul Jika Keterlambatan Aktif)
+      const penaltyBoxHtml = isOverdue ? `
+        <div class="order-penalty-breakdown-card mt-4" id="orderPenaltyBreakdown">
+          <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3 pb-2 border-bottom border-danger-subtle">
+            <div class="d-flex align-items-center gap-2">
+              <i class="bi bi-receipt-cutoff text-danger fs-5"></i>
+              <strong class="text-danger" style="font-size: 0.95rem;">Rincian Denda Keterlambatan Berkala</strong>
             </div>
-            <div class="order-step-label">${step.name}</div>
+            <span class="badge bg-danger text-white rounded-pill px-2.5 py-1 small fw-bold">
+              <i class="bi bi-arrow-repeat me-1"></i> Bertambah Berkala Tiap 24 Jam
+            </span>
+          </div>
+
+          <div class="row g-3 small">
+            <div class="col-md-6 col-12">
+              <div class="d-flex justify-content-between py-1 border-bottom border-light">
+                <span class="text-muted">Biaya Sewa Pokok (${activeOrder.duration} Hari):</span>
+                <span class="fw-bold text-dark">Rp ${activeOrder.price.toLocaleString("id-ID")}</span>
+              </div>
+              <div class="d-flex justify-content-between py-1 border-bottom border-light">
+                <span class="text-muted">Batas Pengembalian Disepakati:</span>
+                <span class="fw-semibold text-danger">${activeOrder.deadlineTime || '22 Nov 2026 17.00 WIB'}</span>
+              </div>
+              <div class="d-flex justify-content-between py-1">
+                <span class="text-muted">Status Respon Notifikasi:</span>
+                <span class="badge bg-danger-subtle text-danger fw-bold">Tidak Digubris / Terlewat</span>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-12">
+              <div class="d-flex justify-content-between py-1 border-bottom border-light">
+                <span class="text-muted">Lama Keterlambatan:</span>
+                <span class="text-danger fw-extrabold"><i class="bi bi-alarm-fill me-1"></i>${overdueDays} Hari Terlambat</span>
+              </div>
+              <div class="d-flex justify-content-between py-1 border-bottom border-light">
+                <span class="text-muted">Tarif Denda Berkala:</span>
+                <span class="text-danger fw-semibold">50% harga barang (Rp ${penaltyPerDay.toLocaleString("id-ID")}/hari)</span>
+              </div>
+              <div class="d-flex justify-content-between py-1">
+                <span class="text-muted">Total Akumulasi Denda:</span>
+                <span class="text-danger fw-bold fs-6">+Rp ${penaltyTotal.toLocaleString("id-ID")}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-3 pt-3 border-top border-danger-subtle d-flex flex-wrap align-items-center justify-content-between gap-3">
+            <div>
+              <span class="text-muted small d-block">Total Kewajiban Pembayaran (Sewa Pokok + Denda):</span>
+              <div class="fs-4 fw-extrabold text-danger">Rp ${totalDue.toLocaleString("id-ID")}</div>
+            </div>
+            <div>
+              <a href="https://wa.me/6281234567890?text=${encodeURIComponent(`Halo Admin Foresta Adventure! 👋\nSaya ingin konfirmasi pengembalian alat untuk Pesanan #${activeOrder.id} (${activeOrder.productName}).\n\nStatus: Terlambat ${overdueDays} Hari\nBiaya Sewa: Rp ${activeOrder.price.toLocaleString("id-ID")}\nDenda Berkala 50%: Rp ${penaltyTotal.toLocaleString("id-ID")}\nTotal Kewajiban: Rp ${totalDue.toLocaleString("id-ID")}\n\nSaya akan segera mengantarkan peralatan ke Basecamp hari ini. Mohon konfirmasinya ya Admin.`)}" target="_blank" class="btn btn-danger rounded-pill px-4 py-2 fw-bold d-inline-flex align-items-center gap-2 shadow-sm">
+                <i class="bi bi-whatsapp"></i> Konfirmasi Pengembalian via WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+      ` : "";
+
+      // Alert Catatan Deadline / Warning
+      const alertNoteHtml = isOverdue
+        ? `
+          <div class="order-deadline-alert penalty mt-4 d-flex align-items-start gap-2.5">
+            <i class="bi bi-exclamation-octagon-fill text-danger fs-5 flex-shrink-0 mt-0.5"></i>
+            <div class="small">
+              <strong>PERINGATAN DENDA BERKALA AKTIF:</strong> Notifikasi pengembalian perlengkapan tidak digubris hingga melewati batas kesepakatan <b>${activeOrder.deadlineTime || '22 Nov 2026 pukul 17.00 WIB'}</b>. Sesuai ketentuan, denda sebesar <b>50% dari harga barang yang disewa (Rp ${penaltyPerDay.toLocaleString("id-ID")})</b> diakumulasikan setiap 24 jam keterlambatan sampai seluruh alat diserahkan utuh dan diperiksa oleh tim Basecamp Foresta.
+            </div>
+          </div>
+        `
+        : `
+          <div class="order-deadline-alert mt-4 d-flex align-items-start gap-2.5">
+            <i class="bi bi-info-circle-fill text-success fs-5 flex-shrink-0 mt-0.5"></i>
+            <div class="small">
+              ${activeOrder.deadlineNote}
+            </div>
           </div>
         `;
-      }).join("");
 
       detailBox.innerHTML = `
         <div class="order-detail-card" id="activeOrderDetailCard">
@@ -272,9 +446,7 @@ class OrderStatusManager {
               <span class="badge bg-light text-dark border px-2 py-1 small fw-bold">ID: #${activeOrder.id}</span>
               <span class="text-muted small d-none d-sm-inline">Penyewaan Mandiri</span>
             </div>
-            <span class="badge rounded-pill ${activeOrder.statusBadgeClass} px-3 py-1.5 fw-bold d-inline-flex align-items-center gap-1">
-              <i class="bi bi-check-circle-fill"></i> ${activeOrder.status}
-            </span>
+            ${statusBadge}
           </div>
 
           <div class="row g-4 align-items-center">
@@ -285,7 +457,9 @@ class OrderStatusManager {
                 <div>
                   <h5 class="fw-bold text-dark mb-1 fs-6">${activeOrder.productName}</h5>
                   <div class="text-muted small mb-2">${activeOrder.qty} Unit × ${activeOrder.duration} Hari</div>
-                  <div class="fw-extrabold text-dark fs-5">${formattedPrice}</div>
+                  <div class="fw-extrabold ${isOverdue ? 'text-danger' : 'text-dark'} fs-5">
+                    ${isOverdue ? `Rp ${totalDue.toLocaleString("id-ID")} <span class="badge bg-danger-subtle text-danger small fs-6 fw-normal">Termasuk Denda</span>` : formattedPrice}
+                  </div>
                 </div>
               </div>
             </div>
@@ -301,10 +475,10 @@ class OrderStatusManager {
                   </div>
                 </div>
                 <div class="d-flex align-items-center gap-2">
-                  <i class="bi bi-calendar-check fs-5 text-dark"></i>
+                  <i class="bi bi-calendar-check fs-5 ${isOverdue ? 'text-danger' : 'text-dark'}"></i>
                   <div>
-                    <div class="text-muted" style="font-size: 0.72rem;">Tanggal Pengembalian</div>
-                    <strong class="text-dark small">${activeOrder.tglKembali}</strong>
+                    <div class="text-muted" style="font-size: 0.72rem;">Batas Pengembalian</div>
+                    <strong class="${isOverdue ? 'text-danger' : 'text-dark'} small">${activeOrder.tglKembali} (17.00 WIB)</strong>
                   </div>
                 </div>
               </div>
@@ -318,16 +492,74 @@ class OrderStatusManager {
             </div>
           </div>
 
-          <!-- Alert Pengingat Keterlambatan -->
-          <div class="order-deadline-alert mt-4 d-flex align-items-start gap-2.5">
-            <i class="bi bi-info-circle-fill text-success fs-5 flex-shrink-0 mt-0.5"></i>
-            <div class="small">
-              ${activeOrder.deadlineNote}
-            </div>
-          </div>
+          <!-- Rincian Denda Berkala Jika Terlambat -->
+          ${penaltyBoxHtml}
+
+          <!-- Alert Pengingat / Peringatan Denda -->
+          ${alertNoteHtml}
         </div>
       `;
     }
+
+    this.updateSimulationControls();
+  }
+
+  updateSimulationControls() {
+    const active = this.getActiveOrder();
+    if (!active) return;
+
+    const btnOnTime = document.getElementById("btnSimulateOnTime");
+    const btnOverdue = document.getElementById("btnSimulateOverdue");
+    const btnAddDay = document.getElementById("btnAddOverdueDay");
+
+    if (btnOnTime && btnOverdue) {
+      if (active.isOverdue) {
+        btnOnTime.className = "btn btn-sm btn-outline-secondary";
+        btnOverdue.className = "btn btn-sm btn-danger active fw-bold";
+        if (btnAddDay) {
+          btnAddDay.disabled = false;
+          btnAddDay.textContent = `+1 Hari Terlambat (Hari ke-${(active.overdueDays || 1) + 1})`;
+        }
+      } else {
+        btnOnTime.className = "btn btn-sm btn-success active fw-bold";
+        btnOverdue.className = "btn btn-sm btn-outline-danger";
+        if (btnAddDay) {
+          btnAddDay.disabled = true;
+          btnAddDay.textContent = "+1 Hari Terlambat";
+        }
+      }
+    }
+  }
+
+  setSimulationState(isOverdue, days = 1) {
+    const active = this.getActiveOrder();
+    if (!active) return;
+
+    active.isOverdue = isOverdue;
+    active.overdueDays = days;
+    active.status = isOverdue ? "Terlambat & Denda Aktif" : "Sedang Disewa";
+    active.statusBadgeClass = isOverdue ? "bg-danger text-white border border-danger" : "bg-success-subtle text-success border border-success-subtle";
+
+    this.saveOrders();
+    this.notifications = this.loadNotifications();
+    this.saveNotifications();
+
+    this.renderNotifications();
+    this.renderActiveOrder();
+  }
+
+  addOverdueDay() {
+    const active = this.getActiveOrder();
+    if (!active) return;
+    if (!active.isOverdue) active.isOverdue = true;
+    active.overdueDays = (active.overdueDays || 1) + 1;
+
+    this.saveOrders();
+    this.notifications = this.loadNotifications();
+    this.saveNotifications();
+
+    this.renderNotifications();
+    this.renderActiveOrder();
   }
 
   renderHistoryOrders() {
@@ -436,6 +668,21 @@ class OrderStatusManager {
         const input = document.getElementById("searchOrderInput");
         if (input) this.searchOrder(input.value);
       });
+    }
+
+    // Event listener Simulasi Status
+    const btnSimOnTime = document.getElementById("btnSimulateOnTime");
+    const btnSimOverdue = document.getElementById("btnSimulateOverdue");
+    const btnAddDay = document.getElementById("btnAddOverdueDay");
+
+    if (btnSimOnTime) {
+      btnSimOnTime.addEventListener("click", () => this.setSimulationState(false, 0));
+    }
+    if (btnSimOverdue) {
+      btnSimOverdue.addEventListener("click", () => this.setSimulationState(true, 1));
+    }
+    if (btnAddDay) {
+      btnAddDay.addEventListener("click", () => this.addOverdueDay());
     }
 
     // Auto-switch tabs via URL hash (#status or #panduan)

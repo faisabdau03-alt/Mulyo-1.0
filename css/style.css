@@ -1535,6 +1535,60 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 0.825rem;
 }
 
+/* Styling Banner Keterlambatan & Denda (Penalty Active) */
+.order-reminder-banner.penalty-active {
+  background-color: #fff1f2;
+  border: 1.5px solid rgba(239, 68, 68, 0.45);
+  box-shadow: 0 4px 20px rgba(220, 38, 38, 0.08);
+}
+
+.bell-radiant-badge.penalty {
+  background-color: #dc2626;
+  box-shadow: 0 6px 16px rgba(220, 38, 38, 0.35);
+}
+
+.bell-radiant-sparkle.penalty {
+  color: #dc2626;
+}
+
+.btn-detail-pesanan.penalty {
+  background-color: #991b1b;
+}
+
+.btn-detail-pesanan.penalty:hover {
+  background-color: #dc2626;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+}
+
+.order-step-node.penalty {
+  background-color: #dc2626;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.35);
+}
+
+.order-step-node.penalty-active-pulse {
+  animation: penaltyPulse 2s infinite;
+}
+
+@keyframes penaltyPulse {
+  0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.6); }
+  70% { box-shadow: 0 0 0 8px rgba(220, 38, 38, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+}
+
+.order-deadline-alert.penalty {
+  background-color: #fef2f2;
+  border: 1.5px solid #fecaca;
+  color: #7f1d1d;
+}
+
+.order-penalty-breakdown-card {
+  background: #fff8f8;
+  border: 1.5px dashed #fca5a5;
+  border-radius: 16px;
+  padding: 1.25rem;
+}
+
 /* Header Notification Bell & Popover */
 .notif-bell-btn {
   width: 40px;

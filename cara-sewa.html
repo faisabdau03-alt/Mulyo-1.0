@@ -181,6 +181,27 @@
         <!-- TAB 1: STATUS PESANAN & RIWAYAT PEMESANAN -->
         <div class="tab-pane fade show active" id="tab-status" role="tabpanel" aria-labelledby="tab-status-btn">
           
+          <!-- Simulator Status Pengembalian & Denda Berkala (Fitur Interaktif) -->
+          <div class="card border-0 shadow-sm rounded-4 p-3 mb-4 bg-white">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+              <div class="d-flex align-items-center gap-2">
+                <span class="badge bg-dark rounded-pill px-2.5 py-1 text-nowrap"><i class="bi bi-sliders me-1"></i> Simulasi Sistem</span>
+                <span class="small text-muted">Uji coba status pengembalian & denda keterlambatan 50%:</span>
+              </div>
+              <div class="btn-group btn-group-sm flex-wrap" role="group">
+                <button type="button" class="btn btn-sm btn-outline-secondary" id="btnSimulateOnTime">
+                  <i class="bi bi-clock-history"></i> Normal (Sebelum Batas Sewa)
+                </button>
+                <button type="button" class="btn btn-sm btn-danger active fw-bold" id="btnSimulateOverdue">
+                  <i class="bi bi-exclamation-triangle-fill"></i> Notifikasi Diabaikan (Denda 50% Aktif)
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-danger" id="btnAddOverdueDay" title="Tambah 1 hari keterlambatan untuk melihat denda bertambah secara berkala">
+                  +1 Hari Terlambat
+                </button>
+              </div>
+            </div>
+          </div>
+
           <!-- Banner Pengingat Pengembalian Barang (Sesuai Desain Acuan) -->
           <div id="orderReminderBanner" class="order-reminder-banner mb-4">
             <!-- Populated by order-status.js -->
@@ -341,12 +362,16 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td class="fw-semibold">Terlambat s/d Pukul 12.00 WIB</td>
-                        <td class="text-success fw-bold">Gratis (Toleransi waktu pengembalian)</td>
+                        <td class="fw-semibold">Pengembalian Tepat Waktu (s/d Pukul 17.00 WIB)</td>
+                        <td class="text-success fw-bold">Bebas Denda (Toleransi jam pengembalian sesuai kesepakatan)</td>
                       </tr>
-                      <tr>
-                        <td class="fw-semibold">Terlambat lebih dari Pukul 12.00 WIB</td>
-                        <td>Dikenakan biaya sewa 1 hari normal tambahan per unit</td>
+                      <tr class="table-danger">
+                        <td class="fw-semibold text-danger">
+                          <i class="bi bi-exclamation-triangle-fill me-1"></i> Terlambat &amp; Notifikasi Tidak Digubris
+                        </td>
+                        <td class="text-danger fw-bold">
+                          Denda berkala sebesar 50% dari harga barang yang disewa per hari keterlambatan (bertambah tiap 24 jam)
+                        </td>
                       </tr>
                       <tr>
                         <td class="fw-semibold">Pasak Tenda Hilang</td>
