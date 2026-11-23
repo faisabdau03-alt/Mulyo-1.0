@@ -75,64 +75,6 @@ const DEFAULT_BUNDLES = [
       { productId: "light-02", qty: 2 }, // 2x Lentera Retro (2 x 12.000 = 24.000)
       { productId: "fly-01", qty: 1 }    // 1x Flysheet 3x4m (1 x 15.000 = 15.000)
     ]
-  },
-  {
-    id: "bundle-porter-summit",
-    name: "Paket Summit + Jasa Porter",
-    badge: "Bebas Lelah (Include 1 Porter)",
-    badgeColor: "success",
-    image: "https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=900&q=80",
-    desc: "Paket sewa perlengkapan lengkap (Tenda 4P, Carrier 60L, 2 Sleeping Bag, Kompor, Nesting, Headlamp, Trekking Pole) PLUS didampingi 1 Porter Berpengalaman. Porter membawakan beban s/d 20 kg & bantu pasang camp.",
-    price: 329000, // Harga bundling per hari (hemat dari 450.000)
-    isActive: true,
-    isPorterIncluded: true,
-    items: [
-      { productId: "tenda-01", qty: 1 },
-      { productId: "carrier-01", qty: 1 },
-      { productId: "sleep-02", qty: 2 },
-      { productId: "cook-01", qty: 1 },
-      { productId: "cook-02", qty: 1 },
-      { productId: "light-01", qty: 1 },
-      { productId: "gear-01", qty: 1 },
-      { productId: "service-porter-01", qty: 1 }
-    ]
-  },
-  {
-    id: "bundle-porter-solo",
-    name: "Jasa Porter & Guide Gunung Profesional",
-    badge: "Porter Resmi Basecamp",
-    badgeColor: "primary",
-    image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=80",
-    desc: "Layanan jasa porter dan guide lokal profesional untuk jalur Merbabu, Lawu, Prau, Sindoro, dan Sumbing. Membawakan beban logistik s/d 20 kg, bantu dirikan tenda, dan mengawal perjalanan muncak Anda dengan aman.",
-    price: 210000, // Harga sewa porter per hari
-    isActive: true,
-    isPorterOnly: true,
-    items: [
-      { productId: "service-porter-01", qty: 1 },
-      { productId: "gear-01", qty: 1 }
-    ]
-  },
-  {
-    id: "bundle-rombongan-porter",
-    name: "Paket Rombongan VIP + 2 Porter Guide",
-    badge: "All-In Bebas Beban (6-10 Orang)",
-    badgeColor: "danger",
-    image: "https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?auto=format&fit=crop&w=900&q=80",
-    desc: "Solusi total pendakian kelompok tanpa beban berat. Sudah mencakup 2 Tenda 4P, 2 Carrier 60L, 4 Sleeping Bag, 4 Matras, 2 Kompor & Nesting, PLUS 2 orang Porter & Guide Gunung yang membawakan beban logistik hingga 40 kg.",
-    price: 749000, // Harga per hari (hemat dari 939.000)
-    isActive: true,
-    isPorterIncluded: true,
-    items: [
-      { productId: "tenda-01", qty: 2 },
-      { productId: "carrier-01", qty: 2 },
-      { productId: "sleep-02", qty: 4 },
-      { productId: "sleep-03", qty: 4 },
-      { productId: "cook-01", qty: 2 },
-      { productId: "cook-02", qty: 2 },
-      { productId: "light-02", qty: 2 },
-      { productId: "fly-01", qty: 1 },
-      { productId: "service-porter-01", qty: 2 }
-    ]
   }
 ];
 
@@ -147,13 +89,6 @@ class BundlesService {
       if (data) {
         const parsed = JSON.parse(data);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          // Merge missing defaults (e.g. porter bundles) agar otomatis tampil
-          const missingDefaults = DEFAULT_BUNDLES.filter(def => !parsed.some(p => p.id === def.id));
-          if (missingDefaults.length > 0) {
-            const merged = [...parsed, ...missingDefaults];
-            this.saveBundlesToStorage(merged);
-            return merged;
-          }
           return parsed;
         }
       }
