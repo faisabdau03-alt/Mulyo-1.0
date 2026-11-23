@@ -477,6 +477,54 @@ ${itemLines}${totalPricingText}
 
 Mohon konfirmasi ketersediaan barang dan persyaratan jaminannya ya admin. Terima kasih! 🌲🏔️`;
 
+    // Simpan pesanan ke riwayat pesanan lokal
+    try {
+      const orderId = "FA-" + new Date().toISOString().slice(0, 10).replace(/-/g, '') + "-" + Math.floor(100 + Math.random() * 900);
+      const orders = JSON.parse(localStorage.getItem("foresta_orders") || "[]");
+      const firstItem = this.cart[0] || { name: "Paket Perlengkapan Outdoor", price: finalTotal };
+      const newOrder = {
+        id: orderId,
+        productName: firstItem.name + (this.cart.length > 1 ? ` (+${this.cart.length - 1} alat lainnya)` : ""),
+        qty: firstItem.qty || 1,
+        duration: this.bookingState.duration || 2,
+        price: finalTotal,
+        image: firstItem.image || "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=500&q=80",
+        tglSewa: tglAmbil,
+        tglKembali: tglKembali,
+        status: "Sedang Diproses",
+        statusBadgeClass: "bg-warning-subtle text-warning-emphasis border border-warning-subtle",
+        isActive: true,
+        steps: [
+          { name: "Pesanan Dikonfirmasi", status: "in-progress", icon: "bi-clock" },
+          { name: "Barang Diserahkan", status: "pending", icon: "bi-box-arrow-up-right" },
+          { name: "Menunggu Pengembalian", status: "pending", icon: "bi-box-seam" }
+        ],
+        deadlineNote: `Pastikan untuk mengembalikan barang sebelum <b>${tglKembali} pukul 17.00 WIB</b> agar tidak dikenakan biaya keterlambatan.`,
+        hasReminder: true,
+        reminderTitle: "Pesanan Baru Berhasil Dikirim",
+        reminderText: `Pesanan #${orderId} telah dikirim ke WhatsApp Admin. Menunggu verifikasi kesiapan stok alat di gudang.`
+      };
+      orders.unshift(newOrder);
+      localStorage.setItem("foresta_orders", JSON.stringify(orders));
+
+      // Tambahkan notifikasi
+      const notifs = JSON.parse(localStorage.getItem("foresta_notifications") || "[]");
+      notifs.unshift({
+        id: Date.now(),
+        type: "confirm",
+        title: "Pesanan Baru Terkirim",
+        time: "Baru saja",
+        desc: `Pesanan #${orderId} telah dikirim ke WhatsApp untuk konfirmasi stok.`,
+        icon: "bi-send-check-fill",
+        iconBg: "rgba(34, 165, 31, 0.15)",
+        iconColor: "#22a51f",
+        isRead: false
+      });
+      localStorage.setItem("foresta_notifications", JSON.stringify(notifs));
+    } catch (e) {
+      console.warn("Error auto-saving order:", e);
+    }
+
     const encoded = encodeURIComponent(message);
     const waUrl = `https://wa.me/${DEFAULT_PHONE_WA}?text=${encoded}`;
     window.open(waUrl, "_blank");

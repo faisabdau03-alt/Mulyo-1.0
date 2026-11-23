@@ -101,168 +101,311 @@
   <!-- Header Section -->
   <section class="bg-brand-dark text-white py-4 border-bottom border-secondary border-opacity-25">
     <div class="container">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb mb-2 small">
-          <li class="breadcrumb-item"><a href="index.html" class="text-brand-green text-decoration-none">Beranda</a></li>
-          <li class="breadcrumb-item active text-white opacity-75" aria-current="page">Cara Sewa</li>
-        </ol>
-      </nav>
-      <h2 class="fw-bold mb-1">Panduan & Syarat Ketentuan Sewa</h2>
-      <p class="text-muted small mb-0">Informasi lengkap alur pemesanan, dokumen jaminan, dan aturan pengembalian gear di Foresta Adventure.</p>
+      <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+        <div>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-2 small">
+              <li class="breadcrumb-item"><a href="index.html" class="text-brand-green text-decoration-none">Beranda</a></li>
+              <li class="breadcrumb-item active text-white opacity-75" aria-current="page">Cara Sewa &amp; Status Pesanan</li>
+            </ol>
+          </nav>
+          <h2 class="fw-bold mb-1">Status Pesanan &amp; Panduan Sewa</h2>
+          <p class="text-muted small mb-0">Pantau status penyewaan aktif Anda, riwayat pengembalian, dan panduan lengkap alur peminjaman alat.</p>
+        </div>
+
+        <!-- Top Right Header: Notifications & Profile Quick Trigger -->
+        <div class="d-flex align-items-center gap-2">
+          <!-- Notification Bell Dropdown -->
+          <div class="dropdown">
+            <button class="notif-bell-btn" type="button" id="notifDropdownBtn" data-bs-toggle="dropdown" aria-expanded="false" title="Notifikasi Pesanan">
+              <i class="bi bi-bell-fill fs-5"></i>
+              <span class="notif-badge-dot" id="notifBadgeDot"></span>
+            </button>
+            <div class="dropdown-menu dropdown-menu-end notification-dropdown-menu p-3 shadow-lg" aria-labelledby="notifDropdownBtn">
+              <div class="d-flex align-items-center justify-content-between pb-2 mb-2 border-bottom">
+                <div class="d-flex align-items-center gap-2">
+                  <i class="bi bi-bell-fill text-success"></i>
+                  <strong class="text-dark">Notifikasi</strong>
+                </div>
+                <a href="#" class="text-decoration-none text-muted small" id="clearNotifBtn" style="font-size: 0.76rem;">Hapus Semua</a>
+              </div>
+              <div id="notifDropdownList" class="d-flex flex-column gap-1">
+                <!-- Populated dynamically by order-status.js -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Profile Avatar Dropdown -->
+          <div class="dropdown">
+            <button class="notif-bell-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="Akun Member">
+              <i class="bi bi-person-circle fs-5"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end shadow-lg rounded-3 border-0 py-2">
+              <li><a class="dropdown-item small" href="login.html"><i class="bi bi-box-arrow-in-right me-2 text-success"></i> Masuk Akun</a></li>
+              <li><a class="dropdown-item small" href="register.html"><i class="bi bi-person-plus me-2 text-primary"></i> Daftar Member Baru</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Content Section -->
-  <section class="py-5">
+  <!-- Main Integrated Section: Status Pesanan, Riwayat & Panduan -->
+  <section class="py-5" style="background-color: var(--color-body-bg); min-height: 75vh;">
     <div class="container">
-      <div class="row g-5">
+      
+      <!-- Nav Tabs: Status & Riwayat vs Panduan -->
+      <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4 pb-2 border-bottom">
+        <ul class="nav nav-pills cara-sewa-nav-tabs gap-2" id="caraSewaPills" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="tab-status-btn" data-bs-toggle="pill" data-bs-target="#tab-status" type="button" role="tab" aria-controls="tab-status" aria-selected="true">
+              <i class="bi bi-box-seam me-1"></i> Status &amp; Riwayat Pesanan
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="tab-panduan-btn" data-bs-toggle="pill" data-bs-target="#tab-panduan" type="button" role="tab" aria-controls="tab-panduan" aria-selected="false">
+              <i class="bi bi-journal-text me-1"></i> Panduan Alur &amp; Syarat Sewa
+            </button>
+          </li>
+        </ul>
+
+        <div class="d-none d-md-flex align-items-center gap-2 text-muted small">
+          <i class="bi bi-shield-check text-success"></i>
+          <span>Jaminan Aman · Konfirmasi Instan WhatsApp</span>
+        </div>
+      </div>
+
+      <!-- Tab Contents -->
+      <div class="tab-content" id="caraSewaTabContent">
         
-        <div class="col-lg-8">
-          <!-- Step by Step -->
-          <div class="card border-0 shadow-sm rounded-4 p-4 mb-4">
-            <h4 class="fw-bold text-dark mb-4"><i class="bi bi-diagram-3-fill text-success me-2"></i> 4 Alur Mudah Peminjaman Alat</h4>
-            
-            <div class="d-flex gap-3 mb-4">
-              <div class="step-number-badge flex-shrink-0">1</div>
-              <div>
-                <h5 class="fw-bold mb-1">Pilih Alat & Tentukan Jadwal</h5>
-                <p class="text-muted small mb-0">
-                  Buka halaman <a href="katalog.html" class="text-success fw-semibold">Katalog Produk</a>, pilih peralatan yang Anda butuhkan (tenda, carrier, nesting, sleeping bag, dll). Masukkan tanggal ambil serta durasi sewa yang diinginkan.
-                </p>
+        <!-- TAB 1: STATUS PESANAN & RIWAYAT PEMESANAN -->
+        <div class="tab-pane fade show active" id="tab-status" role="tabpanel" aria-labelledby="tab-status-btn">
+          
+          <!-- Banner Pengingat Pengembalian Barang (Sesuai Desain Acuan) -->
+          <div id="orderReminderBanner" class="order-reminder-banner mb-4">
+            <!-- Populated by order-status.js -->
+          </div>
+
+          <!-- Section Heading: Detail Pesanan -->
+          <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
+            <h4 class="fw-bold text-dark mb-0 d-flex align-items-center">
+              <i class="bi bi-clipboard2-check-fill text-success fs-4 me-2"></i> Detail Pesanan
+            </h4>
+            <span class="text-muted small">Diperbarui otomatis secara real-time</span>
+          </div>
+
+          <!-- Active Order Card Container -->
+          <div id="activeOrderDetailContainer" class="mb-5">
+            <!-- Populated by order-status.js -->
+          </div>
+
+          <!-- Riwayat Pemesanan & Form Lacak Pesanan -->
+          <div class="row g-4 mt-2">
+            <!-- Kolom Riwayat Pemesanan -->
+            <div class="col-lg-7">
+              <div class="d-flex align-items-center justify-content-between mb-3">
+                <h5 class="fw-bold text-dark mb-0 d-flex align-items-center">
+                  <i class="bi bi-clock-history text-success me-2"></i> Riwayat Pemesanan Selesai
+                </h5>
+                <span class="badge bg-light text-muted border">Tersimpan di Akun</span>
+              </div>
+              <div id="orderHistoryContainer">
+                <!-- Populated by order-status.js -->
               </div>
             </div>
 
-            <div class="d-flex gap-3 mb-4">
-              <div class="step-number-badge flex-shrink-0">2</div>
-              <div>
-                <h5 class="fw-bold mb-1">Konfirmasi Pesanan via WhatsApp</h5>
-                <p class="text-muted small mb-0">
-                  Setelah barang dimasukkan ke keranjang, klik tombol checkout. Sistem akan otomatis menyusun format pesan lengkap ke WhatsApp admin kami. Admin akan segera memeriksa ketersediaan stok fisik di gudang.
-                </p>
-              </div>
-            </div>
+            <!-- Kolom Lacak Pesanan Lain & Bantuan Cepat -->
+            <div class="col-lg-5">
+              <!-- Card Lacak Pesanan -->
+              <div class="card border-0 shadow-sm rounded-4 p-4 mb-4 bg-white">
+                <h6 class="fw-bold text-dark mb-2 d-flex align-items-center gap-2">
+                  <i class="bi bi-search text-brand-green"></i> Lacak Nomor Pesanan Lain
+                </h6>
+                <p class="text-muted small mb-3">Masukkan nomor ID pesanan (misal: <code>FA-20261120-045</code>) yang tertera pada pesan WhatsApp Anda.</p>
+                
+                <form id="searchOrderForm" class="mb-3">
+                  <div class="input-group">
+                    <input type="text" id="searchOrderInput" class="form-control" placeholder="No. ID Pesanan..." required />
+                    <button class="btn btn-brand-primary fw-bold px-3" type="submit">
+                      Cari
+                    </button>
+                  </div>
+                </form>
+                
+                <div id="searchOrderResult" style="display: none;"></div>
 
-            <div class="d-flex gap-3 mb-4">
-              <div class="step-number-badge flex-shrink-0">3</div>
-              <div>
-                <h5 class="fw-bold mb-1">Pengambilan Alat & Titip Dokumen Jaminan</h5>
-                <p class="text-muted small mb-0">
-                  Ambil peralatan di toko Foresta Adventure pada hari H (atau H-1 sore). Lakukan pengecekan fisik bersama staf kami (kelengkapan frame, pasak, resleting) dan serahkan 1 identitas asli (KTP/KTM/SIM).
-                </p>
+                <div class="p-3 rounded-3 bg-light border small text-muted">
+                  <i class="bi bi-info-circle text-success me-1"></i>
+                  Status pesanan akan berubah menjadi <b>Barang Diserahkan</b> setelah Anda mengambil alat di basecamp Foresta.
+                </div>
               </div>
-            </div>
 
-            <div class="d-flex gap-3">
-              <div class="step-number-badge flex-shrink-0">4</div>
-              <div>
-                <h5 class="fw-bold mb-1">Pengembalian Alat & Pengambilan Jaminan</h5>
-                <p class="text-muted small mb-0">
-                  Kembalikan peralatan sesuai jadwal maksimal yang ditentukan. Tim kami akan mengecek kelengkapan kembali, lalu kartu identitas jaminan Anda akan diserahkan secara utuh.
-                </p>
+              <!-- Card Bantuan WhatsApp -->
+              <div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
+                <h6 class="fw-bold text-dark mb-2">Butuh Bantuan Kendala Sewa?</h6>
+                <p class="text-muted small mb-3">Ingin memperpanjang sewa atau konfirmasi waktu pengembalian? Hubungi admin via WhatsApp:</p>
+                <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Foresta%20Adventure,%20saya%20ingin%20tanya%20status%20sewa%20saya" target="_blank" class="btn btn-outline-success rounded-pill w-100 py-2 d-flex align-items-center justify-content-center gap-2 fw-semibold">
+                  <i class="bi bi-whatsapp"></i> Chat WhatsApp CS
+                </a>
               </div>
             </div>
           </div>
 
-          <!-- Syarat Jaminan -->
-          <div class="card border-0 shadow-sm rounded-4 p-4 mb-4" id="syarat">
-            <h4 class="fw-bold text-dark mb-3"><i class="bi bi-card-checklist text-success me-2"></i> Dokumen Jaminan yang Diperlukan</h4>
-            <p class="text-muted small mb-3">Untuk menjamin keamanan perlengkapan kami, penyewa wajib menitipkan <b>1 identitas asli</b> yang masih berlaku:</p>
-            
-            <ul class="list-group list-group-flush small mb-3">
-              <li class="list-group-item px-0 py-2 d-flex align-items-center gap-2">
-                <i class="bi bi-check-circle-fill text-success"></i> <b>KTP Asli</b> (Kartu Tanda Penduduk Republik Indonesia)
-              </li>
-              <li class="list-group-item px-0 py-2 d-flex align-items-center gap-2">
-                <i class="bi bi-check-circle-fill text-success"></i> <b>KTM Asli</b> (Kartu Tanda Mahasiswa yang masih aktif semester ini)
-              </li>
-              <li class="list-group-item px-0 py-2 d-flex align-items-center gap-2">
-                <i class="bi bi-check-circle-fill text-success"></i> <b>SIM A / C Asli</b> (Surat Izin Mengemudi)
-              </li>
-              <li class="list-group-item px-0 py-2 d-flex align-items-center gap-2">
-                <i class="bi bi-check-circle-fill text-success"></i> <b>Paspor Asli</b> (Untuk turis atau WNA)
-              </li>
-            </ul>
-
-            <div class="alert alert-warning py-2 small mb-0">
-              <i class="bi bi-exclamation-triangle-fill me-1"></i> Identitas yang dititipkan harus asli (bukan fotokopi atau softcopy foto HP) dan milik orang yang mengambil barang secara langsung.
-            </div>
-          </div>
-
-          <!-- Ketentuan Denda -->
-          <div class="card border-0 shadow-sm rounded-4 p-4" id="denda">
-            <h4 class="fw-bold text-dark mb-3"><i class="bi bi-shield-exclamation text-success me-2"></i> Ketentuan Kerusakan & Denda Keterlambatan</h4>
-            
-            <div class="table-responsive">
-              <table class="table table-bordered table-sm small align-middle">
-                <thead class="table-light">
-                  <tr>
-                    <th>Kasus / Kejadian</th>
-                    <th>Ketentuan & Biaya Denda</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="fw-semibold">Terlambat s/d Pukul 12.00 WIB</td>
-                    <td class="text-success fw-bold">Gratis (Toleransi waktu pengembalian)</td>
-                  </tr>
-                  <tr>
-                    <td class="fw-semibold">Terlambat lebih dari Pukul 12.00 WIB</td>
-                    <td>Dikenakan biaya sewa 1 hari normal tambahan per unit</td>
-                  </tr>
-                  <tr>
-                    <td class="fw-semibold">Pasak Tenda Hilang</td>
-                    <td>Rp 5.000 / pcs pasak</td>
-                  </tr>
-                  <tr>
-                    <td class="fw-semibold">Frame Tenda Patah / Rusak Parah</td>
-                    <td>Rp 15.000 / ruas sambungan frame</td>
-                  </tr>
-                  <tr>
-                    <td class="fw-semibold">Kain Tenda / SB Robek Kena Rokok / Api</td>
-                    <td>Dikenakan biaya perbaikan/service jahitan (Rp 25.000 - Rp 50.000)</td>
-                  </tr>
-                  <tr>
-                    <td class="fw-semibold">Barang Hilang Total</td>
-                    <td>Mengganti dengan barang yang setipe atau mengganti senilai harga pasar barang bekas layak pakai</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
         </div>
 
-        <!-- Sidebar Info -->
-        <div class="col-lg-4">
-          <div class="card border-0 shadow-sm rounded-4 p-4 mb-4 bg-white sticky-top" style="top: 90px; z-index: 1000;">
-            <h5 class="fw-bold mb-3">Butuh Bantuan Cepat?</h5>
-            <p class="text-muted small mb-4">
-              Punya pertanyaan khusus seputar sewa rombongan atau ketersediaan gear darurat untuk malam ini?
-            </p>
-            <div class="d-grid gap-2">
-              <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Foresta%20Adventure,%20saya%20ingin%20tanya%20syarat%20sewa" target="_blank" class="btn btn-brand-primary py-2 d-flex align-items-center justify-content-center gap-2">
-                <i class="bi bi-whatsapp"></i> Chat CS WhatsApp
-              </a>
-              <a href="katalog.html" class="btn btn-outline-dark py-2">
-                Lihat Katalog Alat
-              </a>
+        <!-- TAB 2: PANDUAN CARA SEWA & SYARAT KETENTUAN -->
+        <div class="tab-pane fade" id="tab-panduan" role="tabpanel" aria-labelledby="tab-panduan-btn">
+          <div class="row g-5">
+            <div class="col-lg-8">
+              <!-- Step by Step -->
+              <div class="card border-0 shadow-sm rounded-4 p-4 mb-4">
+                <h4 class="fw-bold text-dark mb-4"><i class="bi bi-diagram-3-fill text-success me-2"></i> 4 Alur Mudah Peminjaman Alat</h4>
+                
+                <div class="d-flex gap-3 mb-4">
+                  <div class="step-number-badge flex-shrink-0">1</div>
+                  <div>
+                    <h5 class="fw-bold mb-1">Pilih Alat &amp; Tentukan Jadwal</h5>
+                    <p class="text-muted small mb-0">
+                      Buka halaman <a href="katalog.html" class="text-success fw-semibold">Katalog Produk</a>, pilih peralatan yang Anda butuhkan (tenda, carrier, nesting, sleeping bag, dll). Masukkan tanggal ambil serta durasi sewa yang diinginkan.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="d-flex gap-3 mb-4">
+                  <div class="step-number-badge flex-shrink-0">2</div>
+                  <div>
+                    <h5 class="fw-bold mb-1">Konfirmasi Pesanan via WhatsApp</h5>
+                    <p class="text-muted small mb-0">
+                      Setelah barang dimasukkan ke keranjang, klik tombol checkout. Sistem akan otomatis menyusun format pesan lengkap ke WhatsApp admin kami. Admin akan segera memeriksa ketersediaan stok fisik di gudang.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="d-flex gap-3 mb-4">
+                  <div class="step-number-badge flex-shrink-0">3</div>
+                  <div>
+                    <h5 class="fw-bold mb-1">Pengambilan Alat &amp; Titip Dokumen Jaminan</h5>
+                    <p class="text-muted small mb-0">
+                      Ambil peralatan di toko Foresta Adventure pada hari H (atau H-1 sore). Lakukan pengecekan fisik bersama staf kami (kelengkapan frame, pasak, resleting) dan serahkan 1 identitas asli (KTP/KTM/SIM).
+                    </p>
+                  </div>
+                </div>
+
+                <div class="d-flex gap-3">
+                  <div class="step-number-badge flex-shrink-0">4</div>
+                  <div>
+                    <h5 class="fw-bold mb-1">Pengembalian Alat &amp; Pengambilan Jaminan</h5>
+                    <p class="text-muted small mb-0">
+                      Kembalikan peralatan sesuai jadwal maksimal yang ditentukan. Tim kami akan mengecek kelengkapan kembali, lalu kartu identitas jaminan Anda akan diserahkan secara utuh.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Syarat Jaminan -->
+              <div class="card border-0 shadow-sm rounded-4 p-4 mb-4" id="syarat">
+                <h4 class="fw-bold text-dark mb-3"><i class="bi bi-card-checklist text-success me-2"></i> Dokumen Jaminan yang Diperlukan</h4>
+                <p class="text-muted small mb-3">Untuk menjamin keamanan perlengkapan kami, penyewa wajib menitipkan <b>1 identitas asli</b> yang masih berlaku:</p>
+                
+                <ul class="list-group list-group-flush small mb-3">
+                  <li class="list-group-item px-0 py-2 d-flex align-items-center gap-2">
+                    <i class="bi bi-check-circle-fill text-success"></i> <b>KTP Asli</b> (Kartu Tanda Penduduk Republik Indonesia)
+                  </li>
+                  <li class="list-group-item px-0 py-2 d-flex align-items-center gap-2">
+                    <i class="bi bi-check-circle-fill text-success"></i> <b>KTM Asli</b> (Kartu Tanda Mahasiswa yang masih aktif semester ini)
+                  </li>
+                  <li class="list-group-item px-0 py-2 d-flex align-items-center gap-2">
+                    <i class="bi bi-check-circle-fill text-success"></i> <b>SIM A / C Asli</b> (Surat Izin Mengemudi)
+                  </li>
+                  <li class="list-group-item px-0 py-2 d-flex align-items-center gap-2">
+                    <i class="bi bi-check-circle-fill text-success"></i> <b>Paspor Asli</b> (Untuk turis atau WNA)
+                  </li>
+                </ul>
+
+                <div class="alert alert-warning py-2 small mb-0">
+                  <i class="bi bi-exclamation-triangle-fill me-1"></i> Identitas yang dititipkan harus asli (bukan fotokopi atau softcopy foto HP) dan milik orang yang mengambil barang secara langsung.
+                </div>
+              </div>
+
+              <!-- Ketentuan Denda -->
+              <div class="card border-0 shadow-sm rounded-4 p-4" id="denda">
+                <h4 class="fw-bold text-dark mb-3"><i class="bi bi-shield-exclamation text-success me-2"></i> Ketentuan Kerusakan &amp; Denda Keterlambatan</h4>
+                
+                <div class="table-responsive">
+                  <table class="table table-bordered table-sm small align-middle">
+                    <thead class="table-light">
+                      <tr>
+                        <th>Kasus / Kejadian</th>
+                        <th>Ketentuan &amp; Biaya Denda</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="fw-semibold">Terlambat s/d Pukul 12.00 WIB</td>
+                        <td class="text-success fw-bold">Gratis (Toleransi waktu pengembalian)</td>
+                      </tr>
+                      <tr>
+                        <td class="fw-semibold">Terlambat lebih dari Pukul 12.00 WIB</td>
+                        <td>Dikenakan biaya sewa 1 hari normal tambahan per unit</td>
+                      </tr>
+                      <tr>
+                        <td class="fw-semibold">Pasak Tenda Hilang</td>
+                        <td>Rp 5.000 / pcs pasak</td>
+                      </tr>
+                      <tr>
+                        <td class="fw-semibold">Frame Tenda Patah / Rusak Parah</td>
+                        <td>Rp 15.000 / ruas sambungan frame</td>
+                      </tr>
+                      <tr>
+                        <td class="fw-semibold">Kain Tenda / SB Robek Kena Rokok / Api</td>
+                        <td>Dikenakan biaya perbaikan/service jahitan (Rp 25.000 - Rp 50.000)</td>
+                      </tr>
+                      <tr>
+                        <td class="fw-semibold">Barang Hilang Total</td>
+                        <td>Mengganti dengan barang yang setipe atau mengganti senilai harga pasar barang bekas layak pakai</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
 
-            <hr class="my-4" />
+            <!-- Sidebar Info -->
+            <div class="col-lg-4">
+              <div class="card border-0 shadow-sm rounded-4 p-4 mb-4 bg-white sticky-top" style="top: 90px; z-index: 1000;">
+                <h5 class="fw-bold mb-3">Butuh Bantuan Cepat?</h5>
+                <p class="text-muted small mb-4">
+                  Punya pertanyaan khusus seputar sewa rombongan atau ketersediaan gear darurat untuk malam ini?
+                </p>
+                <div class="d-grid gap-2">
+                  <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Foresta%20Adventure,%20saya%20ingin%20tanya%20syarat%20sewa" target="_blank" class="btn btn-brand-primary py-2 d-flex align-items-center justify-content-center gap-2">
+                    <i class="bi bi-whatsapp"></i> Chat CS WhatsApp
+                  </a>
+                  <a href="katalog.html" class="btn btn-outline-dark py-2">
+                    Lihat Katalog Alat
+                  </a>
+                </div>
 
-            <h6 class="fw-bold mb-2">Jam Buka Toko:</h6>
-            <p class="text-muted small mb-3">
-              Senin - Minggu: 08.00 - 21.00 WIB<br />
-              (Tetap buka di tanggal merah & hari libur nasional)
-            </p>
+                <hr class="my-4" />
 
-            <h6 class="fw-bold mb-2">Lokasi Toko:</h6>
-            <p class="text-muted small mb-0">
-              Jl. Kaliurang KM 5, Gang Foresta No. 12, Yogyakarta (Dekat Kampus).
-            </p>
+                <h6 class="fw-bold mb-2">Jam Buka Toko:</h6>
+                <p class="text-muted small mb-3">
+                  Senin - Minggu: 08.00 - 21.00 WIB<br />
+                  (Tetap buka di tanggal merah &amp; hari libur nasional)
+                </p>
+
+                <h6 class="fw-bold mb-2">Lokasi Toko:</h6>
+                <p class="text-muted small mb-0">
+                  Jl. Kaliurang KM 5, Gang Foresta No. 12, Yogyakarta (Dekat Kampus).
+                </p>
+              </div>
+            </div>
+
           </div>
         </div>
 
       </div>
+
     </div>
   </section>
 
@@ -437,6 +580,7 @@
   <script src="js/bundles-data.js"></script>
   <script src="js/cart.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/order-status.js"></script>
 
 </body>
 </html>
