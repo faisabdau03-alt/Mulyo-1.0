@@ -111,54 +111,55 @@ function renderBundlesList() {
               </div>
             </div>
 
-            <!-- Konten Kartu (Clean & Uncluttered) -->
+            <!-- Konten Kartu (Clean, Human & Uncluttered) -->
             <div class="card-body d-flex flex-column p-3 flex-grow-1">
               <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="badge bg-success-subtle text-success fw-bold px-2 py-0-5 rounded-pill" style="font-size: 0.72rem;">
-                  <i class="bi bi-box-seam me-1"></i>${m.itemCount} Jenis Perlengkapan
+                <span class="badge bg-success-subtle text-success fw-bold px-2 py-1 rounded-pill" style="font-size: 0.72rem; letter-spacing: 0.2px;">
+                  <i class="bi bi-box-seam me-1"></i>${m.itemCount} Jenis Alat
                 </span>
-                <span class="text-muted small fw-semibold" style="font-size: 0.74rem;">
-                  Total ${m.totalPieces} Unit Alat
+                <span class="text-secondary small fw-semibold" style="font-size: 0.75rem;">
+                  Total ${m.totalPieces} Unit
                 </span>
               </div>
 
-              <h5 class="card-title fw-bold text-dark mb-1 text-truncate" style="font-size: 0.98rem;" title="${bundle.name}">
+              <h5 class="card-title fw-bold text-dark mb-1 text-truncate" style="font-size: 1rem;" title="${bundle.name}">
                 ${bundle.name}
               </h5>
-              <div class="text-muted small mb-3 text-truncate" style="font-size: 0.78rem;" title="Klik Detail untuk membaca informasi lengkap">
-                <i class="bi bi-info-circle text-success me-1"></i>${bundle.shortDesc || (bundle.desc ? (bundle.desc.length > 42 ? bundle.desc.substring(0, 39) + '...' : bundle.desc) : 'Paket sewa outdoor hemat')}
-              </div>
+              <p class="text-muted small mb-3 text-truncate" style="font-size: 0.8rem; line-height: 1.4;" title="${bundle.desc || bundle.shortDesc || ''}">
+                ${bundle.shortDesc || (bundle.desc ? (bundle.desc.length > 42 ? bundle.desc.substring(0, 39) + '...' : bundle.desc) : 'Paket sewa perlengkapan outdoor')}
+              </p>
 
               <!-- Pricing & Action (Bagian Bawah) -->
               <div class="mt-auto pt-3 border-top">
-                <div class="d-flex justify-content-between align-items-end mb-2">
-                  <div>
-                    <div class="text-muted small text-decoration-line-through" style="font-size: 0.72rem;">
-                      ${formatRupiah(m.normalPrice)}/hr
-                    </div>
-                    <div class="d-flex align-items-baseline gap-1">
-                      <span class="fs-5 fw-bold text-success">${formatRupiah(m.bundlePrice)}</span>
-                      <span class="text-muted" style="font-size: 0.72rem;">/hari</span>
-                    </div>
-                  </div>
+                <!-- Baris Coretan Harga Asli & Badge Hemat -->
+                <div class="d-flex align-items-center gap-2 mb-1" style="min-height: 22px;">
+                  <span class="text-muted text-decoration-line-through small fw-medium" style="font-size: 0.78rem;">
+                    ${formatRupiah(m.normalPrice)}
+                  </span>
                   ${m.savingsAmount > 0 ? `
-                    <div class="text-end">
-                      <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1 rounded-pill fw-bold" style="font-size: 0.72rem;">
-                        Hemat ${formatRupiah(m.savingsAmount)}
-                      </span>
-                    </div>
+                    <span class="badge bg-danger-subtle text-danger border border-danger-subtle rounded-pill px-2 py-0-5 fw-bold" style="font-size: 0.68rem; letter-spacing: 0.2px;">
+                      Hemat ${formatRupiah(m.savingsAmount)}
+                    </span>
                   ` : ""}
                 </div>
 
-                <!-- Tombol Aksi -->
-                <div class="row g-1">
+                <!-- Baris Harga Sewa Utama (Clean & Non-breaking) -->
+                <div class="d-flex align-items-baseline gap-1 mb-3" style="white-space: nowrap;">
+                  <span class="fw-bolder text-success text-nowrap" style="font-size: 1.25rem; letter-spacing: -0.3px; font-family: var(--font-heading);">
+                    ${formatRupiah(m.bundlePrice)}
+                  </span>
+                  <span class="text-muted small fw-medium" style="font-size: 0.78rem;">/hari</span>
+                </div>
+
+                <!-- Tombol Aksi (Detail & Sewa) -->
+                <div class="row g-2">
                   <div class="col-6">
-                    <button type="button" class="btn btn-outline-dark rounded-pill w-100 py-1-5 fw-semibold btn-sm d-inline-flex align-items-center justify-content-center gap-1" style="font-size: 0.78rem;" onclick="openBundleDetailModal('${bundle.id}')">
+                    <button type="button" class="btn btn-outline-secondary rounded-pill w-100 py-2 fw-semibold btn-sm d-inline-flex align-items-center justify-content-center gap-1 text-nowrap" style="font-size: 0.82rem;" onclick="openBundleDetailModal('${bundle.id}')">
                       <i class="bi bi-eye"></i> Detail
                     </button>
                   </div>
                   <div class="col-6">
-                    <button type="button" class="btn btn-brand-primary rounded-pill w-100 py-1-5 fw-bold btn-sm shadow-sm d-inline-flex align-items-center justify-content-center gap-1" style="font-size: 0.78rem;" ${!isAvailable ? "disabled" : ""} onclick="quickRentBundle('${bundle.id}')">
+                    <button type="button" class="btn btn-brand-primary rounded-pill w-100 py-2 fw-bold btn-sm shadow-sm d-inline-flex align-items-center justify-content-center gap-1 text-nowrap" style="font-size: 0.82rem;" ${!isAvailable ? "disabled" : ""} onclick="quickRentBundle('${bundle.id}')">
                       <i class="bi bi-cart-plus"></i> Sewa
                     </button>
                   </div>
@@ -516,6 +517,6 @@ Mohon konfirmasi ketersediaan paket untuk tanggal tersebut ya admin. Terima kasi
 }
 
 function formatRupiah(num) {
-  return "Rp " + (Number(num) || 0).toLocaleString("id-ID");
+  return "Rp\u00A0" + (Number(num) || 0).toLocaleString("id-ID");
 }
 
