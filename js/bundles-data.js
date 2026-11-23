@@ -10,6 +10,7 @@ const DEFAULT_BUNDLES = [
   {
     id: "bundle-camping-basic",
     name: "Paket Camping Basic",
+    shortDesc: "Camping santai praktis 1-4 orang",
     badge: "Rekomendasi Pemula",
     badgeColor: "success",
     image: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=900&q=80",
@@ -25,6 +26,7 @@ const DEFAULT_BUNDLES = [
   {
     id: "bundle-hiking",
     name: "Paket Hiking",
+    shortDesc: "Jalur pendakian & solo/duo muncak",
     badge: "Favorit Solo & Duo Hiker",
     badgeColor: "primary",
     image: "https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=900&q=80",
@@ -41,6 +43,7 @@ const DEFAULT_BUNDLES = [
   {
     id: "bundle-camping-complete",
     name: "Paket Camping Complete",
+    shortDesc: "All-in-one lengkap shelter & masak",
     badge: "Paling Hemat & Lengkap",
     badgeColor: "warning",
     image: "https://images.unsplash.com/photo-1510312305653-8ed496efae75?auto=format&fit=crop&w=900&q=80",
@@ -59,6 +62,7 @@ const DEFAULT_BUNDLES = [
   {
     id: "bundle-rombongan",
     name: "Paket Rombongan (Group Camping)",
+    shortDesc: "Kapasitas besar rombongan 6-8 orang",
     badge: "Favorit Rombongan (6-8P)",
     badgeColor: "danger",
     image: "https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?auto=format&fit=crop&w=900&q=80",
@@ -89,8 +93,12 @@ class BundlesService {
       if (data) {
         const parsed = JSON.parse(data);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          // Normalisasi badge jika ada badge lama yang terlalu panjang
+          // Normalisasi badge & shortDesc jika ada data lama
           parsed.forEach((b) => {
+            const def = DEFAULT_BUNDLES.find((d) => d.id === b.id);
+            if (def && !b.shortDesc) {
+              b.shortDesc = def.shortDesc;
+            }
             if (b.id === "bundle-rombongan" && b.badge && b.badge.includes("Pilihan Terbaik")) {
               b.badge = "Favorit Rombongan (6-8P)";
             }

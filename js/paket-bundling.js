@@ -153,9 +153,9 @@ function renderBundlesList() {
               <h5 class="card-title fw-bold text-dark mb-1 text-truncate" style="font-size: 0.95rem;" title="${bundle.name}">
                 ${bundle.name}
               </h5>
-              <p class="text-muted small mb-2 text-truncate-2" style="font-size: 0.78rem; line-height: 1.35; min-height: 32px;">
-                ${bundle.desc || ""}
-              </p>
+              <div class="text-muted small mb-2 text-truncate" style="font-size: 0.75rem;" title="Klik Detail untuk membaca deskripsi lengkap">
+                <i class="bi bi-info-circle text-success me-1"></i>${bundle.shortDesc || (bundle.desc ? (bundle.desc.length > 42 ? bundle.desc.substring(0, 39) + '...' : bundle.desc) : 'Paket sewa outdoor hemat')}
+              </div>
 
               <!-- Items Box Preview (Compact) -->
               <div class="p-2 bg-light rounded-3 mb-3 border border-light-subtle flex-grow-1" style="font-size: 0.72rem;">
