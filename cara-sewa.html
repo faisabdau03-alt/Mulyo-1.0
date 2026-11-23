@@ -154,12 +154,17 @@
   <section class="py-5" style="background-color: var(--color-body-bg); min-height: 75vh;">
     <div class="container">
       
-      <!-- Nav Tabs: Status & Riwayat vs Panduan -->
+      <!-- Nav Tabs: Status Pesanan, Riwayat Pemesanan, dan Panduan -->
       <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4 pb-2 border-bottom">
         <ul class="nav nav-pills cara-sewa-nav-tabs gap-2" id="caraSewaPills" role="tablist">
           <li class="nav-item" role="presentation">
             <button class="nav-link active" id="tab-status-btn" data-bs-toggle="pill" data-bs-target="#tab-status" type="button" role="tab" aria-controls="tab-status" aria-selected="true">
-              <i class="bi bi-box-seam me-1"></i> Status &amp; Riwayat Pesanan
+              <i class="bi bi-box-seam me-1"></i> Status Pesanan
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="tab-riwayat-btn" data-bs-toggle="pill" data-bs-target="#tab-riwayat" type="button" role="tab" aria-controls="tab-riwayat" aria-selected="false">
+              <i class="bi bi-clock-history me-1"></i> Riwayat Pemesanan
             </button>
           </li>
           <li class="nav-item" role="presentation">
@@ -178,7 +183,7 @@
       <!-- Tab Contents -->
       <div class="tab-content" id="caraSewaTabContent">
         
-        <!-- TAB 1: STATUS PESANAN & RIWAYAT PEMESANAN -->
+        <!-- TAB 1: STATUS PESANAN AKTIF -->
         <div class="tab-pane fade show active" id="tab-status" role="tabpanel" aria-labelledby="tab-status-btn">
           
           <!-- Banner Pengingat Pengembalian Barang (Sesuai Desain Acuan) -->
@@ -195,57 +200,102 @@
           </div>
 
           <!-- Active Order Card Container -->
-          <div id="activeOrderDetailContainer" class="mb-5">
+          <div id="activeOrderDetailContainer" class="mb-4">
             <!-- Populated by order-status.js -->
           </div>
 
-          <!-- Riwayat Pemesanan & Form Lacak Pesanan -->
-          <div class="row g-4 mt-2">
-            <!-- Kolom Riwayat Pemesanan -->
+          <!-- Form Lacak Pesanan Lain & Bantuan Cepat -->
+          <div class="row g-4 mt-1">
             <div class="col-lg-7">
-              <div class="d-flex align-items-center justify-content-between mb-3">
-                <h5 class="fw-bold text-dark mb-0 d-flex align-items-center">
-                  <i class="bi bi-clock-history text-success me-2"></i> Riwayat Pemesanan Selesai
-                </h5>
-                <span class="badge bg-light text-muted border">Tersimpan di Akun</span>
-              </div>
-              <div id="orderHistoryContainer">
-                <!-- Populated by order-status.js -->
-              </div>
-            </div>
-
-            <!-- Kolom Lacak Pesanan Lain & Bantuan Cepat -->
-            <div class="col-lg-5">
-              <!-- Card Lacak Pesanan -->
-              <div class="card border-0 shadow-sm rounded-4 p-4 mb-4 bg-white">
+              <div class="card border-0 shadow-sm rounded-4 p-4 bg-white h-100">
                 <h6 class="fw-bold text-dark mb-2 d-flex align-items-center gap-2">
                   <i class="bi bi-search text-brand-green"></i> Lacak Nomor Pesanan Lain
                 </h6>
-                <p class="text-muted small mb-3">Masukkan nomor ID pesanan (misal: <code>FA-20261120-045</code>) yang tertera pada pesan WhatsApp Anda.</p>
+                <p class="text-muted small mb-3">Masukkan nomor ID pesanan (misal: <code>FA-20261120-045</code>) untuk memeriksa status kesiapan alat.</p>
                 
                 <form id="searchOrderForm" class="mb-3">
                   <div class="input-group">
-                    <input type="text" id="searchOrderInput" class="form-control" placeholder="No. ID Pesanan..." required />
-                    <button class="btn btn-brand-primary fw-bold px-3" type="submit">
-                      Cari
+                    <input type="text" id="searchOrderInput" class="form-control" placeholder="Ketik No. ID Pesanan..." required />
+                    <button class="btn btn-brand-primary fw-bold px-4" type="submit">
+                      Cari Pesanan
                     </button>
                   </div>
                 </form>
                 
                 <div id="searchOrderResult" style="display: none;"></div>
 
-                <div class="p-3 rounded-3 bg-light border small text-muted">
+                <div class="p-3 rounded-3 bg-light border small text-muted mt-auto">
                   <i class="bi bi-info-circle text-success me-1"></i>
                   Status pesanan akan berubah menjadi <b>Barang Diserahkan</b> setelah Anda mengambil alat di basecamp Foresta.
                 </div>
               </div>
+            </div>
 
-              <!-- Card Bantuan WhatsApp -->
-              <div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
-                <h6 class="fw-bold text-dark mb-2">Butuh Bantuan Kendala Sewa?</h6>
-                <p class="text-muted small mb-3">Ingin memperpanjang sewa atau konfirmasi waktu pengembalian? Hubungi admin via WhatsApp:</p>
-                <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Foresta%20Adventure,%20saya%20ingin%20tanya%20status%20sewa%20saya" target="_blank" class="btn btn-outline-success rounded-pill w-100 py-2 d-flex align-items-center justify-content-center gap-2 fw-semibold">
+            <div class="col-lg-5">
+              <div class="card border-0 shadow-sm rounded-4 p-4 bg-white h-100 d-flex flex-column justify-content-between">
+                <div>
+                  <h6 class="fw-bold text-dark mb-2">Butuh Bantuan Kendala Sewa?</h6>
+                  <p class="text-muted small mb-3">Ingin memperpanjang sewa atau konfirmasi waktu pengambilan &amp; pengembalian? Hubungi admin via WhatsApp:</p>
+                </div>
+                <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Foresta%20Adventure,%20saya%20ingin%20tanya%20status%20sewa%20saya" target="_blank" class="btn btn-outline-success rounded-pill w-100 py-2.5 d-flex align-items-center justify-content-center gap-2 fw-semibold">
                   <i class="bi bi-whatsapp"></i> Chat WhatsApp CS
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- TAB 2: RIWAYAT PEMESANAN -->
+        <div class="tab-pane fade" id="tab-riwayat" role="tabpanel" aria-labelledby="tab-riwayat-btn">
+          
+          <!-- Header Riwayat Pemesanan -->
+          <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4 pb-3 border-bottom">
+            <div>
+              <h4 class="fw-bold text-dark mb-1 d-flex align-items-center">
+                <i class="bi bi-clock-history text-success fs-4 me-2"></i> Riwayat Pemesanan Selesai
+              </h4>
+              <p class="text-muted small mb-0">Daftar seluruh transaksi penyewaan perlengkapan outdoor yang telah Anda selesaikan.</p>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+              <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2 rounded-pill small fw-bold">
+                <i class="bi bi-shield-check me-1"></i> Jaminan 100% Kembali
+              </span>
+            </div>
+          </div>
+
+          <!-- Riwayat List Container -->
+          <div class="row g-4">
+            <div class="col-lg-8">
+              <div id="orderHistoryContainer">
+                <!-- Populated dynamically by order-status.js -->
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <!-- Summary Card -->
+              <div class="card border-0 shadow-sm rounded-4 p-4 bg-white mb-4">
+                <h6 class="fw-bold text-dark mb-3">Ringkasan Riwayat Sewa</h6>
+                <div class="d-flex align-items-center justify-content-between py-2 border-bottom small">
+                  <span class="text-muted">Total Transaksi Selesai</span>
+                  <strong class="text-dark" id="historyTotalCount">2 Transaksi</strong>
+                </div>
+                <div class="d-flex align-items-center justify-content-between py-2 border-bottom small">
+                  <span class="text-muted">Status Pengembalian</span>
+                  <span class="badge bg-success-subtle text-success">100% Tepat Waktu</span>
+                </div>
+                <div class="d-flex align-items-center justify-content-between py-2 small">
+                  <span class="text-muted">Kondisi Alat</span>
+                  <span class="badge bg-light text-dark border">Baik &amp; Lengkap</span>
+                </div>
+              </div>
+
+              <!-- Sewa Lagi Banner -->
+              <div class="card border-0 shadow-sm rounded-4 p-4 bg-brand-dark text-white">
+                <h6 class="fw-bold text-white mb-2">Rencanakan Muncak Berikutnya?</h6>
+                <p class="text-muted small mb-3">Dapatkan diskon member otomatis 10% untuk setiap penyewaan baru.</p>
+                <a href="katalog.html" class="btn btn-brand-primary rounded-pill w-100 py-2 fw-bold">
+                  Sewa Alat Lagi <i class="bi bi-arrow-right ms-1"></i>
                 </a>
               </div>
             </div>

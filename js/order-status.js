@@ -335,11 +335,16 @@ class OrderStatusManager {
     if (!historyContainer) return;
 
     const completed = this.getCompletedOrders();
+    const countEl = document.getElementById("historyTotalCount");
+    if (countEl) countEl.textContent = `${completed.length} Transaksi`;
+
     if (completed.length === 0) {
       historyContainer.innerHTML = `
-        <div class="text-center py-4 text-muted small bg-white rounded-4 border p-4">
-          <i class="bi bi-clock-history fs-3 d-block mb-1 text-secondary"></i>
-          Belum ada riwayat pesanan sewa sebelumnya.
+        <div class="text-center py-5 text-muted small bg-white rounded-4 border p-4">
+          <i class="bi bi-clock-history fs-1 d-block mb-2 text-secondary"></i>
+          <h6 class="fw-bold text-dark mb-1">Belum Ada Riwayat Pemesanan</h6>
+          <p class="text-muted small mb-3">Transaksi penyewaan yang telah selesai dikembalikan akan tercatat di sini.</p>
+          <a href="katalog.html" class="btn btn-sm btn-brand-primary rounded-pill px-4">Mulai Sewa Alat</a>
         </div>
       `;
       return;
@@ -358,7 +363,7 @@ class OrderStatusManager {
         </div>
         <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
           <div class="d-flex align-items-center gap-3">
-            <img src="${o.image}" alt="${o.productName}" class="rounded-3" style="width: 70px; height: 55px; object-fit: cover;" />
+            <img src="${o.image}" alt="${o.productName}" class="rounded-3" style="width: 75px; height: 60px; object-fit: cover;" />
             <div>
               <strong class="d-block text-dark small">${o.productName}</strong>
               <span class="text-muted" style="font-size: 0.78rem;">${o.qty} Unit × ${o.duration} Hari</span>
@@ -366,9 +371,14 @@ class OrderStatusManager {
           </div>
           <div class="text-md-end">
             <div class="fw-bold text-dark mb-1">Rp ${o.price.toLocaleString("id-ID")}</div>
-            <button type="button" class="btn btn-xs btn-outline-secondary rounded-pill px-3 py-1" onclick="alert('Bukti Pengembalian & Jaminan #${o.id} telah diserahkan di Basecamp Foresta Adventure pada ${o.tglKembali}. Terima kasih!')">
-              <i class="bi bi-receipt me-1"></i> Nota Selesai
-            </button>
+            <div class="d-flex gap-2">
+              <button type="button" class="btn btn-xs btn-outline-secondary rounded-pill px-3 py-1" onclick="alert('Bukti Pengembalian & Jaminan #${o.id} telah diserahkan di Basecamp Foresta Adventure pada ${o.tglKembali}. Terima kasih!')">
+                <i class="bi bi-receipt me-1"></i> Nota Selesai
+              </button>
+              <a href="katalog.html" class="btn btn-xs btn-success rounded-pill px-3 py-1 text-white">
+                <i class="bi bi-arrow-repeat me-1"></i> Sewa Lagi
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -436,6 +446,7 @@ class OrderStatusManager {
   handleUrlHash() {
     const hash = window.location.hash;
     const statusTabBtn = document.getElementById("tab-status-btn");
+    const riwayatTabBtn = document.getElementById("tab-riwayat-btn");
     const panduanTabBtn = document.getElementById("tab-panduan-btn");
 
     if (hash === "#panduan" || hash === "#syarat" || hash === "#denda") {
@@ -443,7 +454,12 @@ class OrderStatusManager {
         const tab = new bootstrap.Tab(panduanTabBtn);
         tab.show();
       }
-    } else if (hash === "#status" || hash === "#riwayat") {
+    } else if (hash === "#riwayat") {
+      if (riwayatTabBtn && window.bootstrap) {
+        const tab = new bootstrap.Tab(riwayatTabBtn);
+        tab.show();
+      }
+    } else if (hash === "#status") {
       if (statusTabBtn && window.bootstrap) {
         const tab = new bootstrap.Tab(statusTabBtn);
         tab.show();
