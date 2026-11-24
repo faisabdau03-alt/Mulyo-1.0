@@ -708,6 +708,13 @@ h1, h2, h3, h4, h5, h6 {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+.footer-foresta p,
+.footer-foresta .text-muted,
+.footer-desc {
+  color: #94a3b8 !important;
+  line-height: 1.6;
+}
+
 .footer-heading {
   color: #ffffff;
   font-size: 1.1rem;
